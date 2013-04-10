@@ -1,0 +1,38 @@
+create table Makler (Name varchar(42), Ort varchar(42), PLZ int(5), Straße varchar(42), Hausnummer int(4), Login varchar(42) primary key, Passwort varchar(32));
+
+create table Immobilie (ID int(12), Ort varchar(42), PLZ int(5), Straße varchar(42), Hausnummer int(4), Fläche int(8), Makler varchar(42) foreign key references Makler(Login)
+constraint fk_immo
+foreign key );
+
+create table Haus (ID int(12) not null foreign key references Immobilie(ID), Stockwerke int(2), Kaufpreis decimal(99,2), Garten boolean);
+
+create table Wohnung (ID int(12) not null foreign key references Immobilie(ID), Stockwerk int(2), Mietpreis decimal(98,2), Zimmer int(2), Balkon boolean, EBK boolean);
+
+create table Person (PID int(16),Vorname varchar(42), Nachname varchar(42), Ort varchar(42), PLZ int(5), Straße varchar(42), Hausnummer int(4)
+constraint pk_Person
+primary key (PID));
+
+create table Vertrag (VertragsNR int(42), Datum date, Ort varchar(42)
+constraint pk_Vertrag
+primary key (VertragsNR));
+
+create table Mietvertrag (MVertrNr int(42), Mietbeginn date, Dauer int(42), Nebenkosten decimal(98,2), Wohnung int(12), Person int(16),
+constraint PK_Mietvertrag
+primary key(MVertrNr),
+constraint FK_Mietvertrag1
+foreign key (MVertrNr) references Vertrag(VertragsNR)
+constraint FK_Mietvertrag2
+foreign key (Person) references Person(PNR));
+constraint FK_Mietvertrag3
+foreign key (Wohnung) references Wohnung(ID));
+
+
+create table Kaufvertrag (KVertrNr int(42), AnzahlRatten int(42), Rattenzins decimal(4,2), Haus int(12), Person int(16),
+constraint PK_Kaufvertrag
+primary key(KVertrNr),
+constraint FK_Kaufvertrag1
+foreign key (KVertrNr) references Vertrag(VertragsNR)
+constraint FK_Kaufvertrag2
+foreign key (Person) references Person(PNR));
+constraint FK_Kaufvertrag3
+foreign key (Haus) references Haus(ID));
