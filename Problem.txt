@@ -3,3 +3,5 @@ ich (Thorsten) hab versucht, mich "heute" (13.04.) mit der Datenbank zu verbinde
 Leider weigerten sich alle vsispool-Rechner eine ssh Verbindung zu mir aufzubauen. Daraufhin installierte ich dann Squirrel, um mich so mit der Datenbank zu verbinden. Das friert mir allerdings in dem Moment ein, in dem ich mit der Datenbank verbunden bin... Keine Chance, ich komme nicht an die Datenbank ran -.-
 
 lg Thorsten
+
+Habe (Max) gerade (13.4) selber versucht mich zu verbinden. Bei mir klappt alles, sofern ich im VPN bin
