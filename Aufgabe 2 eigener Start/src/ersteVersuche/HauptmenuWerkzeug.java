@@ -25,6 +25,7 @@ public class HauptmenuWerkzeug
 		if(pruefePasswort(passwort))
 		{
 			System.out.println("Zugang genehmigt!");
+			//TODO hier muss das passende Fenster geöffnet werden(Makler)
 		}
 		
 	}
@@ -36,6 +37,7 @@ public class HauptmenuWerkzeug
 		if(pruefeLoginDaten(login, passwort))
 		{
 			System.out.println("Zugang genehmigt!");
+			//TODO hier muss das passende Fenster geöffnet werden(Immoblilien)
 		}
 	}
 	
@@ -43,7 +45,7 @@ public class HauptmenuWerkzeug
 	 * Erzeugt das Fenster zur Verwaltung der Verträge.
 	 */
 	private void ZeigeVertragsVerwaltung() {
-		
+		//TODO hier muss das passende Fenster geöffnet werden(Verträge)
 	}
 	
 	/**
@@ -74,7 +76,7 @@ public class HauptmenuWerkzeug
 						}
 					 catch (SQLException e) {
 						e.printStackTrace();
-						
+						//TODO ordentliches Exeption Handling
 					 	}
 					finally {return false;}
 		
