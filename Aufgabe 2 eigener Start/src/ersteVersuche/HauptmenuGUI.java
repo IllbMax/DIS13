@@ -35,31 +35,68 @@ public class HauptmenuGUI extends Frame{
 		setSize(800, 600);
 		
 		setLocation(280, 100);
-		setLayout(new BorderLayout());
+		setLayout(new GridLayout());
 		setBackground(new Color(255,255,255));
-		JButton Button = new JButton("Klick mich3");
-		Button.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				//setLayout(new GridLayout());
-				_centerpanel.add(new JButton("hehe"));
-				setVisible(true);
-			}
-		});
-		_centerpanel = new Panel();
-		add(_centerpanel);
-		add(Button, BorderLayout.LINE_START);
-		Component Feld = new JTextField();
-		add(Feld, BorderLayout.NORTH);
-			
-		/**add(new JTextArea("Login: "));
-		add(new JTextField("Klick mich2"));**/
+		
+		add(GeneriereTextPanel());
+		
+		
+		add(GeneriereButtonPanel());
 		
 		setVisible(true);
 		
 		
 		
+	}
+	
+	private Panel GeneriereTextPanel() 
+	{
+		Panel panel = new Panel();
+		panel.setLayout(new GridLayout(3,1));
+		panel.add(new JTextArea("Untermenu1"));
+		panel.add(new JTextArea("Untermenu2"));
+		panel.add(new JTextArea("Untermenu3"));
+		return panel;
+	}
+	
+	private Panel GeneriereButtonPanel() 
+	{
+		Panel panel = new Panel();
+		panel.setLayout(new GridLayout(3,1));
+		
+		JTextField textfeld;
+		Panel panel1 = new Panel(new GridBagLayout());
+		panel1.add(new JTextArea("Passwort: "));
+		textfeld = new JTextField();
+		textfeld.setPreferredSize(new Dimension(300,30));
+		panel1.add(textfeld);
+		GridBagConstraints constraints = new GridBagConstraints();
+		constraints.gridy=2;
+		constraints.gridwidth = GridBagConstraints.REMAINDER;
+		panel1.add(new JButton("Login"), constraints);
+		panel.add(panel1);
+		
+		Panel panel2 = new Panel(new GridBagLayout());
+		panel2.add(new JTextArea("Login: "));
+		textfeld = new JTextField("Login hier einfügen");
+		textfeld.setPreferredSize(new Dimension(300,30));
+		panel2.add(textfeld);
+		constraints = new GridBagConstraints();
+		constraints.gridy=2;
+		panel2.add(new JTextArea("Passwort: "),constraints);
+		textfeld =new JTextField("Passwort hier einfügen");
+		textfeld.setPreferredSize(new Dimension(300,30));
+		panel2.add(textfeld,constraints);
+		constraints.gridy=3;
+		constraints.gridwidth = GridBagConstraints.REMAINDER;
+		panel2.add(new JButton("Login"), constraints);
+		panel.add(panel2);
+		
+		
+		Panel panel3 = new Panel();
+		panel3.add(new JButton("ok"));
+		panel.add(panel3);
+		return panel;
 	}
 	
 }
