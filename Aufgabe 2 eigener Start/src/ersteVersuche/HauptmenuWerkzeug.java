@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import de.dis2011.data.DB2ConnectionManager;
+
+import dis2011.DB2ConnectionManager;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
