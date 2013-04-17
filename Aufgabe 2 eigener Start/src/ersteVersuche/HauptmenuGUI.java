@@ -78,14 +78,11 @@ public class HauptmenuGUI extends Frame{
 		
 		Panel panel2 = new Panel(new GridBagLayout());
 		panel2.add(new JTextArea("Login: "));
-		textfeld = new JTextField("Login hier einfügen");
-		textfeld.setPreferredSize(new Dimension(300,30));
 		panel2.add(textfeld);
 		constraints = new GridBagConstraints();
 		constraints.gridy=2;
 		panel2.add(new JTextArea("Passwort: "),constraints);
-		textfeld =new JTextField("Passwort hier einfügen");
-		textfeld.setPreferredSize(new Dimension(300,30));
+		
 		panel2.add(textfeld,constraints);
 		constraints.gridy=3;
 		constraints.gridwidth = GridBagConstraints.REMAINDER;
