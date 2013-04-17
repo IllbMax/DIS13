@@ -14,6 +14,10 @@ public class HauptmenuWerkzeug
 {
 	private HauptmenuGUI _hauptmenuGUI;
 	
+	private MaklermenuWerkzeug _MaklermenuWerkzeug;
+	private ImmobilienmenuWerkzeug _ImmobilienmenuWerkzeug;
+	private VertragsmenuWerkzeug _VertragsmenuWerkzeug;
+	
 	/**
 	 * @param args werden nicht beachtet.
 	 */
@@ -29,6 +33,10 @@ public class HauptmenuWerkzeug
 	 */
 	public HauptmenuWerkzeug()
 	{
+		_MaklermenuWerkzeug = new MaklermenuWerkzeug();
+		_ImmobilienmenuWerkzeug = new ImmobilienmenuWerkzeug();
+		_VertragsmenuWerkzeug = new VertragsmenuWerkzeug();
+		
 		_hauptmenuGUI = new HauptmenuGUI();
 		
 		_hauptmenuGUI.addWindowListener(new WindowAdapter(){
@@ -55,6 +63,7 @@ public class HauptmenuWerkzeug
 	private void ZeigeImmobilienVerwaltung(String login, String passwort) {
 		if(pruefeLoginDaten(login, passwort))
 		{
+			
 			System.out.println("Zugang genehmigt!");
 			//TODO hier muss das passende Fenster geöffnet werden(Immoblilien)
 		}
@@ -80,21 +89,24 @@ public class HauptmenuWerkzeug
 	@SuppressWarnings("finally")
 	private boolean pruefeLoginDaten(String login, String passwort) {
 		// Hole Verbindung
-					Connection con = DB2ConnectionManager.getInstance().getConnection();
-					try {
-						// Erzeuge Anfrage
-						String selectSQL = "select 42 from Makler where Login="+login+" and passwort="+passwort;
-						PreparedStatement pstmt = con.prepareStatement(selectSQL);
+		Connection con = DB2ConnectionManager.getInstance().getConnection();
+		try {
+			// Erzeuge Anfrage
+			String selectSQL = "select 42 from Makler where Login="+login+" and passwort="+passwort;
+			PreparedStatement pstmt = con.prepareStatement(selectSQL);
 
-						// Führe Anfrage aus
-						ResultSet rs = pstmt.executeQuery();
-						return rs.next() && !login.contains("'") && !passwort.contains("'");
-						}
-					 catch (SQLException e) {
-						e.printStackTrace();
-						//TODO ordentliches Exeption Handling
-					 	}
-					finally {return false;}
+			// Führe Anfrage aus
+			ResultSet rs = pstmt.executeQuery();
+			return rs.next() && !login.contains("'") && !passwort.contains("'");
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			//TODO ordentliches Exeption Handling
+	 	}
+		finally {
+			try {	con.close();} catch (SQLException e) {e.printStackTrace();}
+			return false;
+		}
 		
 	}
 }
