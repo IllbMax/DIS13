@@ -1,23 +1,42 @@
 package ersteVersuche;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Observable;
 import java.sql.SQLException;
 import de.dis2011.data.DB2ConnectionManager;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class HauptmenuWerkzeug
 {
-
+	private HauptmenuGUI _hauptmenuGUI;
+	
 	/**
 	 * @param args werden nicht beachtet.
 	 */
 	public static void main(String[] args) {
 		//TODO Hier muss das Loginfenster aufgerufen werden.
-
+		final HauptmenuWerkzeug HauptmenuWerkzeug = new HauptmenuWerkzeug();
+		
+		
 	}
 	
+	/**
+	 * Konstruktor oder so
+	 */
+	public HauptmenuWerkzeug()
+	{
+		_hauptmenuGUI = new HauptmenuGUI();
+		
+		_hauptmenuGUI.addWindowListener(new WindowAdapter(){
+			  public void windowClosing(WindowEvent we){
+			  System.exit(0);
+			  }
+			  });
+	}
 	/**
 	 * Erzeugt das Fenster zur Verwaltung der Makler.
 	 */
@@ -63,16 +82,13 @@ public class HauptmenuWerkzeug
 		// Hole Verbindung
 					Connection con = DB2ConnectionManager.getInstance().getConnection();
 					try {
-						// Erzeuge Anf)rage
-						String selectSQL = "select Passwort from Makler where Login="+login;
+						// Erzeuge Anfrage
+						String selectSQL = "select 42 from Makler where Login="+login+" and passwort="+passwort;
 						PreparedStatement pstmt = con.prepareStatement(selectSQL);
 
 						// Führe Anfrage aus
 						ResultSet rs = pstmt.executeQuery();
-						if(rs.next())
-						{
-							return passwort.equals(rs.getString("passwort"));
-						}
+						return rs.next() && !login.contains("'") && !passwort.contains("'");
 						}
 					 catch (SQLException e) {
 						e.printStackTrace();
