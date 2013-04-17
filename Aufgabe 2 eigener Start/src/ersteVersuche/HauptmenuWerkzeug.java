@@ -39,7 +39,7 @@ public class HauptmenuWerkzeug
 		_ImmobilienmenuWerkzeug = new ImmobilienmenuWerkzeug();
 		_VertragsmenuWerkzeug = new VertragsmenuWerkzeug();
 		
-		_hauptmenuGUI = new HauptmenuGUI();
+		_hauptmenuGUI = new HauptmenuGUI(this);
 		
 		_hauptmenuGUI.addWindowListener(new WindowAdapter(){
 			  public void windowClosing(WindowEvent we){

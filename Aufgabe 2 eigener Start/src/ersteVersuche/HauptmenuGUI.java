@@ -28,9 +28,11 @@ public class HauptmenuGUI extends Frame{
 
 	private static final long serialVersionUID = 42;
 	public Panel _centerpanel;
+	private HauptmenuWerkzeug _Werkzeug;
 
-	public HauptmenuGUI()
+	public HauptmenuGUI(HauptmenuWerkzeug werkzeug)
 	{	
+		_Werkzeug = werkzeug;
 		setTitle("Immobilienverwaltungssoftware - Hauptmenu");
 		setSize(800, 600);
 		
@@ -38,7 +40,7 @@ public class HauptmenuGUI extends Frame{
 		setLayout(new GridLayout());
 		setBackground(new Color(255,255,255));
 		
-		add(GeneriereTextPanel());
+		//add(GeneriereTextPanel());
 		
 		
 		add(GeneriereButtonPanel());
@@ -78,11 +80,14 @@ public class HauptmenuGUI extends Frame{
 		
 		Panel panel2 = new Panel(new GridBagLayout());
 		panel2.add(new JTextArea("Login: "));
+		textfeld = new JTextField();
+		textfeld.setPreferredSize(new Dimension(300,30));
 		panel2.add(textfeld);
 		constraints = new GridBagConstraints();
 		constraints.gridy=2;
 		panel2.add(new JTextArea("Passwort: "),constraints);
-		
+		textfeld =new JTextField();
+		textfeld.setPreferredSize(new Dimension(300,30));
 		panel2.add(textfeld,constraints);
 		constraints.gridy=3;
 		constraints.gridwidth = GridBagConstraints.REMAINDER;
@@ -91,7 +96,7 @@ public class HauptmenuGUI extends Frame{
 		
 		
 		Panel panel3 = new Panel();
-		panel3.add(new JButton("ok"));
+		panel3.add(new JButton("Vertragsverwaltung"));
 		panel.add(panel3);
 		return panel;
 	}
