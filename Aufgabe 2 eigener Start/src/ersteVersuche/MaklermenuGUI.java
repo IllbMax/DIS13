@@ -2,7 +2,7 @@ package ersteVersuche;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -10,14 +10,20 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.event.CellEditorListener;
-import javax.swing.event.ChangeEvent;
+import javax.swing.event.TableModelListener;
+
+import ersteVersuche.Material.Makler;
 
 public class MaklermenuGUI extends JFrame {
+	private static final long serialVersionUID = -8976151471696419140L;
+
+	TableModelMakler _tmodel;
+	JTable _table;
+	JButton _maklerAdd, _maklerDel;
 
 	public MaklermenuGUI() {
 
-		setTitle("Immobilienverwaltungssoftware - Hauptmenu");
+		setTitle("Immobilienverwaltungssoftware - Maklerverwaltung");
 		setSize(800, 600);
 
 		setLocation(280, 100);
@@ -26,58 +32,52 @@ public class MaklermenuGUI extends JFrame {
 
 		JPanel tablepanel = new JPanel(new BorderLayout());
 
-		final String[] columnNames = { "Name", "Adresse", "Login", "Passwort" };
-		final Object[][] data = {
-				{ "Kathy", "Smith", "Snowboarding", new Integer(5) },
-				{ "John", "Doe", "Rowing", new Integer(3) },
-				{ "Sue", "Black", "Knitting", new Integer(2) },
-				{ "Jane", "White", "Speed reading", new Integer(20) },
-				{ "Joe", "Brown", "Pool", new Integer(10) } };
+		_table = new JTable(_tmodel = new TableModelMakler());
 
-		JTable table = new JTable(data, columnNames);
-
-		// table.setModel(new TableModelTest<Integer>(data, columnNames));
-
-		CellEditorListener ChangeNotification = new CellEditorListener() {
-			@Override
-			public void editingCanceled(ChangeEvent e) {
-				System.out.println("The user canceled editing.");
-			}
-
-			@Override
-			public void editingStopped(ChangeEvent e) {
-				System.out.println("The user stopped editing successfully.");
-			}
-		};
-
-		JScrollPane scrollPane = new JScrollPane(table);
-		table.setFillsViewportHeight(true);
-		tablepanel.add(table.getTableHeader(), BorderLayout.PAGE_START);
-		tablepanel.add(table, BorderLayout.CENTER);
+		JScrollPane scrollPane = new JScrollPane(_table);
+		_table.setFillsViewportHeight(true);
+		tablepanel.add(_table.getTableHeader(), BorderLayout.PAGE_START);
+		tablepanel.add(scrollPane, BorderLayout.CENTER);
 
 		add(tablepanel);
 
-		JButton Button = new JButton("Klick mich3");
-		Button.addActionListener(new ActionListener() {
+		JPanel buttonpanel = new JPanel(new GridLayout(0, 1));
+		add(buttonpanel, BorderLayout.LINE_END);
 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// setLayout(new GridLayout());
-				// _centerpanel.add(new JButton("hehe"));
-				setVisible(true);
-			}
-		});
-		// _centerpanel = new Panel();
-		// add(_centerpanel);
-		add(Button, BorderLayout.LINE_START);
+		_maklerAdd = new JButton("Makler hinzufügen");
+		_maklerDel = new JButton("Makler löschen");
+
+		buttonpanel.add(_maklerAdd);
+		buttonpanel.add(_maklerDel);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setVisible(true);
-		// new TableModelTest<String[]>(data, columnNames);
+
 	}
 
-	public static void main(String[] args) {
-		new MaklermenuGUI();
+	public void AddMaklerAddListener(ActionListener al) {
+		_maklerAdd.addActionListener(al);
+	}
+
+	public void AddMaklerDelListener(ActionListener al) {
+		_maklerDel.addActionListener(al);
+	}
+
+	public void AddMaklerUpdListener(TableModelListener tml) {
+		_tmodel.addTableModelListener(tml);
+	}
+
+	public TableModelMakler GetTableModel() {
+		return _tmodel;
+	}
+
+	public Makler GetAktiveMakler() {
+		int row = _table.getSelectedRow();
+
+		if (row < 0 || _tmodel.getRowCount() == 0)
+			return null;
+
+		return _tmodel.GetElement(row);
 	}
 }

@@ -67,26 +67,21 @@ public class TableModelMakler extends ATableModel<Makler> {
 			return false;
 		}
 
-		// TODO SQL UPDATE MAKLER
 		return true;
 	}
 
 	public boolean DeleteMakler(Makler t) {
 		return _data.remove(t);
-		// TODO SQL DELETE MAKLER
 	}
 
 	public boolean DeleteMakler(int row) {
 		if (row < 0 || row >= _data.size())
 			return false;
-		// TODO SQL DELETE MAKLER
 		_data.remove(row);
 		return true;
 	}
 
 	public void AddMakler(Makler t) {
-
 		_data.add(t);
-		// TODO SQL INSERT INTO MAKLER
 	}
 }

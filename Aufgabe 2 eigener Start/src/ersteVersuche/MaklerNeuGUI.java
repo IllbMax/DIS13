@@ -7,11 +7,12 @@ import java.awt.Panel;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class MaklerNeuGUI extends JFrame {
+public class MaklerNeuGUI extends JDialog {
 
 	private static final long serialVersionUID = 42;
 	private final Panel _dataPanel;
@@ -19,7 +20,8 @@ public class MaklerNeuGUI extends JFrame {
 	private final JTextField _name, _adresse, _login, _passwort;
 	private final JButton _okButton;
 
-	public MaklerNeuGUI() {
+	public MaklerNeuGUI(JFrame frame) {
+		super(frame, true);
 
 		setTitle("Makler anlegen");
 		// setSize(800, 600);
@@ -50,7 +52,6 @@ public class MaklerNeuGUI extends JFrame {
 
 		add(_okButton, BorderLayout.SOUTH);
 		pack();
-		setVisible(true);
 
 	}
 
@@ -72,9 +73,5 @@ public class MaklerNeuGUI extends JFrame {
 
 	public String GetPasswort() {
 		return _passwort.getText();
-	}
-
-	public static void main(String[] args) {
-		new MaklerNeuGUI();
 	}
 }

@@ -47,6 +47,10 @@ public abstract class ATableModel<T> extends AbstractTableModel {
 		}
 	}
 
+	public T GetElement(int row) {
+		return _data.get(row);
+	}
+
 	/**
 	 * Gibt ein String[] mit den Texten des Headers der Tabelle zurück Die Länge
 	 * Dient gleichzeitig zur Bestimmung der Spalten-Anzahl
