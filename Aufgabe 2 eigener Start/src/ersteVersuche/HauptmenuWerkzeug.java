@@ -122,12 +122,14 @@ public class HauptmenuWerkzeug
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
 		try {
 			// Erzeuge Anfrage
-			String selectSQL = "select 42 from Makler where Login="+login+" and passwort="+passwort;
+			String selectSQL = "select 42 from Makler where Login= ? and passwort= ?";
 			PreparedStatement pstmt = con.prepareStatement(selectSQL);
+			pstmt.setString(1, login);
+			pstmt.setString(2, passwort);
 
 			// Führe Anfrage aus
 			ResultSet rs = pstmt.executeQuery();
-			return rs.next();// && !login.contains("'") && !passwort.contains("'");
+			return rs.next()&&(rs.getInt(1)==42);// && !login.contains("'") && !passwort.contains("'");
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
