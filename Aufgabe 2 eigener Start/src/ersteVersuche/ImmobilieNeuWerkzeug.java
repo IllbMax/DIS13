@@ -21,19 +21,17 @@ public class ImmobilieNeuWerkzeug {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// _immobilie = new Makler(_GUI.GetName(), _GUI.GetAdresse(),
-				// _GUI
-				// .GetLogin(), _GUI.GetPasswort());
+				_immobilie = _GUI.getImmobilie();
 				_GUI.setVisible(false);
 			}
 		});
 	}
 
 	/**
-	 * Erstellt ein neues Maklerobjekt (nur das Objekt/ wird nicht in der DB
-	 * eingetragen)
+	 * Erstellt ein neues (Subklasse eines) Immobilienobjekt (nur das Objekt/
+	 * wird nicht in der DB eingetragen)
 	 * 
-	 * @return Makler oder null, bei Abbruch
+	 * @return Immobilie oder null, bei Abbruch
 	 */
 	public Immobilie ErstelleImmobilie() {
 
