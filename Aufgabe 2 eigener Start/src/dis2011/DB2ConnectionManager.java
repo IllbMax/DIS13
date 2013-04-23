@@ -11,6 +11,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import javax.swing.JDialog;
+import javax.swing.JTextField;
+
 /**
  * Einfaches Singleton zur Verwaltung von Datenbank-Verbindungen.
  * 
@@ -47,14 +50,30 @@ public class DB2ConnectionManager {
 
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();//TODO ordentliches Exeption Handling
+			JDialog warnung = new JDialog();
+			warnung.add(new JTextField("Die Datenbankinformationen konnten nicht gefunden werden"));
+			warnung.setAlwaysOnTop(true);
+			warnung.setVisible(true);
 		} catch (IOException e) {
 			e.printStackTrace();
+			JDialog warnung = new JDialog();
+			warnung.add(new JTextField("Auf die Datenbankinformationen konnte nicht zugegriffen werden."));
+			warnung.setAlwaysOnTop(true);
+			warnung.setVisible(true);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			JDialog warnung = new JDialog();
+			warnung.add(new JTextField("Die Anwendung konnte mit ihrer Eingabe nicht umgehen."));
+			warnung.setAlwaysOnTop(true);
+			warnung.setVisible(true);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
+			JDialog warnung = new JDialog();
+			warnung.add(new JTextField("Hände weg!"));
+			warnung.setAlwaysOnTop(true);
+			warnung.setVisible(true);
 		}
 
 	}

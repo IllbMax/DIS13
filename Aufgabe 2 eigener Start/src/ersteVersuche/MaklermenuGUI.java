@@ -53,6 +53,7 @@ public class MaklermenuGUI extends JFrame {
 		setAlwaysOnTop(true);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		pack();
 		//setVisible(true);
 
