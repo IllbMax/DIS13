@@ -1,5 +1,8 @@
 package ersteVersuche;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ersteVersuche.Material.Haus;
 import ersteVersuche.Material.Immobilie;
 import ersteVersuche.Material.Wohnung;
@@ -12,13 +15,15 @@ public class TableModelImmobilie extends ATableModel<Immobilie> {
 
 	private IClassState _state;
 
-	public TableModelImmobilie() {
-		_state = new ImmobilienBaseState();
-	}
+	private final IClassState _stateAlle, _stateHaus, _stateWohnung;
 
-	@Override
-	public int getRowCount() {
-		return _state.getRowCount();
+	public TableModelImmobilie() {
+		_stateAlle = new ImmobilienBaseState();
+		_stateHaus = new ImmobilieHausState();
+		_stateWohnung = new ImmobilieWohnungState();
+
+		_state = _stateHaus;
+		_data = _state.getList();
 	}
 
 	@Override
@@ -48,34 +53,43 @@ public class TableModelImmobilie extends ATableModel<Immobilie> {
 	}
 
 	public boolean DeleteImmobilie(Immobilie t) {
-		return _data.remove(t);
-	}
+		boolean result = true;
 
-	public boolean DeleteImmobilie(int row) {
-		if (row < 0 || row >= _data.size())
-			return false;
-		_data.remove(row);
-		return true;
+		if (t instanceof Immobilie)
+			result &= _stateAlle.getList().remove(t);
+		if (t instanceof Wohnung)
+			result &= _stateWohnung.getList().remove(t);
+		if (t instanceof Haus)
+			result &= _stateHaus.getList().remove(t);
+		return result;
 	}
 
 	public void AddImmobilie(Immobilie t) {
-		_data.add(t);
+		if (t instanceof Immobilie)
+			_stateAlle.getList().add(t);
+		if (t instanceof Wohnung)
+			_stateWohnung.getList().add(t);
+		if (t instanceof Haus)
+			_stateHaus.getList().add(t);
 	}
 
 	public void SwitchToImmobilien() {
-		_state = new ImmobilienBaseState();
+		_state = _stateAlle;
+		_data = _state.getList();
 	}
 
 	public void SwitchToHaus() {
-		_state = new ImmobilieHausState();
+		_state = _stateHaus;
+		_data = _state.getList();
 	}
 
 	public void SwitchToWohnung() {
-		_state = new ImmobilieWohnungState();
+		_state = _stateWohnung;
+		_data = _state.getList();
 	}
 
 	private interface IClassState {
-		int getRowCount();
+		List<Immobilie> getList();
 
 		String[] GetRowHeader();
 
@@ -91,14 +105,15 @@ public class TableModelImmobilie extends ATableModel<Immobilie> {
 				"Haus Nr.", "Fläche [m²]" };
 		final Class<?>[] _colClasses = new Class<?>[] { String.class,
 				String.class, String.class, String.class, Float.class };
+		List<Immobilie> _data;
 
 		public ImmobilienBaseState() {
-
+			_data = new ArrayList<Immobilie>();
 		}
 
 		@Override
-		public int getRowCount() {
-			return _data.size();
+		public List<Immobilie> getList() {
+			return _data;
 		}
 
 		@Override
@@ -172,18 +187,15 @@ public class TableModelImmobilie extends ATableModel<Immobilie> {
 				String.class, String.class, String.class, Float.class,
 				Integer.class, Float.class, Boolean.class };
 
-		public ImmobilieHausState() {
+		List<Immobilie> _data;
 
+		public ImmobilieHausState() {
+			_data = new ArrayList<Immobilie>();
 		}
 
 		@Override
-		public int getRowCount() {
-			int count = 0;
-			for (Immobilie t : _data)
-				if (t instanceof Haus)
-					count++;
-
-			return count;
+		public List<Immobilie> getList() {
+			return _data;
 		}
 
 		@Override
@@ -286,18 +298,15 @@ public class TableModelImmobilie extends ATableModel<Immobilie> {
 				Integer.class, Float.class, Integer.class, Boolean.class,
 				Boolean.class };
 
-		public ImmobilieWohnungState() {
+		List<Immobilie> _data;
 
+		public ImmobilieWohnungState() {
+			_data = new ArrayList<Immobilie>();
 		}
 
 		@Override
-		public int getRowCount() {
-			int count = 0;
-			for (Immobilie t : _data)
-				if (t instanceof Wohnung)
-					count++;
-
-			return count;
+		public List<Immobilie> getList() {
+			return _data;
 		}
 
 		@Override

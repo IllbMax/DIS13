@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 
 public abstract class ATableModel<T> extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
-	protected final List<T> _data;
+	protected List<T> _data;
 
 	protected ATableModel() {
 		this._data = new ArrayList<T>();
