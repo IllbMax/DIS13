@@ -62,6 +62,7 @@ public class ImmobilienmenuGUI extends JFrame {
 
 			}
 		});
+
 		_loeschen = new JButton("Immobilien löschen");
 		_loeschen.setSize(100, 100);
 		_loeschen.addActionListener(new ActionListener() {

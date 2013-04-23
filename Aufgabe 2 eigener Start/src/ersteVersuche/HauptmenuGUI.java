@@ -18,12 +18,13 @@ public class HauptmenuGUI extends JFrame {
 
 	private static final long serialVersionUID = 42;
 	public Panel _centerpanel;
-	private final HauptmenuWerkzeug _Werkzeug;
+
+
 	private final JTextField passwort1, passwort2, login;
 	private final JButton maklerButton, immobilienButton, vertragsButton;
-
-	public HauptmenuGUI(HauptmenuWerkzeug werkzeug) {
-		_Werkzeug = werkzeug;
+	
+	public HauptmenuGUI()
+	{	
 		setTitle("Immobilienverwaltungssoftware - Hauptmenu");
 		setSize(800, 600);
 
@@ -52,21 +53,12 @@ public class HauptmenuGUI extends JFrame {
 		setVisible(true);
 
 	}
-
-	private Panel GeneriereTextPanel() {
+	
+	private Panel GeneriereButtonPanel() 
+	{
 		Panel panel = new Panel();
-		panel.setLayout(new GridLayout(3, 1));
-		panel.add(new JTextArea("Untermenu1"));
-		panel.add(new JTextArea("Untermenu2"));
-		panel.add(new JTextArea("Untermenu3"));
-		return panel;
-	}
-
-	private Panel GeneriereButtonPanel() {
-		Panel panel = new Panel();
-		panel.setLayout(new GridLayout(3, 1));
-
-		JTextField textfeld;
+		panel.setLayout(new GridLayout(3,1));		
+		
 		Panel panel1 = new Panel(new GridBagLayout());
 		panel1.add(new JLabel("Passwort: "));
 		panel1.add(passwort1);
