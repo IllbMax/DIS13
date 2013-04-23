@@ -77,5 +77,10 @@ public class MaklermenuWerkzeug {
 	public static void main(String[] args) {
 		new MaklermenuWerkzeug();
 	}
+	
+	public void ZeigeMaklerMenu()
+	{
+		_GUI.setVisible(true);
+	}
 
 }

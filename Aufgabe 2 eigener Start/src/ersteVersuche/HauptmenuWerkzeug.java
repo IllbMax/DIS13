@@ -1,5 +1,7 @@
 package ersteVersuche;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
@@ -11,6 +13,8 @@ import dis2011.DB2ConnectionManager;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
+import javax.swing.JFrame;
 
 public class HauptmenuWerkzeug
 {
@@ -41,11 +45,15 @@ public class HauptmenuWerkzeug
 		
 		_hauptmenuGUI = new HauptmenuGUI(this);
 		
-		_hauptmenuGUI.addWindowListener(new WindowAdapter(){
-			  public void windowClosing(WindowEvent we){
-			  System.exit(0);
-			  }
-			  });
+		
+		_hauptmenuGUI.AddMaklerButtonListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ZeigeMaklerVerwaltung(_hauptmenuGUI.GetPasswort1Text());
+				
+			}
+		});
 	}
 	/**
 	 * Erzeugt das Fenster zur Verwaltung der Makler.
@@ -54,6 +62,7 @@ public class HauptmenuWerkzeug
 		if(pruefePasswort(passwort))
 		{
 			System.out.println("Zugang genehmigt!");
+			_MaklermenuWerkzeug.ZeigeMaklerMenu();
 			//TODO hier muss das passende Fenster geöffnet werden(Makler)
 		}
 		

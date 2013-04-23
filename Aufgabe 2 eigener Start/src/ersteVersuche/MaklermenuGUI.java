@@ -49,10 +49,12 @@ public class MaklermenuGUI extends JFrame {
 
 		buttonpanel.add(_maklerAdd);
 		buttonpanel.add(_maklerDel);
+		
+		setAlwaysOnTop(true);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
-		setVisible(true);
+		//setVisible(true);
 
 	}
 
