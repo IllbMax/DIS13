@@ -135,6 +135,7 @@ public class ImmobilieNeuGUI extends JDialog {
 		_hausNr = new JTextField(TEXTFELD_BREITE);
 		_flaeche = new JFormattedTextField(NumberFormat.getNumberInstance());
 		_flaeche.setColumns(TEXTFELD_BREITE);
+		_flaeche.setValue(0.0f);
 
 		_dataPanelBase.add(new JLabel("Ort:"));
 		_dataPanelBase.add(_ort);
@@ -154,12 +155,15 @@ public class ImmobilieNeuGUI extends JDialog {
 		_wohnung_stockwerk = new JFormattedTextField(
 				NumberFormat.getIntegerInstance());
 		_wohnung_stockwerk.setColumns(TEXTFELD_BREITE);
+		_wohnung_stockwerk.setValue(0);
 		_wohnung_mietpreis = new JFormattedTextField(
 				NumberFormat.getNumberInstance());
 		_wohnung_mietpreis.setColumns(TEXTFELD_BREITE);
+		_wohnung_mietpreis.setValue(0.0f);
 		_wohnung_zimmer = new JFormattedTextField(
 				NumberFormat.getIntegerInstance());
 		_wohnung_zimmer.setColumns(TEXTFELD_BREITE);
+		_wohnung_zimmer.setValue(0);
 
 		_wohnung_balkon = new JCheckBox();
 		_wohnung_ebk = new JCheckBox();
@@ -182,9 +186,11 @@ public class ImmobilieNeuGUI extends JDialog {
 		_haus_stockwerke = new JFormattedTextField(
 				NumberFormat.getIntegerInstance());
 		_haus_stockwerke.setColumns(TEXTFELD_BREITE);
+		_haus_stockwerke.setValue(0);
 		_haus_kaufpreis = new JFormattedTextField(
 				NumberFormat.getNumberInstance());
 		_haus_kaufpreis.setColumns(TEXTFELD_BREITE);
+		_haus_kaufpreis.setValue(0.0f);
 
 		_haus_garten = new JCheckBox();
 

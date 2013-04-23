@@ -13,15 +13,20 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.event.TableModelListener;
 
 import ersteVersuche.Material.Haus;
+import ersteVersuche.Material.Immobilie;
 import ersteVersuche.Material.Wohnung;
 
 public class ImmobilienmenuGUI extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JFrame _frame;
 	JList _list;
 	JButton _anlegen;
-	JButton _aendern;
 	JButton _loeschen;
 	JButton _zurueck;
 	JPanel _operationSelection;
@@ -116,33 +121,10 @@ public class ImmobilienmenuGUI extends JFrame {
 	private void initButtons() {
 		_anlegen = new JButton("Immobilien anlegen");
 		_anlegen.setSize(100, 100);
-		_anlegen.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-
-			}
-		});
-
-		_aendern = new JButton("Immobilien ändern");
-		_aendern.setSize(100, 100);
-		_aendern.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-
-			}
-		});
 
 		_loeschen = new JButton("Immobilien löschen");
 		_loeschen.setSize(100, 100);
-		_loeschen.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-
-			}
-		});
 		_zurueck = new JButton("Zurück");
 		_zurueck.setSize(100, 100);
 		_zurueck.addActionListener(new ActionListener() {
@@ -153,7 +135,6 @@ public class ImmobilienmenuGUI extends JFrame {
 			}
 		});
 		_operationSelection.add(_anlegen);
-		_operationSelection.add(_aendern);
 		_operationSelection.add(_loeschen);
 		_operationSelection.add(_zurueck);
 	}
@@ -178,9 +159,34 @@ public class ImmobilienmenuGUI extends JFrame {
 		return tablepanel;
 	}
 
+	public void AddImmobilienAddListener(ActionListener al) {
+		_anlegen.addActionListener(al);
+	}
+
+	public void AddImmobilienDelListener(ActionListener al) {
+		_loeschen.addActionListener(al);
+	}
+
+	public void AddImmobilienUpdListener(TableModelListener tml) {
+		_tmodel.addTableModelListener(tml);
+	}
+
+	public TableModelImmobilie GetTableModel() {
+		return _tmodel;
+	}
+
 	public static void main(String[] args) {
 		ImmobilienmenuGUI _gui = new ImmobilienmenuGUI();
 
 		_gui.setVisible(true);
+	}
+
+	public Immobilie GetAktiveImmobilie() {
+		int row = _table.getSelectedRow();
+
+		if (row < 0 || _tmodel.getRowCount() == 0)
+			return null;
+
+		return _tmodel.GetElement(row);
 	}
 }
