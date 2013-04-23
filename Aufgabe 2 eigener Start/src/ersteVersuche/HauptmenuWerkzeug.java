@@ -14,7 +14,9 @@ import dis2011.DB2ConnectionManager;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JTextField;
 
 public class HauptmenuWerkzeug
 {
@@ -29,6 +31,7 @@ public class HauptmenuWerkzeug
 	 */
 	public static void main(String[] args) {
 		//TODO Hier muss das Loginfenster aufgerufen werden.
+		
 		final HauptmenuWerkzeug HauptmenuWerkzeug = new HauptmenuWerkzeug();
 		
 		
@@ -42,8 +45,8 @@ public class HauptmenuWerkzeug
 		_MaklermenuWerkzeug = new MaklermenuWerkzeug();
 		_ImmobilienmenuWerkzeug = new ImmobilienmenuWerkzeug();
 		_VertragsmenuWerkzeug = new VertragsmenuWerkzeug();
+		_hauptmenuGUI = new HauptmenuGUI();
 		
-		_hauptmenuGUI = new HauptmenuGUI(this);
 		
 		
 		_hauptmenuGUI.AddMaklerButtonListener(new ActionListener() {
@@ -52,6 +55,22 @@ public class HauptmenuWerkzeug
 			public void actionPerformed(ActionEvent e) {
 				ZeigeMaklerVerwaltung(_hauptmenuGUI.GetPasswort1Text());
 				
+			}
+		});
+		_hauptmenuGUI.AddVertragsListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				ZeigeVertragsVerwaltung();
+				
+			}
+		});
+		_hauptmenuGUI.AddImmobilienButtonListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				ZeigeImmobilienVerwaltung(_hauptmenuGUI.GetLoginText(),
+						_hauptmenuGUI.GetPasswort2Text());	
 			}
 		});
 	}
@@ -63,7 +82,6 @@ public class HauptmenuWerkzeug
 		{
 			System.out.println("Zugang genehmigt!");
 			_MaklermenuWerkzeug.ZeigeMaklerMenu();
-			//TODO hier muss das passende Fenster geöffnet werden(Makler)
 		}
 		
 	}
@@ -76,6 +94,7 @@ public class HauptmenuWerkzeug
 		{
 			
 			System.out.println("Zugang genehmigt!");
+			_ImmobilienmenuWerkzeug.ZeigeImmobilienMenu();
 			//TODO hier muss das passende Fenster geöffnet werden(Immoblilien)
 		}
 	}
@@ -84,7 +103,7 @@ public class HauptmenuWerkzeug
 	 * Erzeugt das Fenster zur Verwaltung der Verträge.
 	 */
 	private void ZeigeVertragsVerwaltung() {
-		//TODO hier muss das passende Fenster geöffnet werden(Verträge)
+		_VertragsmenuWerkzeug.ZeigeVertragsMenu();
 	}
 	
 	/**
@@ -108,11 +127,15 @@ public class HauptmenuWerkzeug
 
 			// Führe Anfrage aus
 			ResultSet rs = pstmt.executeQuery();
-			return rs.next() && !login.contains("'") && !passwort.contains("'");
+			return rs.next();// && !login.contains("'") && !passwort.contains("'");
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 			//TODO ordentliches Exeption Handling
+			JDialog warnung = new JDialog();
+			warnung.add(new JTextField("Ein Verbindungsfehler ist aufgetreten."));
+			warnung.setAlwaysOnTop(true);
+			warnung.setVisible(true);
 	 	}
 		finally {
 			try {	con.close();} catch (SQLException e) {e.printStackTrace();}

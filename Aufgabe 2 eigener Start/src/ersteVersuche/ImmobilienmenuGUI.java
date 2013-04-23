@@ -42,7 +42,7 @@ public class ImmobilienmenuGUI extends JFrame
 				
 			}});
 		
-		_aendern = new JButton("Immobilien ändern");
+		_aendern = new JButton("Immobilien √§ndern");
 		_aendern.setSize(100,100);
 		_aendern.addActionListener(new ActionListener() {
 			
@@ -50,7 +50,7 @@ public class ImmobilienmenuGUI extends JFrame
 			public void actionPerformed(ActionEvent arg0) {
 				
 			}});
-		_loeschen = new JButton("Immobilien loeschen");
+		_loeschen = new JButton("Immobilien l√∂schen");
 		_loeschen.setSize(100,100);
 		_loeschen.addActionListener(new ActionListener() {
 			
@@ -58,7 +58,7 @@ public class ImmobilienmenuGUI extends JFrame
 			public void actionPerformed(ActionEvent arg0) {
 				
 			}});
-		_zurueck = new JButton("Zurück");
+		_zurueck = new JButton("Zur√ºck");
 		_zurueck.setSize(100,100);
 		_zurueck.addActionListener(new ActionListener() {
 			

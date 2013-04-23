@@ -1,5 +1,7 @@
 package ersteVersuche;
 
-public class VertragsmenuGUI {
+import javax.swing.JFrame;
+
+public class VertragsmenuGUI extends JFrame{
 
 }

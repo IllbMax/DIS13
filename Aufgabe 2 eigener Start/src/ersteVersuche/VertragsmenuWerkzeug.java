@@ -8,4 +8,9 @@ public class VertragsmenuWerkzeug {
 		_GUI = new VertragsmenuGUI();
 	}
 
+	public void ZeigeVertragsMenu() {
+		_GUI.setVisible(true);
+		
+	}
+
 }
