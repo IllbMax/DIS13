@@ -9,121 +9,132 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JDialog;
+import javax.swing.JTextField;
+
 import dis2011.DB2ConnectionManager;
 import ersteVersuche.Immobilie.ImmobilienmenuWerkzeug;
 import ersteVersuche.Makler.MaklermenuWerkzeug;
+import ersteVersuche.Vertrag.PersonVerwaltungWerkzeug;
 import ersteVersuche.Vertrag.VertragsmenuWerkzeug;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+public class HauptmenuWerkzeug {
+	private final HauptmenuGUI _hauptmenuGUI;
 
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JTextField;
+	private final MaklermenuWerkzeug _MaklermenuWerkzeug;
+	private final ImmobilienmenuWerkzeug _ImmobilienmenuWerkzeug;
+	private final VertragsmenuWerkzeug _VertragsmenuWerkzeug;
+	private final PersonVerwaltungWerkzeug _PersonverwaltungWerkzeug;
 
-public class HauptmenuWerkzeug
-{
-	private HauptmenuGUI _hauptmenuGUI;
-	
-	private MaklermenuWerkzeug _MaklermenuWerkzeug;
-	private ImmobilienmenuWerkzeug _ImmobilienmenuWerkzeug;
-	private VertragsmenuWerkzeug _VertragsmenuWerkzeug;
-	
 	/**
-	 * @param args werden nicht beachtet.
+	 * @param args
+	 *            werden nicht beachtet.
 	 */
 	public static void main(String[] args) {
-		//TODO Hier muss das Loginfenster aufgerufen werden.
-		
+		// TODO Hier muss das Loginfenster aufgerufen werden.
 		final HauptmenuWerkzeug HauptmenuWerkzeug = new HauptmenuWerkzeug();
-		try{}
-		finally{try {	DB2ConnectionManager.getInstance().getConnection().close();} catch (SQLException e) {e.printStackTrace();}}
-		
+		// try {
+		//
+		// } finally {
+		// try {
+		// DB2ConnectionManager.getInstance().getConnection().close();
+		// } catch (SQLException e) {
+		// e.printStackTrace();
+		// }
+		// }
+
 	}
-	
+
 	/**
 	 * Konstruktor oder so
 	 */
-	public HauptmenuWerkzeug()
-	{
+	public HauptmenuWerkzeug() {
 		_MaklermenuWerkzeug = new MaklermenuWerkzeug();
 		_ImmobilienmenuWerkzeug = new ImmobilienmenuWerkzeug();
 		_VertragsmenuWerkzeug = new VertragsmenuWerkzeug();
+		_PersonverwaltungWerkzeug = new PersonVerwaltungWerkzeug();
+
 		_hauptmenuGUI = new HauptmenuGUI();
-		
-		
-		
+
 		_hauptmenuGUI.AddMaklerButtonListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ZeigeMaklerVerwaltung(_hauptmenuGUI.GetPasswort1Text());
-				
+
 			}
 		});
 		_hauptmenuGUI.AddVertragsListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ZeigeVertragsVerwaltung();
-				
+
 			}
 		});
 		_hauptmenuGUI.AddImmobilienButtonListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ZeigeImmobilienVerwaltung(_hauptmenuGUI.GetLoginText(),
-						_hauptmenuGUI.GetPasswort2Text());	
+						_hauptmenuGUI.GetPasswort2Text());
 			}
 		});
+		_hauptmenuGUI.AddPersonListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				_PersonverwaltungWerkzeug.ZeigePersonenMenu();
+
+			}
+		});
+
 		_MaklermenuWerkzeug.AddWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				_hauptmenuGUI.setVisible(true);
-			}	
+			}
 		});
 		_VertragsmenuWerkzeug.AddWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				_hauptmenuGUI.setVisible(true);
-			}	
+			}
 		});
 		_ImmobilienmenuWerkzeug.AddWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				_hauptmenuGUI.setVisible(true);
-			}	
+			}
 		});
-		 
+
 	}
+
 	/**
 	 * Erzeugt das Fenster zur Verwaltung der Makler.
 	 */
 	private void ZeigeMaklerVerwaltung(String passwort) {
-		if(pruefePasswort(passwort))
-		{
+		if (pruefePasswort(passwort)) {
 			System.out.println("Zugang genehmigt!");
 			_MaklermenuWerkzeug.ZeigeMaklerMenu();
 			_hauptmenuGUI.setVisible(false);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Erzeugt das Fenster zur Verwaltung der Immobilien.
 	 */
 	private void ZeigeImmobilienVerwaltung(String login, String passwort) {
-		if(pruefeLoginDaten(login, passwort))
-		{
-			
+		if (pruefeLoginDaten(login, passwort)) {
+
 			System.out.println("Zugang genehmigt!");
 			_ImmobilienmenuWerkzeug.ZeigeImmobilienMenu(login);
-			//TODO hier muss das passende Fenster geöffnet werden(Immoblilien)
+			// TODO hier muss das passende Fenster geöffnet werden(Immoblilien)
 			_hauptmenuGUI.setVisible(false);
 		}
 	}
-	
+
 	/**
 	 * Erzeugt das Fenster zur Verwaltung der Verträge.
 	 */
@@ -131,16 +142,18 @@ public class HauptmenuWerkzeug
 		_VertragsmenuWerkzeug.ZeigeVertragsMenu();
 		_hauptmenuGUI.setVisible(false);
 	}
-	
+
 	/**
-	 * Überprüft das gegebene Passwort für den Zutritt zur Makler-Verwaltung auf Gültigkeit.
+	 * Überprüft das gegebene Passwort für den Zutritt zur Makler-Verwaltung auf
+	 * Gültigkeit.
 	 */
 	private boolean pruefePasswort(String passwort) {
 		return "123456".equals(passwort);
 	}
-	
+
 	/**
-	 * Überprüft mit Hilfe der Datenbank, ob für den angegebenen Makler(Login) das Passwort stimmt
+	 * Überprüft mit Hilfe der Datenbank, ob für den angegebenen Makler(Login)
+	 * das Passwort stimmt
 	 */
 	@SuppressWarnings("finally")
 	private boolean pruefeLoginDaten(String login, String passwort) {
@@ -155,22 +168,22 @@ public class HauptmenuWerkzeug
 
 			// Führe Anfrage aus
 			ResultSet rs = pstmt.executeQuery();
-			
-			return rs.next()&&(rs.getInt(1)==42);// && !login.contains("'") && !passwort.contains("'");
-		}
-		catch (SQLException e) {
+
+			return rs.next() && (rs.getInt(1) == 42);// && !login.contains("'")
+														// &&
+														// !passwort.contains("'");
+		} catch (SQLException e) {
 			e.printStackTrace();
-			//TODO ordentliches Exeption Handling
+			// TODO ordentliches Exeption Handling
 			JDialog warnung = new JDialog();
 			warnung.add(new JTextField("Ein Verbindungsfehler ist aufgetreten."));
 			warnung.setAlwaysOnTop(true);
 			warnung.setVisible(true);
-	 	}
-		finally {
-			//try {	con.close();} catch (SQLException e) {e.printStackTrace();}
-			
+		} finally {
+			// try { con.close();} catch (SQLException e) {e.printStackTrace();}
+
 		}
 		return false;
-		
+
 	}
 }

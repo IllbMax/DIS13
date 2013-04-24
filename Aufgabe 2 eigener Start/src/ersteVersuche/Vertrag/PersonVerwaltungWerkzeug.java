@@ -118,7 +118,7 @@ public class PersonVerwaltungWerkzeug {
 		new MaklermenuWerkzeug();
 	}
 
-	public void ZeigeMaklerMenu() {
+	public void ZeigePersonenMenu() {
 		_GUI.setVisible(true);
 	}
 

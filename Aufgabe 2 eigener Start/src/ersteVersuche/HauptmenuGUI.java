@@ -12,7 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class HauptmenuGUI extends JFrame {
@@ -20,13 +19,12 @@ public class HauptmenuGUI extends JFrame {
 	private static final long serialVersionUID = 42;
 	public Panel _centerpanel;
 
-
 	private final JPasswordField passwort1, passwort2;
 	private final JTextField login;
-	private final JButton maklerButton, immobilienButton, vertragsButton;
-	
-	public HauptmenuGUI()
-	{	
+	private final JButton maklerButton, immobilienButton, vertragsButton,
+			personButton;
+
+	public HauptmenuGUI() {
 		setTitle("Immobilienverwaltungssoftware - Hauptmenu");
 		setSize(800, 600);
 
@@ -47,6 +45,7 @@ public class HauptmenuGUI extends JFrame {
 		maklerButton = new JButton("Login");
 		immobilienButton = new JButton("Login");
 		vertragsButton = new JButton("Vertragsverwaltung");
+		personButton = new JButton("Personenverwaltung");
 
 		add(GeneriereButtonPanel());
 
@@ -56,12 +55,11 @@ public class HauptmenuGUI extends JFrame {
 		setVisible(true);
 
 	}
-	
-	private Panel GeneriereButtonPanel() 
-	{
+
+	private Panel GeneriereButtonPanel() {
 		Panel panel = new Panel();
-		panel.setLayout(new GridLayout(3,1));		
-		
+		panel.setLayout(new GridLayout(3, 1));
+
 		Panel panel1 = new Panel(new GridBagLayout());
 		panel1.add(new JLabel("Passwort: "));
 		panel1.add(passwort1);
@@ -99,6 +97,10 @@ public class HauptmenuGUI extends JFrame {
 
 	public void AddVertragsListener(ActionListener al) {
 		vertragsButton.addActionListener(al);
+	}
+
+	public void AddPersonListener(ActionListener al) {
+		personButton.addActionListener(al);
 	}
 
 	@SuppressWarnings("deprecation")

@@ -52,7 +52,7 @@ public class PersonVerwaltungGUI extends JFrame {
 
 		setAlwaysOnTop(true);
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		pack();
 		// setVisible(true);

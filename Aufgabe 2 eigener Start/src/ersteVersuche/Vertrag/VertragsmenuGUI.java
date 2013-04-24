@@ -22,6 +22,7 @@ public class VertragsmenuGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	JFrame _frame;
 	JButton _anlegen;
+	JButton _refresh;
 	JPanel _operationSelection;
 	private JTable _table;
 	private TableModelVertrag _tmodel;
@@ -115,7 +116,10 @@ public class VertragsmenuGUI extends JFrame {
 		_anlegen = new JButton("Vertrag anlegen");
 		_anlegen.setSize(100, 100);
 
+		_refresh = new JButton("Refresh");
+
 		_operationSelection.add(_anlegen);
+		_operationSelection.add(_refresh);
 	}
 
 	private JPanel initTable() {
@@ -140,6 +144,10 @@ public class VertragsmenuGUI extends JFrame {
 
 	public void AddVertragAddListener(ActionListener al) {
 		_anlegen.addActionListener(al);
+	}
+
+	public void AddRefreshAddListener(ActionListener al) {
+		_refresh.addActionListener(al);
 	}
 
 	public TableModelVertrag GetTableModel() {

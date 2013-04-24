@@ -24,8 +24,8 @@ public class VertragsmenuWerkzeug {
 	private String _makler;
 	private final VertragNeuWerkzeug _vertragNeu;
 
-	private final List<Person> _personen = LadePersonen();
-	private final List<Immobilie> _immobilien = LadeImmobilien();
+	private List<Person> _personen = LadePersonen();
+	private List<Immobilie> _immobilien = LadeImmobilien();
 
 	public VertragsmenuWerkzeug() {
 
@@ -37,6 +37,16 @@ public class VertragsmenuWerkzeug {
 				AddVertrag();
 			}
 
+		});
+
+		_GUI.AddRefreshAddListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				_personen = LadePersonen();
+				_immobilien = LadeImmobilien();
+
+			}
 		});
 	}
 
