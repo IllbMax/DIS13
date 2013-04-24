@@ -117,6 +117,7 @@ public class ImmobilienmenuWerkzeug {
 			ResultSet keys = pstmt.getGeneratedKeys();
 			keys.next();
 			int ID = keys.getInt(1);
+			i.setID(ID);
 			if(i instanceof Haus)
 			{
 				insertSQL = "INSERT INTO Haus (ID, Stockwerke, Kaufpreis, Garten) VALUES(?, ?, ?, ?)";
@@ -187,18 +188,18 @@ public class ImmobilienmenuWerkzeug {
 
 	private boolean UpdImmobilieSQL(Immobilie i) {
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
-		String selectSQL = "UPDATE Immobilie SET ID = ?, Ort = ?, PLZ = ?, Straße = ?, Hausnummer = ?, Fläche = ? WHERE ID = ?";
+		String selectSQL = "UPDATE Immobilie SET Ort = ?, PLZ = ?, Straße = ?, Hausnummer = ?, Fläche = ? WHERE ID = ?";
 		PreparedStatement pstmt;
 		try {
 			pstmt = con.prepareStatement(selectSQL);
-			pstmt.setInt(1, i.getID());
-			pstmt.setString(2, i.getOrt());
-			pstmt.setInt(3, i.getPLZ());
-			pstmt.setString(4, i.getStrasse());
-			pstmt.setInt(5, i.getHausNr());
-			pstmt.setFloat(6, i.getFlaeche());
+			pstmt.setString(1, i.getOrt());
+			pstmt.setInt(2, i.getPLZ());
+			pstmt.setString(3, i.getStrasse());
+			pstmt.setInt(4, i.getHausNr());
+			pstmt.setFloat(5, i.getFlaeche());
 
 			// pstmt.setString(5, login);
+			pstmt.setInt(6, i.getID());
 
 			// TODO: UPDATE für immobilien
 
