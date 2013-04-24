@@ -57,7 +57,8 @@ public class ImmobilienmenuWerkzeug {
 	private void AddImmobilie() {
 		Immobilie i = _immobilieNeu.ErstelleImmobilie();
 
-		if (i != null && AddImmobilieSQL(i)) {
+		if (i != null )
+		{//&& AddImmobilieSQL(i)) {
 			_GUI.GetTableModel().AddImmobilie(i);
 		}
 		_GUI.repaint();
@@ -65,7 +66,7 @@ public class ImmobilienmenuWerkzeug {
 
 	private void DelImmobilie(Immobilie i) {
 
-		if (i != null && DelImmobilieSQL(i)) {
+		if (i != null){// && DelImmobilieSQL(i)) {
 			_GUI.GetTableModel().DeleteImmobilie(i);
 		}
 		_GUI.repaint();
@@ -73,7 +74,7 @@ public class ImmobilienmenuWerkzeug {
 
 	private void UpdImmobilie(Immobilie i) {
 
-		if (i != null && UpdImmobilieSQL(i)) {
+		if (i != null){// && UpdImmobilieSQL(i)) {
 		}
 		_GUI.repaint();
 	}

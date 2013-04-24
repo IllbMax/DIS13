@@ -129,6 +129,7 @@ public class HauptmenuWerkzeug
 
 			// Führe Anfrage aus
 			ResultSet rs = pstmt.executeQuery();
+			
 			return rs.next()&&(rs.getInt(1)==42);// && !login.contains("'") && !passwort.contains("'");
 		}
 		catch (SQLException e) {
@@ -140,9 +141,10 @@ public class HauptmenuWerkzeug
 			warnung.setVisible(true);
 	 	}
 		finally {
-			try {	con.close();} catch (SQLException e) {e.printStackTrace();}
-			return false;
+			//try {	con.close();} catch (SQLException e) {e.printStackTrace();}
+			
 		}
+		return false;
 		
 	}
 }

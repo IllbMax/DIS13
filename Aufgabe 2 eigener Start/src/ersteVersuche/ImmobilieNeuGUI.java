@@ -6,7 +6,10 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 
+import javax.jws.Oneway;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -219,19 +222,44 @@ public class ImmobilieNeuGUI extends JDialog {
 		_okButton.addActionListener(al);
 	}
 
+private float getFloatFromFormatTextbox(JFormattedTextField text)
+{
+	float f;
+	Object o = text.getValue();
+	if(o instanceof Long || o instanceof Integer)
+		f = (Long) o;
+	else if(o instanceof Double)
+		f =  ((Double) o).floatValue();
+	else
+		f = (Float)o;
+	return f;
+}
+	
 	public Immobilie getImmobilie() {
-		float flaeche = (Float) _flaeche.getValue();
+		
+		NumberFormat formatter = NumberFormat.getNumberInstance(Locale.GERMANY);
+		float flaeche = 0.0f; 
+		try
+		{
+		   flaeche = formatter.parse(_flaeche.getText()).floatValue();
+		}
+		catch (ParseException e)
+		{
+		   e.printStackTrace();
+		}
+		flaeche = getFloatFromFormatTextbox(_flaeche);
+		
 
 		if (_classHaus.isSelected()) {
 			int stockwerke = (Integer) _haus_stockwerke.getValue();
-			float preis = (Float) _haus_kaufpreis.getValue();
+			float preis = getFloatFromFormatTextbox(_haus_kaufpreis);
 
 			return new Haus(-1, _ort.getText(), _plz.getText(),
 					_strasse.getText(), _hausNr.getText(), flaeche, stockwerke,
 					preis, _haus_garten.isSelected());
 		} else if (_classWohnung.isSelected()) {
 			int stockwerk = (Integer) _wohnung_stockwerk.getValue();
-			float preis = (Float) _wohnung_mietpreis.getValue();
+			float preis = getFloatFromFormatTextbox(_wohnung_mietpreis);
 			int zimmer = (Integer) _wohnung_zimmer.getValue();
 
 			return new Wohnung(-1, _ort.getText(), _plz.getText(),

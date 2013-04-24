@@ -22,6 +22,10 @@ public class MaklermenuWerkzeug {
 	public MaklermenuWerkzeug() {
 		_GUI = new MaklermenuGUI();
 		_maklerNeu = new MaklerNeuWerkzeug();
+		for(Makler m :LadeMakler())
+		{
+			_GUI.GetTableModel().AddMakler(m);
+		}
 
 		_GUI.AddMaklerAddListener(new ActionListener() {
 			@Override
