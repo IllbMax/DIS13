@@ -24,8 +24,8 @@ public class VertragsmenuWerkzeug {
 	private String _makler;
 	private final VertragNeuWerkzeug _vertragNeu;
 
-	private List<Person> _personen;
-	private List<Immobilie> _immobilien;
+	private final List<Person> _personen = LadePersonen();
+	private final List<Immobilie> _immobilien = LadeImmobilien();
 
 	public VertragsmenuWerkzeug() {
 
@@ -165,6 +165,95 @@ public class VertragsmenuWerkzeug {
 				result = i;
 				break;
 			}
+		return result;
+	}
+
+	private List<Immobilie> LadeImmobilien() {
+
+		List<Immobilie> result = new ArrayList<Immobilie>();
+		result.addAll(LadeImmobilienHaeuser());
+		result.addAll(LadeImmobilienWohnungen());
+
+		return result;
+	}
+
+	private List<Haus> LadeImmobilienHaeuser() {
+		Connection con = DB2ConnectionManager.getInstance().getConnection();
+
+		List<Haus> result = new ArrayList<Haus>();
+		String selectSQL = "SELECT * FROM Haus h, Immobilie i where h.id = i.id";
+		PreparedStatement pstmt;
+		try {
+			pstmt = con.prepareStatement(selectSQL);
+
+			// Führe Anfrage aus
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				result.add(new Haus(rs.getInt("ID"), rs.getString("Ort"), rs
+						.getInt("PLZ"), rs.getString("Straße"), rs
+						.getInt("Hausnummer"), rs.getFloat("Fläche"), rs
+						.getInt("Stockwerke"), rs.getFloat("Kaufpreis"), rs
+						.getBoolean("Garten")));
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	private List<Wohnung> LadeImmobilienWohnungen() {
+		Connection con = DB2ConnectionManager.getInstance().getConnection();
+
+		List<Wohnung> result = new ArrayList<Wohnung>();
+		String selectSQL = "SELECT * FROM Wohnung w, Immobilie i where w.id = i.id";
+		PreparedStatement pstmt;
+		try {
+			pstmt = con.prepareStatement(selectSQL);
+
+			// Führe Anfrage aus
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				result.add(new Wohnung(rs.getInt("ID"), rs.getString("Ort"), rs
+						.getInt("PLZ"), rs.getString("Straße"), Integer
+						.parseInt(rs.getString("Hausnummer")), rs
+						.getFloat("Fläche"), rs.getInt("Stockwerk"), rs
+						.getFloat("Mietpreis"), rs.getInt("Zimmer"), rs
+						.getBoolean("Balkon"), rs.getBoolean("EBK")));
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	private List<Person> LadePersonen() {
+		Connection con = DB2ConnectionManager.getInstance().getConnection();
+
+		List<Person> result = new ArrayList<Person>();
+		String selectSQL = "SELECT * FROM Person";
+		PreparedStatement pstmt;
+		try {
+			pstmt = con.prepareStatement(selectSQL);
+
+			// Führe Anfrage aus
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				result.add(new Person(rs.getInt("PID"),
+						rs.getString("Vorname"), rs.getString("Nachname"), rs
+								.getString("Adresse")));
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
 		return result;
 	}
 
