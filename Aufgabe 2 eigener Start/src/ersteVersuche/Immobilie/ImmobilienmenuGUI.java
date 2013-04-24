@@ -28,7 +28,7 @@ public class ImmobilienmenuGUI extends JFrame {
 	JList _list;
 	JButton _anlegen;
 	JButton _loeschen;
-	JButton _zurueck;
+	//JButton _zurueck;
 	JPanel _operationSelection;
 	private JTable _table;
 	private TableModelImmobilie _tmodel;
@@ -125,7 +125,7 @@ public class ImmobilienmenuGUI extends JFrame {
 		_loeschen = new JButton("Immobilien löschen");
 		_loeschen.setSize(100, 100);
 
-		_zurueck = new JButton("Zurück");
+		/*_zurueck = new JButton("Zurück");
 		_zurueck.setSize(100, 100);
 		_zurueck.addActionListener(new ActionListener() {
 
@@ -133,10 +133,10 @@ public class ImmobilienmenuGUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 
 			}
-		});
+		});*/
 		_operationSelection.add(_anlegen);
 		_operationSelection.add(_loeschen);
-		_operationSelection.add(_zurueck);
+		//_operationSelection.add(_zurueck);
 	}
 
 	private JPanel initTable() {
