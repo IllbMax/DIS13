@@ -2,11 +2,13 @@ package ersteVersuche.Material;
 
 public class Person {
 
+	private int _pid;
 	private String _vorname;
 	private String _nachname;
 	private String _adresse;
 
-	public Person(String vorname, String nachname, String adresse) {
+	public Person(int pid, String vorname, String nachname, String adresse) {
+		_pid = pid;
 		_vorname = vorname;
 		_nachname = nachname;
 		_adresse = adresse;
@@ -55,6 +57,15 @@ public class Person {
 	 */
 	public void setVorname(String vorname) {
 		this._vorname = vorname;
+	}
+
+	public int getPID() {
+		return _pid;
+	}
+
+	public void setPID(int pid) 
+	{
+		_pid = pid;
 	}
 
 }
