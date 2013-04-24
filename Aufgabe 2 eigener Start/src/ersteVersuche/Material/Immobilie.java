@@ -8,8 +8,8 @@ public abstract class Immobilie {
 	private int _hausNr;
 	private float _flaeche;
 
-	public Immobilie(int id, String ort, int plz, String strasse,
-			int hausNr, float flaeche) {
+	public Immobilie(int id, String ort, int plz, String strasse, int hausNr,
+			float flaeche) {
 		_id = id;
 		_ort = ort;
 		_plz = plz;
@@ -108,6 +108,9 @@ public abstract class Immobilie {
 		_flaeche = flaeche;
 	}
 
-	
-
+	@Override
+	public String toString() {
+		return _strasse + " " + _hausNr + ", " + _plz + " " + _ort + " ("
+				+ _flaeche + "m²)";
+	}
 }
