@@ -59,15 +59,15 @@ public class PersonVerwaltungGUI extends JFrame {
 
 	}
 
-	public void AddMaklerAddListener(ActionListener al) {
+	public void AddPersonAddListener(ActionListener al) {
 		_personAdd.addActionListener(al);
 	}
 
-	public void AddMaklerDelListener(ActionListener al) {
+	public void AddPersonDelListener(ActionListener al) {
 		_personDel.addActionListener(al);
 	}
 
-	public void AddMaklerUpdListener(TableModelListener tml) {
+	public void AddPersonUpdListener(TableModelListener tml) {
 		_tmodel.addTableModelListener(tml);
 	}
 
