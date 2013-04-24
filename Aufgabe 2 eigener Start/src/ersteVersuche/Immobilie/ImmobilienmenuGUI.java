@@ -189,4 +189,5 @@ public class ImmobilienmenuGUI extends JFrame {
 
 		return _tmodel.GetElement(row);
 	}
+	
 }
