@@ -3,6 +3,7 @@ package ersteVersuche.Immobilie;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
+import java.io.ObjectInputStream.GetField;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -99,7 +100,7 @@ public class ImmobilienmenuWerkzeug {
 			pstmt.setString(2, i.getOrt());
 			pstmt.setInt(3, i.getPLZ());
 			pstmt.setString(4, i.getStrasse());
-			pstmt.setString(5, i.getHausNr());
+			pstmt.setInt(5, i.getHausNr());
 			pstmt.setFloat(6, i.getFlaeche());
 			pstmt.setString(7, Makler);
 			// TODO: INSERT für immobilien
@@ -140,14 +141,16 @@ public class ImmobilienmenuWerkzeug {
 
 	private boolean UpdImmobilieSQL(Immobilie i) {
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
-		String selectSQL = "UPDATE Makler SET Name = ?, Adresse = ?, Login = ?, Passwort = ? WHERE Login = ?";
+		String selectSQL = "UPDATE Immobilie SET ID = ?, Ort = ?, PLZ = ?, Straße = ?, Hausnummer = ?, Fläche = ? WHERE ID = ?";
 		PreparedStatement pstmt;
 		try {
 			pstmt = con.prepareStatement(selectSQL);
-			// pstmt.setString(1, i.getName());
-			// pstmt.setString(2, i.getAdresse());
-			// pstmt.setString(3, i.getLogin());
-			// pstmt.setString(4, i.getPasswort());
+			pstmt.setInt(1, i.getID());
+			pstmt.setString(2, i.getOrt());
+			pstmt.setInt(3, i.getPLZ());
+			pstmt.setString(4, i.getStrasse());
+			pstmt.setInt(5, i.getHausNr());
+			pstmt.setFloat(6, i.getFlaeche());
 
 			// pstmt.setString(5, login);
 
@@ -188,7 +191,7 @@ public class ImmobilienmenuWerkzeug {
 			while (rs.next()) {
 				result.add(new Haus(rs.getInt("ID"), rs.getString("Ort"), rs
 						.getInt("PLZ"), rs.getString("Strasse"), rs
-						.getString("HausNr"), rs.getFloat("Flaeche"), rs
+						.getInt("HausNr"), rs.getFloat("Flaeche"), rs
 						.getInt("Stockwerke"), rs.getFloat("Kaufpreis"), rs
 						.getBoolean("Garten")));
 			}
@@ -214,8 +217,8 @@ public class ImmobilienmenuWerkzeug {
 
 			while (rs.next()) {
 				result.add(new Wohnung(rs.getInt("ID"), rs.getString("Ort"), rs
-						.getInt("PLZ"), rs.getString("Strasse"), rs
-						.getString("HausNr"), rs.getFloat("Flaeche"), rs
+						.getInt("PLZ"), rs.getString("Strasse"), Integer.parseInt(rs
+						.getString("HausNr")), rs.getFloat("Flaeche"), rs
 						.getInt("Stockwerk"), rs.getFloat("Mietpreis"), rs
 						.getInt("Zimmer"), rs.getBoolean("Balkon"), rs
 						.getBoolean("EBK")));

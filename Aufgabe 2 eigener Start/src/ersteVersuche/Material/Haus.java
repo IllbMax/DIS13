@@ -13,7 +13,7 @@ public class Haus extends Immobilie {
 	private float _kaufpreis;
 	private boolean _garten;
 
-	public Haus(int id, String ort, int plz, String strasse, String hausNr,
+	public Haus(int id, String ort, int plz, String strasse, int hausNr,
 			float flaeche, int stockwerke, float kaufpreis, boolean garten) {
 		super(id, ort, plz, strasse, hausNr, flaeche);
 		_stockwerke = stockwerke;

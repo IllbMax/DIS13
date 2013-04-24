@@ -9,7 +9,7 @@ public class Wohnung extends Immobilie {
 	private boolean _ebk;
 
 	public Wohnung(int id, String ort, int plz, String strasse,
-			String hausNr, float flaeche, int stockwerk, float mietpreis,
+			int hausNr, float flaeche, int stockwerk, float mietpreis,
 			int zimmer, boolean balkon, boolean ebk) {
 		super(id, ort, plz, strasse, hausNr, flaeche);
 
