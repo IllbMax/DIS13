@@ -5,12 +5,11 @@ public abstract class Immobilie {
 	private String _ort;
 	private int _plz;
 	private String _strasse;
-	private String _hausNr;
+	private int _hausNr;
 	private float _flaeche;
-	private String _makler;
 
 	public Immobilie(int id, String ort, int plz, String strasse,
-			String hausNr, float flaeche) {
+			int hausNr, float flaeche) {
 		_id = id;
 		_ort = ort;
 		_plz = plz;
@@ -82,7 +81,7 @@ public abstract class Immobilie {
 	/**
 	 * @return the hausNr
 	 */
-	public String getHausNr() {
+	public int getHausNr() {
 		return _hausNr;
 	}
 
@@ -90,7 +89,7 @@ public abstract class Immobilie {
 	 * @param hausNr
 	 *            the hausNr to set
 	 */
-	public void setHausNr(String hausNr) {
+	public void setHausNr(int hausNr) {
 		_hausNr = hausNr;
 	}
 
@@ -109,12 +108,6 @@ public abstract class Immobilie {
 		_flaeche = flaeche;
 	}
 
-	public String getMakler() {
-		return _makler;
-	}
-
-	public void setMakler(String makler) {
-		this._makler = makler;
-	}
+	
 
 }

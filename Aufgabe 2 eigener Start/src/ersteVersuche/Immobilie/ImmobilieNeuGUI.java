@@ -257,7 +257,7 @@ private float getFloatFromFormatTextbox(JFormattedTextField text)
 			float preis = getFloatFromFormatTextbox(_haus_kaufpreis);
 
 			return new Haus(-1, _ort.getText(), Integer.parseInt(_plz.getText()),
-					_strasse.getText(), _hausNr.getText(), flaeche, stockwerke,
+					_strasse.getText(), Integer.parseInt(_hausNr.getText()), flaeche, stockwerke,
 					preis, _haus_garten.isSelected());
 		} else if (_classWohnung.isSelected()) {
 			int stockwerk = (Integer) _wohnung_stockwerk.getValue();
@@ -265,7 +265,7 @@ private float getFloatFromFormatTextbox(JFormattedTextField text)
 			int zimmer = (Integer) _wohnung_zimmer.getValue();
 
 			return new Wohnung(-1, _ort.getText(), Integer.parseInt(_plz.getText()),
-					_strasse.getText(), _hausNr.getText(), flaeche, stockwerk,
+					_strasse.getText(), Integer.parseInt(_hausNr.getText()), flaeche, stockwerk,
 					preis, zimmer, _wohnung_balkon.isSelected(),
 					_wohnung_ebk.isSelected());
 

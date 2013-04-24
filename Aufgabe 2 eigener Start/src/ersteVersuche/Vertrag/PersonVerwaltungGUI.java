@@ -21,7 +21,7 @@ public class PersonVerwaltungGUI extends JFrame {
 	JTable _table;
 	JButton _personAdd, _personDel;
 
-	public  PersonVerwaltungGUI() {
+	public PersonVerwaltungGUI() {
 
 		setTitle("Immobilienverwaltungssoftware - Personverwaltung");
 		setSize(800, 600);
@@ -49,13 +49,13 @@ public class PersonVerwaltungGUI extends JFrame {
 
 		buttonpanel.add(_personAdd);
 		buttonpanel.add(_personDel);
-		
+
 		setAlwaysOnTop(true);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		pack();
-		//setVisible(true);
+		// setVisible(true);
 
 	}
 
@@ -84,4 +84,3 @@ public class PersonVerwaltungGUI extends JFrame {
 		return _tmodel.GetElement(row);
 	}
 }
-

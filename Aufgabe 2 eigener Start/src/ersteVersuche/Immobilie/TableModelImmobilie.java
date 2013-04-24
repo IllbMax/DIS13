@@ -165,7 +165,7 @@ public class TableModelImmobilie extends ATableModel<Immobilie> {
 				t.setStrasse(value.toString());
 				break;
 			case 3:
-				t.setHausNr(value.toString());
+				t.setHausNr(Integer.parseInt(value.toString()));
 				break;
 			case 4:
 				float f = Float.parseFloat(value.toString());
@@ -262,7 +262,7 @@ public class TableModelImmobilie extends ATableModel<Immobilie> {
 				t.setStrasse(value.toString());
 				break;
 			case 3:
-				t.setHausNr(value.toString());
+				t.setHausNr(Integer.parseInt(value.toString()));
 				break;
 			case 4:
 				float flaeche = (Float) value;
@@ -375,7 +375,7 @@ public class TableModelImmobilie extends ATableModel<Immobilie> {
 				t.setStrasse(value.toString());
 				break;
 			case 3:
-				t.setHausNr(value.toString());
+				t.setHausNr(Integer.parseInt(toString()));
 				break;
 			case 4:
 				float f = Float.parseFloat(value.toString());
