@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
