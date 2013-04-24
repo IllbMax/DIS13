@@ -80,9 +80,6 @@ public class ImmobilienmenuWerkzeug {
 		_GUI.repaint();
 	}
 
-	public static void main(String[] args) {
-		new ImmobilienmenuWerkzeug().ZeigeImmobilienMenu();
-	}
 
 	public void ZeigeImmobilienMenu() {
 		_GUI.setVisible(true);

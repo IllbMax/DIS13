@@ -274,8 +274,5 @@ private float getFloatFromFormatTextbox(JFormattedTextField text)
 		return null;
 	}
 
-	public static void main(String[] args) {
-		new ImmobilieNeuGUI(null).setVisible(true);
-	}
 
 }

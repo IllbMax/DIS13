@@ -76,6 +76,25 @@ public class HauptmenuWerkzeug
 						_hauptmenuGUI.GetPasswort2Text());	
 			}
 		});
+		_MaklermenuWerkzeug.AddWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				_hauptmenuGUI.setVisible(true);
+			}	
+		});
+		_VertragsmenuWerkzeug.AddWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				_hauptmenuGUI.setVisible(true);
+			}	
+		});
+		_ImmobilienmenuWerkzeug.AddWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				_hauptmenuGUI.setVisible(true);
+			}	
+		});
+		 
 	}
 	/**
 	 * Erzeugt das Fenster zur Verwaltung der Makler.
@@ -85,6 +104,7 @@ public class HauptmenuWerkzeug
 		{
 			System.out.println("Zugang genehmigt!");
 			_MaklermenuWerkzeug.ZeigeMaklerMenu();
+			_hauptmenuGUI.setVisible(false);
 		}
 		
 	}
@@ -99,6 +119,7 @@ public class HauptmenuWerkzeug
 			System.out.println("Zugang genehmigt!");
 			_ImmobilienmenuWerkzeug.ZeigeImmobilienMenu();
 			//TODO hier muss das passende Fenster geöffnet werden(Immoblilien)
+			_hauptmenuGUI.setVisible(false);
 		}
 	}
 	
@@ -107,6 +128,7 @@ public class HauptmenuWerkzeug
 	 */
 	private void ZeigeVertragsVerwaltung() {
 		_VertragsmenuWerkzeug.ZeigeVertragsMenu();
+		_hauptmenuGUI.setVisible(false);
 	}
 	
 	/**

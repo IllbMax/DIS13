@@ -175,12 +175,6 @@ public class ImmobilienmenuGUI extends JFrame {
 		return _tmodel;
 	}
 
-	public static void main(String[] args) {
-		ImmobilienmenuGUI _gui = new ImmobilienmenuGUI();
-
-		_gui.setVisible(true);
-	}
-
 	public Immobilie GetAktiveImmobilie() {
 		int row = _table.getSelectedRow();
 
