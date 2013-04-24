@@ -1,0 +1,46 @@
+Ich habe in unserer Datenbank die von uns erdachten Tabellen erstellt.
+Hier sind die Befehle der ausgeführten Version:
+
+	create table Makler (Name varchar(42), Adresse varchar(42), Login varchar(42) primary key, Passwort varchar(32));
+
+	create table Immobilie (ID decimal(16) not null primary key, Ort varchar(42), PLZ decimal(5), Straße varchar(42), Hausnummer decimal(4), Fläche decimal(8), Makler varchar(42) not null,
+	constraint fk_immo
+	foreign key (Makler) references Makler(Login));
+
+	create table Haus (ID decimal(16) not null primary key, Stockwerke decimal(2), Kaufpreis decimal(12,2), Garten smallint,
+	constraint fk_haus
+	foreign key (ID) references Immobilie(ID));
+
+create t	able Wohnung (ID decimal(16) not null primary key, Stockwerk decimal(2), Mietpreis decimal(12,2), Zimmer decimal(2), Balkon smallint, EBK smallint,
+constraint fk_wohnung
+ foreign key (ID) references Immobilie(ID));
+
+create table Person (PID decimal(16) not null,Vorname varchar(42), Nachname varchar(42), Ort varchar(42), PLZ decimal(5), Straße varchar(42), Hausnummer decimal(4),
+constraint pk_Person
+primary key (PID));
+
+create table Vertrag (VertragsNR decimal(16) not null, Datum date, Ort varchar(42),
+constraint pk_Vertrag
+primary key (VertragsNR));
+
+create table Mietvertrag (MVertrNr decimal(16) not null, Mietbeginn date, Dauer decimal(16), Nebenkosten decimal(12,2), Wohnung decimal(16), Mieter decimal(16),
+constraint PK_Mietvertrag
+primary key(MVertrNr),
+constraint FK_Mietvertrag1
+foreign key (MVertrNr) references Vertrag(VertragsNR),
+constraint FK_Mietvertrag2
+foreign key (Mieter) references Person(PID),
+constraint FK_Mietvertrag3
+foreign key (Wohnung) references Wohnung(ID));
+
+create table Kaufvertrag (KVertrNr decimal(16) not null, AnzahlRatten decimal(3), Rattenzins decimal(4,2), Haus decimal(16), Person decimal(16),
+constraint PK_Kaufvertrag
+primary key(KVertrNr),
+constraint FK_Kaufvertrag1
+foreign key (KVertrNr) references Vertrag(VertragsNR),
+constraint FK_Kaufvertrag2
+foreign key (Person) references Person(PID),
+constraint FK_Kaufvertrag3
+foreign key (Haus) references Haus(ID));
+
+insert into Makler values ('Testuser','Loopstraße 42 424242 Turingdorf', 'Testuser','test');

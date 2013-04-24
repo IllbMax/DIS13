@@ -10,6 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import dis2011.DB2ConnectionManager;
+import ersteVersuche.Immobilie.ImmobilienmenuWerkzeug;
+import ersteVersuche.Makler.MaklermenuWerkzeug;
+import ersteVersuche.Vertrag.VertragsmenuWerkzeug;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
