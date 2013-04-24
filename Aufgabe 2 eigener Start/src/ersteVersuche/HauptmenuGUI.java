@@ -50,6 +50,7 @@ public class HauptmenuGUI extends JFrame {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		pack();
 		setVisible(true);
 
 	}

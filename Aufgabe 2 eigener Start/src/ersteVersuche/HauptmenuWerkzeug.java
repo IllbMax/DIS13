@@ -78,19 +78,19 @@ public class HauptmenuWerkzeug
 		});
 		_MaklermenuWerkzeug.AddWindowListener(new WindowAdapter() {
 			@Override
-			public void windowClosed(WindowEvent e) {
+			public void windowClosing(WindowEvent e) {
 				_hauptmenuGUI.setVisible(true);
 			}	
 		});
 		_VertragsmenuWerkzeug.AddWindowListener(new WindowAdapter() {
 			@Override
-			public void windowClosed(WindowEvent e) {
+			public void windowClosing(WindowEvent e) {
 				_hauptmenuGUI.setVisible(true);
 			}	
 		});
 		_ImmobilienmenuWerkzeug.AddWindowListener(new WindowAdapter() {
 			@Override
-			public void windowClosed(WindowEvent e) {
+			public void windowClosing(WindowEvent e) {
 				_hauptmenuGUI.setVisible(true);
 			}	
 		});
