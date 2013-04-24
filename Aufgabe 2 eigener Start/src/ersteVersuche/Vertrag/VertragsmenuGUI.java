@@ -112,7 +112,7 @@ public class VertragsmenuGUI extends JFrame {
 	}
 
 	private void initButtons() {
-		_anlegen = new JButton("Immobilien anlegen");
+		_anlegen = new JButton("Vertrag anlegen");
 		_anlegen.setSize(100, 100);
 
 		_operationSelection.add(_anlegen);

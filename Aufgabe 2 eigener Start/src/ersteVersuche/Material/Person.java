@@ -63,9 +63,12 @@ public class Person {
 		return _pid;
 	}
 
-	public void setPID(int pid) 
-	{
+	public void setPID(int pid) {
 		_pid = pid;
 	}
 
+	@Override
+	public String toString() {
+		return _nachname + ", " + _vorname;
+	}
 }

@@ -41,8 +41,7 @@ public class VertragsmenuWerkzeug {
 	}
 
 	private void AddVertrag() {
-		// TODO: heir fehtl noch der Neu diaglog !!!
-		Vertrag i = null; // _immobilieNeu.ErstelleImmobilie();
+		Vertrag i = _vertragNeu.ErstelleVertrag();
 
 		if (i != null) {// && AddImmobilieSQL(i)) {
 			_GUI.GetTableModel().AddVertrag(i);
