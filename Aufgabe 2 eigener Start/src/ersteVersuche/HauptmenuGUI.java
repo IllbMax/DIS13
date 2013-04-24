@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -20,7 +21,8 @@ public class HauptmenuGUI extends JFrame {
 	public Panel _centerpanel;
 
 
-	private final JTextField passwort1, passwort2, login;
+	private final JPasswordField passwort1, passwort2;
+	private final JTextField login;
 	private final JButton maklerButton, immobilienButton, vertragsButton;
 	
 	public HauptmenuGUI()
@@ -33,13 +35,13 @@ public class HauptmenuGUI extends JFrame {
 		setBackground(new Color(255, 255, 255));
 
 		// add(GeneriereTextPanel());
-		passwort1 = new JTextField();
+		passwort1 = new JPasswordField();
 		passwort1.setPreferredSize(new Dimension(300, 30));
 
 		login = new JTextField();
 		login.setPreferredSize(new Dimension(300, 30));
 
-		passwort2 = new JTextField();
+		passwort2 = new JPasswordField();
 		passwort2.setPreferredSize(new Dimension(300, 30));
 
 		maklerButton = new JButton("Login");
@@ -99,13 +101,18 @@ public class HauptmenuGUI extends JFrame {
 		vertragsButton.addActionListener(al);
 	}
 
+	@SuppressWarnings("deprecation")
 	public String GetPasswort1Text() {
-		return passwort1.getText();
-
+		String re = passwort1.getText();
+		passwort1.setText(null);
+		return re;
 	}
 
+	@SuppressWarnings("deprecation")
 	public String GetPasswort2Text() {
-		return passwort2.getText();
+		String re = passwort2.getText();
+		passwort2.setText(null);
+		return re;
 
 	}
 

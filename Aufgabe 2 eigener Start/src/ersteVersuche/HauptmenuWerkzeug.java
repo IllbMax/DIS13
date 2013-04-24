@@ -117,7 +117,7 @@ public class HauptmenuWerkzeug
 		{
 			
 			System.out.println("Zugang genehmigt!");
-			_ImmobilienmenuWerkzeug.ZeigeImmobilienMenu();
+			_ImmobilienmenuWerkzeug.ZeigeImmobilienMenu(login);
 			//TODO hier muss das passende Fenster geöffnet werden(Immoblilien)
 			_hauptmenuGUI.setVisible(false);
 		}

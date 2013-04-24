@@ -21,8 +21,10 @@ import ersteVersuche.Material.Wohnung;
 public class ImmobilienmenuWerkzeug {
 	private final ImmobilienmenuGUI _GUI;
 	private final ImmobilieNeuWerkzeug _immobilieNeu;
+	private String Makler;
 
 	public ImmobilienmenuWerkzeug() {
+		
 		_GUI = new ImmobilienmenuGUI();
 		_immobilieNeu = new ImmobilieNeuWerkzeug();
 		_GUI.AddImmobilienAddListener(new ActionListener() {
@@ -81,7 +83,8 @@ public class ImmobilienmenuWerkzeug {
 	}
 
 
-	public void ZeigeImmobilienMenu() {
+	public void ZeigeImmobilienMenu(String Login) {
+		Makler = Login;
 		_GUI.setVisible(true);
 
 	}
@@ -98,7 +101,7 @@ public class ImmobilienmenuWerkzeug {
 			pstmt.setString(4, i.getStrasse());
 			pstmt.setString(5, i.getHausNr());
 			pstmt.setFloat(6, i.getFlaeche());
-			pstmt.setString(7, i.getMakler());
+			pstmt.setString(7, Makler);
 			// TODO: INSERT für immobilien
 			// Führe Anfrage aus
 			int rs = pstmt.executeUpdate();

@@ -7,7 +7,6 @@ public abstract class Immobilie {
 	private String _strasse;
 	private String _hausNr;
 	private float _flaeche;
-	private String _makler;
 
 	public Immobilie(int id, String ort, int plz, String strasse,
 			String hausNr, float flaeche) {
@@ -109,12 +108,6 @@ public abstract class Immobilie {
 		_flaeche = flaeche;
 	}
 
-	public String getMakler() {
-		return _makler;
-	}
-
-	public void setMakler(String makler) {
-		this._makler = makler;
-	}
+	
 
 }
