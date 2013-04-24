@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dis2011.DB2ConnectionManager;
-import ersteVersuche.Immobilie.ImmobilieNeuWerkzeug;
 import ersteVersuche.Material.Haus;
 import ersteVersuche.Material.Immobilie;
 import ersteVersuche.Material.Kaufvertrag;
@@ -31,7 +30,7 @@ public class VertragsmenuWerkzeug {
 	public VertragsmenuWerkzeug() {
 
 		_GUI = new VertragsmenuGUI();
-		_vertragNeu = new VertragNeuWerkzeug();
+		_vertragNeu = new VertragNeuWerkzeug(_personen, _immobilien);
 		_GUI.AddVertragAddListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -53,7 +52,7 @@ public class VertragsmenuWerkzeug {
 
 	public void ZeigeVertragsMenu() {
 		_GUI.setVisible(true);
-		//_makler = makler;
+		// _makler = makler;
 	}
 
 	private boolean AddVertragSQL(Vertrag v) {

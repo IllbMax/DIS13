@@ -1,8 +1,11 @@
-package ersteVersuche.Immobilie;
+package ersteVersuche.Vertrag;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
+import ersteVersuche.Material.Immobilie;
+import ersteVersuche.Material.Person;
 import ersteVersuche.Material.Vertrag;
 
 public class VertragNeuWerkzeug {
@@ -10,12 +13,17 @@ public class VertragNeuWerkzeug {
 
 	private Vertrag _vertrag = null;
 
+	private final List<Person> _personen;
+	private final List<Immobilie> _immoblilen;
+
 	/**
 	 * Konstruktor oder so
 	 */
-	public VertragNeuWerkzeug() {
+	public VertragNeuWerkzeug(List<Person> personen, List<Immobilie> immoblilen) {
 
-		_GUI = new VertragNeuGUI(null);
+		_personen = personen;
+		_immoblilen = immoblilen;
+		_GUI = new VertragNeuGUI(null, _personen, _immoblilen);
 
 		_GUI.AddOKListener(new ActionListener() {
 
@@ -36,7 +44,7 @@ public class VertragNeuWerkzeug {
 	public Vertrag ErstelleVertrag() {
 
 		_GUI.setVisible(true);
-		Vertrag m = _vetrag;
+		Vertrag m = _vertrag;
 		_vertrag = null;
 		return m;
 	}
