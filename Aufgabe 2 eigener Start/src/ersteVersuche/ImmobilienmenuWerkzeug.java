@@ -90,14 +90,17 @@ public class ImmobilienmenuWerkzeug {
 
 	private boolean AddImmobilieSQL(Immobilie i) {
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
-		String selectSQL = "INSERT INTO Makler (Name, Adresse, Login, Passwort) VALUES(?, ?, ?, ?)";
+		String insertSQL = "INSERT INTO Immobilie (ID, Ort, PLZ, Straße, Hausnummer, Fläche, Makler) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement pstmt;
 		try {
-			pstmt = con.prepareStatement(selectSQL);
-			// pstmt.setString(1, i.getName());
-			// pstmt.setString(2, i.getAdresse());
-			// pstmt.setString(3, i.getLogin());
-			// pstmt.setString(4, i.getPasswort());
+			pstmt = con.prepareStatement(insertSQL);
+			pstmt.setInt(1, i.getID());
+			pstmt.setString(2, i.getOrt());
+			pstmt.setInt(3, i.getPLZ());
+			pstmt.setString(4, i.getStrasse());
+			pstmt.setString(5, i.getHausNr());
+			pstmt.setFloat(6, i.getFlaeche());
+			pstmt.setString(7, i.getMakler());
 			// TODO: INSERT für immobilien
 			// Führe Anfrage aus
 			int rs = pstmt.executeUpdate();
@@ -183,7 +186,7 @@ public class ImmobilienmenuWerkzeug {
 
 			while (rs.next()) {
 				result.add(new Haus(rs.getInt("ID"), rs.getString("Ort"), rs
-						.getString("PLZ"), rs.getString("Strasse"), rs
+						.getInt("PLZ"), rs.getString("Strasse"), rs
 						.getString("HausNr"), rs.getFloat("Flaeche"), rs
 						.getInt("Stockwerke"), rs.getFloat("Kaufpreis"), rs
 						.getBoolean("Garten")));
@@ -210,7 +213,7 @@ public class ImmobilienmenuWerkzeug {
 
 			while (rs.next()) {
 				result.add(new Wohnung(rs.getInt("ID"), rs.getString("Ort"), rs
-						.getString("PLZ"), rs.getString("Strasse"), rs
+						.getInt("PLZ"), rs.getString("Strasse"), rs
 						.getString("HausNr"), rs.getFloat("Flaeche"), rs
 						.getInt("Stockwerk"), rs.getFloat("Mietpreis"), rs
 						.getInt("Zimmer"), rs.getBoolean("Balkon"), rs

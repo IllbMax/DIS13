@@ -35,7 +35,7 @@ public class ImmobilieNeuGUI extends JDialog {
 	private final JPanel _dataPanel;
 
 	private JTextField _ort;
-	private JTextField _plz;
+	private JFormattedTextField _plz;
 	private JTextField _strasse;
 	private JTextField _hausNr;
 	private JFormattedTextField _flaeche;
@@ -133,12 +133,14 @@ public class ImmobilieNeuGUI extends JDialog {
 		_dataPanelBase = new JPanel(new GridLayout(5, 2));
 
 		_ort = new JTextField(TEXTFELD_BREITE);
-		_plz = new JTextField(TEXTFELD_BREITE);
 		_strasse = new JTextField(TEXTFELD_BREITE);
 		_hausNr = new JTextField(TEXTFELD_BREITE);
 		_flaeche = new JFormattedTextField(NumberFormat.getNumberInstance());
 		_flaeche.setColumns(TEXTFELD_BREITE);
 		_flaeche.setValue(0.0f);
+		_plz = new JFormattedTextField(NumberFormat.getIntegerInstance());
+		_plz.setColumns(TEXTFELD_BREITE);
+		_plz.setValue(0);
 
 		_dataPanelBase.add(new JLabel("Ort:"));
 		_dataPanelBase.add(_ort);
@@ -254,7 +256,7 @@ private float getFloatFromFormatTextbox(JFormattedTextField text)
 			int stockwerke = (Integer) _haus_stockwerke.getValue();
 			float preis = getFloatFromFormatTextbox(_haus_kaufpreis);
 
-			return new Haus(-1, _ort.getText(), _plz.getText(),
+			return new Haus(-1, _ort.getText(), Integer.parseInt(_plz.getText()),
 					_strasse.getText(), _hausNr.getText(), flaeche, stockwerke,
 					preis, _haus_garten.isSelected());
 		} else if (_classWohnung.isSelected()) {
@@ -262,7 +264,7 @@ private float getFloatFromFormatTextbox(JFormattedTextField text)
 			float preis = getFloatFromFormatTextbox(_wohnung_mietpreis);
 			int zimmer = (Integer) _wohnung_zimmer.getValue();
 
-			return new Wohnung(-1, _ort.getText(), _plz.getText(),
+			return new Wohnung(-1, _ort.getText(), Integer.parseInt(_plz.getText()),
 					_strasse.getText(), _hausNr.getText(), flaeche, stockwerk,
 					preis, zimmer, _wohnung_balkon.isSelected(),
 					_wohnung_ebk.isSelected());

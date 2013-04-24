@@ -142,14 +142,14 @@ public class ImmobilienmenuGUI extends JFrame {
 	private JPanel initTable() {
 		JPanel tablepanel = new JPanel(new BorderLayout());
 		_table = new JTable(_tmodel = new TableModelImmobilie());
-		_tmodel.AddImmobilie(new Wohnung(0, "aSD2", "123", "sss", "42", 12.5f,
+		/*_tmodel.AddImmobilie(new Wohnung(0, "aSD2", "123", "sss", "42", 12.5f,
 				4, 123, 7, true, false));
 		_tmodel.AddImmobilie(new Haus(0, "aSD2", "123", "sss", "42", 12.5f, 4,
 				123, true));
 		_tmodel.AddImmobilie(new Wohnung(0, "aSD2", "123", "sss", "44", 12.5f,
 				4, 123, 7, true, false));
 		_tmodel.AddImmobilie(new Wohnung(0, "aaSD2", "1d23", "ssfs", "45",
-				12.5f, 4, 123, 7, true, false));
+				12.5f, 4, 123, 7, true, false));*/
 
 		JScrollPane scrollPane = new JScrollPane(_table);
 		_table.setFillsViewportHeight(true);

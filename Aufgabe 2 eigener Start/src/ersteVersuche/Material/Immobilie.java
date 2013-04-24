@@ -3,12 +3,13 @@ package ersteVersuche.Material;
 public abstract class Immobilie {
 	private int _id;
 	private String _ort;
-	private String _plz;
+	private int _plz;
 	private String _strasse;
 	private String _hausNr;
 	private float _flaeche;
+	private String _makler;
 
-	public Immobilie(int id, String ort, String plz, String strasse,
+	public Immobilie(int id, String ort, int plz, String strasse,
 			String hausNr, float flaeche) {
 		_id = id;
 		_ort = ort;
@@ -51,7 +52,7 @@ public abstract class Immobilie {
 	/**
 	 * @return the pLZ
 	 */
-	public String getPLZ() {
+	public int getPLZ() {
 		return _plz;
 	}
 
@@ -59,7 +60,7 @@ public abstract class Immobilie {
 	 * @param pLZ
 	 *            the pLZ to set
 	 */
-	public void setPLZ(String pLZ) {
+	public void setPLZ(int pLZ) {
 		_plz = pLZ;
 	}
 
@@ -106,6 +107,14 @@ public abstract class Immobilie {
 	 */
 	public void setFlaeche(float flaeche) {
 		_flaeche = flaeche;
+	}
+
+	public String getMakler() {
+		return _makler;
+	}
+
+	public void setMakler(String makler) {
+		this._makler = makler;
 	}
 
 }

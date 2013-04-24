@@ -104,7 +104,7 @@ public class TableModelImmobilie extends ATableModel<Immobilie> {
 		final String[] _header = new String[] { "Ort", "PLZ", "Straße",
 				"Haus Nr.", "Fläche [m²]" };
 		final Class<?>[] _colClasses = new Class<?>[] { String.class,
-				String.class, String.class, String.class, Float.class };
+				Integer.class, String.class, String.class, Float.class };
 		List<Immobilie> _data;
 
 		public ImmobilienBaseState() {
@@ -158,7 +158,7 @@ public class TableModelImmobilie extends ATableModel<Immobilie> {
 				t.setOrt(value.toString());
 				break;
 			case 1:
-				t.setPLZ(value.toString());
+				t.setPLZ(Integer.parseInt(value.toString()));
 				break;
 			case 2:
 				t.setStrasse(value.toString());
@@ -184,7 +184,7 @@ public class TableModelImmobilie extends ATableModel<Immobilie> {
 		final String[] _header = new String[] { "Ort", "PLZ", "Straße",
 				"Haus Nr.", "Fläche [m²]", "Stockwerke", "Kaufpreis", "Garten" };
 		final Class<?>[] _colClasses = new Class<?>[] { String.class,
-				String.class, String.class, String.class, Float.class,
+				Integer.class, String.class, String.class, Float.class,
 				Integer.class, Float.class, Boolean.class };
 
 		List<Immobilie> _data;
@@ -255,7 +255,7 @@ public class TableModelImmobilie extends ATableModel<Immobilie> {
 				t.setOrt(value.toString());
 				break;
 			case 1:
-				t.setPLZ(value.toString());
+				t.setPLZ(Integer.parseInt(value.toString()));
 				break;
 			case 2:
 				t.setStrasse(value.toString());
@@ -294,7 +294,7 @@ public class TableModelImmobilie extends ATableModel<Immobilie> {
 				"Haus Nr.", "Fläche [m²]", "Stockwerk", "Mietpreis", "Zimmer",
 				"Balkon", "EBK" };
 		final Class<?>[] _colClasses = new Class<?>[] { String.class,
-				String.class, String.class, String.class, Float.class,
+				Integer.class, String.class, String.class, Float.class,
 				Integer.class, Float.class, Integer.class, Boolean.class,
 				Boolean.class };
 
@@ -368,7 +368,7 @@ public class TableModelImmobilie extends ATableModel<Immobilie> {
 				t.setOrt(value.toString());
 				break;
 			case 1:
-				t.setPLZ(value.toString());
+				t.setPLZ(Integer.parseInt(value.toString()));
 				break;
 			case 2:
 				t.setStrasse(value.toString());
