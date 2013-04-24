@@ -23,7 +23,7 @@ import ersteVersuche.Material.Wohnung;
 public class VertragsmenuWerkzeug {
 	private final VertragsmenuGUI _GUI;
 	private String _makler;
-	private final ImmobilieNeuWerkzeug _immobilieNeu;
+	private final VertragNeuWerkzeug _vertragNeu;
 
 	private List<Person> _personen;
 	private List<Immobilie> _immobilien;
@@ -31,7 +31,7 @@ public class VertragsmenuWerkzeug {
 	public VertragsmenuWerkzeug() {
 
 		_GUI = new VertragsmenuGUI();
-		_immobilieNeu = new ImmobilieNeuWerkzeug();
+		_vertragNeu = new VertragNeuWerkzeug();
 		_GUI.AddVertragAddListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -51,9 +51,9 @@ public class VertragsmenuWerkzeug {
 		_GUI.repaint();
 	}
 
-	public void ZeigeVertragsMenu(String makler) {
+	public void ZeigeVertragsMenu() {
 		_GUI.setVisible(true);
-		_makler = makler;
+		//_makler = makler;
 	}
 
 	private boolean AddVertragSQL(Vertrag v) {
