@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,22 +67,49 @@ public class VertragsmenuWerkzeug {
 
 	private boolean AddVertragSQL(Vertrag v) {
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
-		String insertSQL = "INSERT INTO Immobilie (ID, Ort, PLZ, Straße, Hausnummer, Fläche, Makler) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+		String insertSQL = "INSERT INTO Vertrag (Datum, Ort) VALUES(?, ?)";
 		PreparedStatement pstmt;
 		try {
-			pstmt = con.prepareStatement(insertSQL);
-			// pstmt.setInt(1, v.getID());
-			// pstmt.setString(2, v.getOrt());
-			// pstmt.setInt(3, v.getPLZ());
-			// pstmt.setString(4, v.getStrasse());
-			// pstmt.setInt(5, v.getHausNr());
-			// pstmt.setFloat(6, v.getFlaeche());
-			// pstmt.setString(7, Makler);
-			// // TODO: INSERT für immobilien
+			pstmt = con.prepareStatement(insertSQL,Statement.RETURN_GENERATED_KEYS);
+			pstmt.setDate(1, v.getDatum());
+			pstmt.setString(2, v.getOrt());
+			
 			// Führe Anfrage aus
 			int rs = pstmt.executeUpdate();
-
-			return rs > 0;
+			if(rs <= 0) return false;
+			
+			ResultSet keys = pstmt.getGeneratedKeys();
+			keys.next();
+			int ID = keys.getInt(1);
+			v.setVertragsnr(ID);
+			if(v instanceof Kaufvertrag)
+			{
+				insertSQL = "INSERT INTO Kaufvertrag (KVertrNr, AnzahlRaten, Ratenzins, Haus, Person) VALUES(?, ?, ?, ?, ?)";
+				pstmt = con.prepareStatement(insertSQL,Statement.RETURN_GENERATED_KEYS);
+				pstmt.setInt(1, ID);
+				pstmt.setInt(2, ((Kaufvertrag) v).getAnzahlRaten());
+				pstmt.setFloat(3, ((Kaufvertrag) v).getRatenzins());
+				pstmt.setInt(4, ((Kaufvertrag) v).getHaus().getID());
+				pstmt.setInt(5, v.getPerson().getPID());
+				
+				rs = pstmt.executeUpdate();
+				if(rs > 0) return true;
+			}
+			if(v instanceof Mietvertrag)
+			{
+				insertSQL = "INSERT INTO Mietvertrag (MVertrNr, Mietbeginn, Dauer, Nebenkosten, Wohnung, Mieter) VALUES(?, ?, ?, ?, ?, ?)";
+				pstmt = con.prepareStatement(insertSQL,Statement.RETURN_GENERATED_KEYS);
+				pstmt.setInt(1, ID);
+				pstmt.setDate(2, v.getDatum());
+				pstmt.setFloat(3, ((Mietvertrag) v).getDauer());
+				pstmt.setFloat(4, ((Mietvertrag) v).getNebenkosten());
+				pstmt.setInt(5, ((Mietvertrag) v).getWohnung().getID());
+				pstmt.setInt(6, ((Mietvertrag) v).getPerson().getPID());
+				
+				rs = pstmt.executeUpdate();
+				if(rs > 0) return true;
+			}
+			
 		} catch (SQLException e) {
 
 			e.printStackTrace();
