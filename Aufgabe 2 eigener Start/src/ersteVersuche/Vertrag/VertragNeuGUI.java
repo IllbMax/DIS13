@@ -5,14 +5,15 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
 import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-import javax.jws.Oneway;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -21,9 +22,13 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import ersteVersuche.Material.Haus;
+import ersteVersuche.Material.Immobilie;
 import ersteVersuche.Material.Kaufvertrag;
 import ersteVersuche.Material.Mietvertrag;
+import ersteVersuche.Material.Person;
 import ersteVersuche.Material.Vertrag;
+import ersteVersuche.Material.Wohnung;
 
 public class VertragNeuGUI extends JDialog {
 
@@ -36,13 +41,12 @@ public class VertragNeuGUI extends JDialog {
 
 	private JTextField _ort;
 	private JFormattedTextField _datum;
-	
 
 	private final JButton _okButton;
 
 	private ButtonGroup _classButtonGroup;
-	private JRadioButton _classMietvertrag;
 	private JRadioButton _classKaufvertrag;
+	private JRadioButton _classMietvertrag;
 
 	private final JPanel _dataPanelExtend;
 	private JPanel _kaufExtend;
@@ -50,18 +54,25 @@ public class VertragNeuGUI extends JDialog {
 
 	private JFormattedTextField _kauf_anzahlratten;
 	private JFormattedTextField _kauf_rattenzins;
-	private JTextField _haus;
-	private JTextField _person;
+	private JComboBox _haus;
+	private JComboBox _person;
 
 	private JFormattedTextField _mietbeginn;
 	private JFormattedTextField _miet_dauer;
 	private JFormattedTextField _miet_nebenkosten;
-	private JTextField _mieter;
-	
+	private JComboBox _mieter;
+	private JComboBox _wohnung;
 
-	public VertragNeuGUI(JFrame frame) {
+	private final List<Immobilie> _immobilien;
+
+	private final List<Person> _personen;
+
+	public VertragNeuGUI(JFrame frame, List<Person> personen,
+			List<Immobilie> immobilien) {
 		super(frame, true);
 
+		_immobilien = immobilien;
+		_personen = personen;
 		setTitle(" Vertrag anlegen");
 		// setSize(800, 600);
 
@@ -100,18 +111,18 @@ public class VertragNeuGUI extends JDialog {
 		JPanel selectClassPanel = new JPanel(new GridLayout(0, 2));
 
 		_classButtonGroup = new ButtonGroup();
-		_classHaus = new JRadioButton("Haus");
-		_classHaus.setSelected(true);
-		_classWohnung = new JRadioButton("Wohnung");
+		_classKaufvertrag = new JRadioButton("Kaufvertrag");
+		_classKaufvertrag.setSelected(true);
+		_classMietvertrag = new JRadioButton("Mietvertrag");
 
-		selectClassPanel.add(_classHaus);
-		selectClassPanel.add(_classWohnung);
+		selectClassPanel.add(_classKaufvertrag);
+		selectClassPanel.add(_classMietvertrag);
 
-		_classButtonGroup.add(_classHaus);
-		_classButtonGroup.add(_classWohnung);
+		_classButtonGroup.add(_classKaufvertrag);
+		_classButtonGroup.add(_classMietvertrag);
 		add(selectClassPanel, BorderLayout.NORTH);
 
-		_classHaus.addActionListener(new ActionListener() {
+		_classKaufvertrag.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -119,7 +130,7 @@ public class VertragNeuGUI extends JDialog {
 			}
 		});
 
-		_classWohnung.addActionListener(new ActionListener() {
+		_classMietvertrag.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -132,89 +143,96 @@ public class VertragNeuGUI extends JDialog {
 		_dataPanelBase = new JPanel(new GridLayout(5, 2));
 
 		_ort = new JTextField(TEXTFELD_BREITE);
-		_strasse = new JTextField(TEXTFELD_BREITE);
-		_hausNr = new JTextField(TEXTFELD_BREITE);
-		_flaeche = new JFormattedTextField(NumberFormat.getNumberInstance());
-		_flaeche.setColumns(TEXTFELD_BREITE);
-		_flaeche.setValue(0.0f);
-		_plz = new JFormattedTextField(NumberFormat.getIntegerInstance());
-		_plz.setColumns(TEXTFELD_BREITE);
-		_plz.setValue(0);
+		_datum = new JFormattedTextField(DateFormat.getDateInstance());
+		_datum.setColumns(TEXTFELD_BREITE);
+		_datum.setValue(new Date(1970, 1, 1));
 
+		_dataPanelBase.add(new JLabel("Datum:"));
+		_dataPanelBase.add(_datum);
 		_dataPanelBase.add(new JLabel("Ort:"));
 		_dataPanelBase.add(_ort);
-		_dataPanelBase.add(new JLabel("PLZ:"));
-		_dataPanelBase.add(_plz);
-		_dataPanelBase.add(new JLabel("Straße:"));
-		_dataPanelBase.add(_strasse);
-		_dataPanelBase.add(new JLabel("Hausnummer:"));
-		_dataPanelBase.add(_hausNr);
-		_dataPanelBase.add(new JLabel("Fläche [m²]:"));
-		_dataPanelBase.add(_flaeche);
 	}
 
 	private void initMietvertrag() {
-		_wohnungExtend = new JPanel(new GridLayout(0, 2));
+		_mietExtend = new JPanel(new GridLayout(0, 2));
 
-		_wohnung_stockwerk = new JFormattedTextField(
-				NumberFormat.getIntegerInstance());
-		_wohnung_stockwerk.setColumns(TEXTFELD_BREITE);
-		_wohnung_stockwerk.setValue(0);
-		_wohnung_mietpreis = new JFormattedTextField(
+		_mietbeginn = new JFormattedTextField(DateFormat.getDateInstance());
+		_mietbeginn.setColumns(TEXTFELD_BREITE);
+		_mietbeginn.setValue(new Date(1970, 1, 1));
+
+		_miet_dauer = new JFormattedTextField(NumberFormat.getIntegerInstance());
+		_miet_dauer.setColumns(TEXTFELD_BREITE);
+		_miet_dauer.setValue(0);
+
+		_miet_nebenkosten = new JFormattedTextField(
 				NumberFormat.getNumberInstance());
-		_wohnung_mietpreis.setColumns(TEXTFELD_BREITE);
-		_wohnung_mietpreis.setValue(0.0f);
-		_wohnung_zimmer = new JFormattedTextField(
-				NumberFormat.getIntegerInstance());
-		_wohnung_zimmer.setColumns(TEXTFELD_BREITE);
-		_wohnung_zimmer.setValue(0);
+		_miet_nebenkosten.setColumns(TEXTFELD_BREITE);
+		_miet_nebenkosten.setValue(0.0f);
 
-		_wohnung_balkon = new JCheckBox();
-		_wohnung_ebk = new JCheckBox();
+		_mieter = new JComboBox(_personen.toArray(new Person[_personen.size()]));
 
-		_wohnungExtend.add(new JLabel("Stockwerk:"));
-		_wohnungExtend.add(_wohnung_stockwerk);
-		_wohnungExtend.add(new JLabel("Mietpreis:"));
-		_wohnungExtend.add(_wohnung_mietpreis);
-		_wohnungExtend.add(new JLabel("Zimmer:"));
-		_wohnungExtend.add(_wohnung_zimmer);
-		_wohnungExtend.add(new JLabel("Balkon:"));
-		_wohnungExtend.add(_wohnung_balkon);
-		_wohnungExtend.add(new JLabel("EBK:"));
-		_wohnungExtend.add(_wohnung_ebk);
+		List<Wohnung> wohnung = new ArrayList<Wohnung>();
+		for (Immobilie i : _immobilien) {
+			if (i instanceof Wohnung)
+				wohnung.add((Wohnung) i);
+		}
+
+		_wohnung = new JComboBox(wohnung.toArray(new Wohnung[wohnung.size()]));
+
+		_mietExtend.add(new JLabel("Mietbeginn:"));
+		_mietExtend.add(_mietbeginn);
+		_mietExtend.add(new JLabel("Mietdauer:"));
+		_mietExtend.add(_miet_dauer);
+		_mietExtend.add(new JLabel("Nebenkosten:"));
+		_mietExtend.add(_miet_nebenkosten);
+		_mietExtend.add(new JLabel("Mieter:"));
+		_mietExtend.add(_mieter);
+		_mietExtend.add(new JLabel("Wohung:"));
+		_mietExtend.add(_wohnung);
+
 	}
 
 	private void initKaufvertrag() {
-		_hausExtend = new JPanel(new GridLayout(0, 2));
+		_kaufExtend = new JPanel(new GridLayout(0, 2));
 
-		_haus_stockwerke = new JFormattedTextField(
+		_kauf_anzahlratten = new JFormattedTextField(
 				NumberFormat.getIntegerInstance());
-		_haus_stockwerke.setColumns(TEXTFELD_BREITE);
-		_haus_stockwerke.setValue(0);
-		_haus_kaufpreis = new JFormattedTextField(
+		_kauf_anzahlratten.setColumns(TEXTFELD_BREITE);
+		_kauf_anzahlratten.setValue(0);
+		_kauf_rattenzins = new JFormattedTextField(
 				NumberFormat.getNumberInstance());
-		_haus_kaufpreis.setColumns(TEXTFELD_BREITE);
-		_haus_kaufpreis.setValue(0.0f);
+		_kauf_rattenzins.setColumns(TEXTFELD_BREITE);
+		_kauf_rattenzins.setValue(0.0f);
 
-		_haus_garten = new JCheckBox();
+		_person = new JComboBox(_personen.toArray(new Person[_personen.size()]));
 
-		_hausExtend.add(new JLabel("Stockwerke:"));
-		_hausExtend.add(_haus_stockwerke);
-		_hausExtend.add(new JLabel("Kaufpreis:"));
-		_hausExtend.add(_haus_kaufpreis);
-		_hausExtend.add(new JLabel("Garten:"));
-		_hausExtend.add(_haus_garten);
+		List<Haus> haus = new ArrayList<Haus>();
+		for (Immobilie i : _immobilien) {
+			if (i instanceof Haus)
+				haus.add((Haus) i);
+		}
+
+		_haus = new JComboBox(haus.toArray(new Haus[haus.size()]));
+
+		_kaufExtend.add(new JLabel("Anzahl Raten:"));
+		_kaufExtend.add(_kauf_anzahlratten);
+		_kaufExtend.add(new JLabel("Ratenzins:"));
+		_kaufExtend.add(_kauf_rattenzins);
+		_kaufExtend.add(new JLabel("Person:"));
+		_kaufExtend.add(_person);
+		_kaufExtend.add(new JLabel("Haus:"));
+		_kaufExtend.add(_haus);
 
 	}
 
 	private void UpdateClassData() {
-		_dataPanelExtend.remove(_wohnungExtend);
-		_dataPanelExtend.remove(_hausExtend);
+		_dataPanelExtend.remove(_mietExtend);
+		_dataPanelExtend.remove(_kaufExtend);
 
-		if (_classHaus.isSelected())
-			_dataPanelExtend.add(_hausExtend);
-		else if (_classWohnung.isSelected())
-			_dataPanelExtend.add(_wohnungExtend);
+		if (_classKaufvertrag.isSelected())
+			_dataPanelExtend.add(_kaufExtend);
+		else if (_classMietvertrag.isSelected())
+			_dataPanelExtend.add(_mietExtend);
 		pack();
 		// repaint();
 	}
@@ -223,55 +241,37 @@ public class VertragNeuGUI extends JDialog {
 		_okButton.addActionListener(al);
 	}
 
-private float getFloatFromFormatTextbox(JFormattedTextField text)
-{
-	float f;
-	Object o = text.getValue();
-	if(o instanceof Long || o instanceof Integer)
-		f = (Long) o;
-	else if(o instanceof Double)
-		f =  ((Double) o).floatValue();
-	else
-		f = (Float)o;
-	return f;
-}
-	
-	public Immobilie getImmobilie() {
-		
-		NumberFormat formatter = NumberFormat.getNumberInstance(Locale.GERMANY);
-		float flaeche = 0.0f; 
-		try
-		{
-		   flaeche = formatter.parse(_flaeche.getText()).floatValue();
-		}
-		catch (ParseException e)
-		{
-		   e.printStackTrace();
-		}
-		flaeche = getFloatFromFormatTextbox(_flaeche);
-		
+	private float getFloatFromFormatTextbox(JFormattedTextField text) {
+		float f;
+		Object o = text.getValue();
+		if (o instanceof Long || o instanceof Integer)
+			f = (Long) o;
+		else if (o instanceof Double)
+			f = ((Double) o).floatValue();
+		else
+			f = (Float) o;
+		return f;
+	}
 
-		if (_classHaus.isSelected()) {
-			int stockwerke = (Integer) _haus_stockwerke.getValue();
-			float preis = getFloatFromFormatTextbox(_haus_kaufpreis);
+	public Vertrag getVertrag() {
 
-			return new Haus(-1, _ort.getText(), Integer.parseInt(_plz.getText()),
-					_strasse.getText(), _hausNr.getText(), flaeche, stockwerke,
-					preis, _haus_garten.isSelected());
-		} else if (_classWohnung.isSelected()) {
-			int stockwerk = (Integer) _wohnung_stockwerk.getValue();
-			float preis = getFloatFromFormatTextbox(_wohnung_mietpreis);
-			int zimmer = (Integer) _wohnung_zimmer.getValue();
-
-			return new Wohnung(-1, _ort.getText(), Integer.parseInt(_plz.getText()),
-					_strasse.getText(), _hausNr.getText(), flaeche, stockwerk,
-					preis, zimmer, _wohnung_balkon.isSelected(),
-					_wohnung_ebk.isSelected());
+		if (_classKaufvertrag.isSelected()) {
+			return new Kaufvertrag(-1, (Date) _datum.getValue(),
+					_ort.getText(), (Person) _person.getSelectedItem(),
+					(Haus) _haus.getSelectedItem(),
+					(Integer) _kauf_anzahlratten.getValue(),
+					(Float) _kauf_rattenzins.getValue());
+		} else if (_classMietvertrag.isSelected()) {
+			return new Mietvertrag(-1, (Date) _datum.getValue(),
+					_ort.getText(), (Person) _mieter.getSelectedItem(),
+					(Wohnung) _wohnung.getSelectedItem(),
+					(Date) _mietbeginn.getValue(),
+					(Integer) _miet_dauer.getValue(),
+					(Float) _miet_nebenkosten.getValue());
 
 		}
 
 		return null;
 	}
-
 
 }
