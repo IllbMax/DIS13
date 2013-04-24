@@ -3,7 +3,9 @@ Hier sind die Befehle der ausgeführten Version:
 
 	create table Makler (Name varchar(42), Adresse varchar(42), Login varchar(42) primary key, Passwort varchar(32));
 
-	create table Immobilie (ID decimal(16) not null primary key, Ort varchar(42), PLZ decimal(5), Straße varchar(42), Hausnummer decimal(4), Fläche decimal(8), Makler varchar(42) not null,
+	create table Immobilie (ID decimal(16) not null GENERATED ALWAYS AS IDENTITY
+   (START WITH 1
+   INCREMENT BY 1), Ort varchar(42), PLZ decimal(5), Straße varchar(42), Hausnummer decimal(4), Fläche decimal(8), Makler varchar(42) not null,
 	constraint fk_immo
 	foreign key (Makler) references Makler(Login));
 
@@ -19,7 +21,9 @@ Hier sind die Befehle der ausgeführten Version:
 	constraint pk_Person
 	primary key (PID));
 
-	create table Vertrag (VertragsNR decimal(16) not null, Datum date, Ort varchar(42),
+	create table Vertrag (VertragsNR decimal(16) not null GENERATED ALWAYS AS IDENTITY
+   (START WITH 1
+   INCREMENT BY 1), Datum date, Ort varchar(42),
 	constraint pk_Vertrag
 	primary key (VertragsNR));
 
@@ -33,7 +37,7 @@ Hier sind die Befehle der ausgeführten Version:
 	constraint FK_Mietvertrag3
 	foreign key (Wohnung) references Wohnung(ID));
 
-	create table Kaufvertrag (KVertrNr decimal(16) not null, AnzahlRatten decimal(3), Rattenzins decimal(4,2), Haus decimal(16), Person decimal(16),
+	create table Kaufvertrag (KVertrNr decimal(16) not null, AnzahlRaten decimal(3), Ratenzins decimal(4,2), Haus decimal(16), Person decimal(16),
 	constraint PK_Kaufvertrag
 	primary key(KVertrNr),
 	constraint FK_Kaufvertrag1
