@@ -9,6 +9,7 @@ public class TableModelMakler extends ATableModel<Makler> {
 	private static final long serialVersionUID = 1L;
 	final String[] _header = new String[] { "Name", "Adresse", "Login",
 			"Passwort" };
+	private String _lastLoginValue;
 
 	public TableModelMakler() {
 
@@ -45,6 +46,8 @@ public class TableModelMakler extends ATableModel<Makler> {
 	@Override
 	protected boolean EditElement(Makler t, int col, Object value) {
 		Object old = ConvertElementToCell(t, col);
+
+		_lastLoginValue = t.getLogin();
 
 		if (old.equals(value))
 			return false;
@@ -83,5 +86,9 @@ public class TableModelMakler extends ATableModel<Makler> {
 
 	public void AddMakler(Makler t) {
 		_data.add(t);
+	}
+
+	public String getLastLoginValue() {
+		return _lastLoginValue;
 	}
 }
