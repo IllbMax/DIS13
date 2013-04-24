@@ -36,7 +36,8 @@ public class HauptmenuWerkzeug
 		//TODO Hier muss das Loginfenster aufgerufen werden.
 		
 		final HauptmenuWerkzeug HauptmenuWerkzeug = new HauptmenuWerkzeug();
-		
+		try{}
+		finally{try {	DB2ConnectionManager.getInstance().getConnection().close();} catch (SQLException e) {e.printStackTrace();}}
 		
 	}
 	
