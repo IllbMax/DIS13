@@ -37,7 +37,7 @@ public class ImmobilieNeuGUI extends JDialog {
 	private JTextField _ort;
 	private JFormattedTextField _plz;
 	private JTextField _strasse;
-	private JTextField _hausNr;
+	private JFormattedTextField _hausNr;
 	private JFormattedTextField _flaeche;
 
 	private final JButton _okButton;
@@ -134,7 +134,9 @@ public class ImmobilieNeuGUI extends JDialog {
 
 		_ort = new JTextField(TEXTFELD_BREITE);
 		_strasse = new JTextField(TEXTFELD_BREITE);
-		_hausNr = new JTextField(TEXTFELD_BREITE);
+		_hausNr = new JFormattedTextField(NumberFormat.getIntegerInstance());
+		_hausNr.setColumns(TEXTFELD_BREITE);
+		_hausNr.setValue(0);
 		_flaeche = new JFormattedTextField(NumberFormat.getNumberInstance());
 		_flaeche.setColumns(TEXTFELD_BREITE);
 		_flaeche.setValue(0.0f);
