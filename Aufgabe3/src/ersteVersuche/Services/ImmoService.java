@@ -81,6 +81,12 @@ public class ImmoService {
 		return null;
 	}
 
+	public Makler getMaklerByLoginPasswort(String login, String passwort) {
+
+		// TODO: HAuptmenuWerkzeugtpruefeLoginDaten
+		return null;
+	}
+
 	/**
 	 * Gibt alle Makler zurück
 	 */
@@ -313,7 +319,11 @@ public class ImmoService {
 	}
 
 	public void addVertrag(Vertrag v) {
-		kaufvertraege.add(k);
+		if (v instanceof Kaufvertrag)
+			addKaufvertrag((Kaufvertrag) v);
+		if (v instanceof Mietvertrag)
+			addMietvertrag((Mietvertrag) v);
+
 	}
 
 	/**
