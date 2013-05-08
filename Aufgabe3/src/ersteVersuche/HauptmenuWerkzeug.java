@@ -4,13 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import javax.swing.JDialog;
-import javax.swing.JTextField;
 
 import ersteVersuche.Immobilie.ImmobilienmenuWerkzeug;
 import ersteVersuche.Makler.MaklermenuWerkzeug;
@@ -162,38 +155,11 @@ public class HauptmenuWerkzeug {
 	 * Überprüft mit Hilfe der Datenbank, ob für den angegebenen Makler(Login)
 	 * das Passwort stimmt
 	 */
-	@SuppressWarnings("finally")
 	private boolean pruefeLoginDaten(String login, String passwort) {
 
-		// TODO: login über hibernate + gebe Makler zurück
+		Makler m = _service.getMaklerByLoginPasswort(login, passwort);
 
-		// Hole Verbindung
-		Connection con = DB2ConnectionManager.getInstance().getConnection();
-		try {
-			// Erzeuge Anfrage
-			String selectSQL = "select 42 from Makler where Login= ? and passwort= ?";
-			PreparedStatement pstmt = con.prepareStatement(selectSQL);
-			pstmt.setString(1, login);
-			pstmt.setString(2, passwort);
-
-			// Führe Anfrage aus
-			ResultSet rs = pstmt.executeQuery();
-
-			return rs.next() && (rs.getInt(1) == 42);// && !login.contains("'")
-														// &&
-														// !passwort.contains("'");
-		} catch (SQLException e) {
-			e.printStackTrace();
-			// TODO ordentliches Exeption Handling
-			JDialog warnung = new JDialog();
-			warnung.add(new JTextField("Ein Verbindungsfehler ist aufgetreten."));
-			warnung.setAlwaysOnTop(true);
-			warnung.setVisible(true);
-		} finally {
-			// try { con.close();} catch (SQLException e) {e.printStackTrace();}
-
-		}
-		return false;
+		return m != null;
 
 	}
 }

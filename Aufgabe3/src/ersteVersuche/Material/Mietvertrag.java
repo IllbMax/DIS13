@@ -99,4 +99,9 @@ public class Mietvertrag extends Vertrag {
 
 	}
 
+	@Override
+	public Immobilie getImmobilie() {
+		return _wohnung;
+	}
+
 }

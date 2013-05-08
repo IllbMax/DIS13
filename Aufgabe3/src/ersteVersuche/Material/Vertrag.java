@@ -82,6 +82,8 @@ public abstract class Vertrag {
 		this._person = person;
 	}
 
+	public abstract Immobilie getImmobilie();
+
 	@Override
 	public boolean equals(Object obj) {
 		Vertrag v = (Vertrag) obj;

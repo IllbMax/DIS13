@@ -80,4 +80,9 @@ public class Kaufvertrag extends Vertrag {
 
 	}
 
+	@Override
+	public Immobilie getImmobilie() {
+		return _haus;
+	}
+
 }
