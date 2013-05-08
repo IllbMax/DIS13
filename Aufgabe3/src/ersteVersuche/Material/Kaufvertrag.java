@@ -7,15 +7,18 @@ public class Kaufvertrag extends Vertrag {
 	private int _anzahlRaten;
 	private float _ratenzins;
 
+	private Haus _haus;
+
 	public Kaufvertrag() {
 	}
 
 	public Kaufvertrag(int vertragsnr, Date datum, String ort, Person person,
 			Haus immobilie, int anzahlRaten, float ratenzins) {
-		super(vertragsnr, datum, ort, person, immobilie);
+		super(vertragsnr, datum, ort, person);
 
 		_anzahlRaten = anzahlRaten;
 		_ratenzins = ratenzins;
+		_haus = immobilie;
 	}
 
 	/**
@@ -49,18 +52,10 @@ public class Kaufvertrag extends Vertrag {
 	}
 
 	/**
-	 * @return the immobilie
-	 */
-	@Override
-	public Haus getImmobilie() {
-		return (Haus) _immobilie;
-	}
-
-	/**
 	 * @return the haus
 	 */
 	public Haus getHaus() {
-		return (Haus) _immobilie;
+		return _haus;
 	}
 
 	/**
@@ -68,7 +63,7 @@ public class Kaufvertrag extends Vertrag {
 	 *            the immobilie to set
 	 */
 	public void setHaus(Haus haus) {
-		this._immobilie = haus;
+		this._haus = haus;
 	}
 
 	@Override

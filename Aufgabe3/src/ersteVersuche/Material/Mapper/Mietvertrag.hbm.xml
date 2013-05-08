@@ -15,7 +15,7 @@
             <column name="NEBENKOSTEN" />
         </property>
         
-        <many-to-one name="_immobilie" class="ersteVersuche.Material.Wohnung" column="IMMOBILIE" access="field" fetch="join" not-null="true" />
+        <many-to-one name="_wohnung" class="ersteVersuche.Material.Wohnung" column="WOHNUNG" access="field" fetch="join" not-null="true" />
         
         
     </joined-subclass>

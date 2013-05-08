@@ -8,20 +8,18 @@ public abstract class Vertrag {
 	private Date _datum;
 	private String _ort;
 
-	protected Immobilie _immobilie;
 	private Person _person;
 
 	public Vertrag() {
 	}
 
-	public Vertrag(int vertragsnr, Date datum, String ort, Person person,
-			Immobilie immobilie) {
+	public Vertrag(int vertragsnr, Date datum, String ort, Person person) {
 		_vertragsnr = vertragsnr;
 		_datum = datum;
 		_ort = ort;
 
 		_person = person;
-		_immobilie = immobilie;
+
 	}
 
 	/**
@@ -70,13 +68,6 @@ public abstract class Vertrag {
 	}
 
 	/**
-	 * @return the immobilie
-	 */
-	public Immobilie getImmobilie() {
-		return _immobilie;
-	}
-
-	/**
 	 * @return the person
 	 */
 	public Person getPerson() {
@@ -100,8 +91,7 @@ public abstract class Vertrag {
 			return true;
 
 		return _vertragsnr == v._vertragsnr && _datum.equals(v._datum)
-				&& _ort.equals(v._ort) && _person.equals(v._person)
-				&& _immobilie.equals(v._immobilie);
+				&& _ort.equals(v._ort) && _person.equals(v._person);
 	}
 
 	@Override

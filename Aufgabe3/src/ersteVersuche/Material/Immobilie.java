@@ -8,6 +8,8 @@ public abstract class Immobilie {
 	private int _hausNr;
 	private float _flaeche;
 
+	private Makler _verwalter;
+
 	public Immobilie() {
 	}
 
@@ -133,6 +135,21 @@ public abstract class Immobilie {
 	@Override
 	public int hashCode() {
 		return _id;
+	}
+
+	/**
+	 * @return the verwalter
+	 */
+	public Makler getVerwalter() {
+		return _verwalter;
+	}
+
+	/**
+	 * @param verwalter
+	 *            the verwalter to set
+	 */
+	public void setVerwalter(Makler verwalter) {
+		this._verwalter = verwalter;
 	}
 
 }

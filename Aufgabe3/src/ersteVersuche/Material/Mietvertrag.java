@@ -8,31 +8,26 @@ public class Mietvertrag extends Vertrag {
 	private int _dauer;
 	private float _nebenkosten;
 
+	private Wohnung _wohnung;
+
 	public Mietvertrag() {
 	}
 
 	public Mietvertrag(int vertragsnr, Date datum, String ort, Person person,
 			Wohnung immobilie, Date mietbeginn, int dauer, float nebenkosten) {
-		super(vertragsnr, datum, ort, person, immobilie);
+		super(vertragsnr, datum, ort, person);
 
 		_mietbeginn = mietbeginn;
 		_dauer = dauer;
 		_nebenkosten = nebenkosten;
-	}
-
-	/**
-	 * @return the immobilie
-	 */
-	@Override
-	public Wohnung getImmobilie() {
-		return (Wohnung) _immobilie;
+		_wohnung = immobilie;
 	}
 
 	/**
 	 * @return the haus
 	 */
 	public Wohnung getWohnung() {
-		return (Wohnung) _immobilie;
+		return _wohnung;
 	}
 
 	/**
@@ -40,7 +35,7 @@ public class Mietvertrag extends Vertrag {
 	 *            the immobilie to set
 	 */
 	public void setWohnung(Wohnung wohnung) {
-		this._immobilie = wohnung;
+		this._wohnung = wohnung;
 	}
 
 	/**
@@ -99,7 +94,8 @@ public class Mietvertrag extends Vertrag {
 			return true;
 
 		return _dauer == m._dauer && _nebenkosten == m._nebenkosten
-				&& _mietbeginn.equals(m._mietbeginn);
+				&& _mietbeginn.equals(m._mietbeginn)
+				&& _wohnung.equals(m._wohnung);
 
 	}
 
