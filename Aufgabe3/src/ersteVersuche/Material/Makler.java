@@ -7,6 +7,9 @@ public class Makler {
 	private String _login;
 	private String _passwort;
 
+	public Makler() {
+	}
+
 	public Makler(String name, String adresse, String login, String passwort) {
 		_name = name;
 		_adresse = adresse;

@@ -3,7 +3,6 @@
  */
 package ersteVersuche.Material;
 
-
 /**
  * @author Max Menzel
  * 
@@ -13,6 +12,9 @@ public class Haus extends Immobilie {
 	private int _stockwerke;
 	private float _kaufpreis;
 	private boolean _garten;
+
+	public Haus() {
+	}
 
 	public Haus(int id, String ort, int plz, String strasse, int hausNr,
 			float flaeche, int stockwerke, float kaufpreis, boolean garten) {

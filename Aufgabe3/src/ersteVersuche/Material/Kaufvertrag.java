@@ -7,6 +7,9 @@ public class Kaufvertrag extends Vertrag {
 	private int _anzahlRaten;
 	private float _ratenzins;
 
+	public Kaufvertrag() {
+	}
+
 	public Kaufvertrag(int vertragsnr, Date datum, String ort, Person person,
 			Haus immobilie, int anzahlRaten, float ratenzins) {
 		super(vertragsnr, datum, ort, person, immobilie);

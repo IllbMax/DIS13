@@ -7,6 +7,9 @@ public class Person {
 	private String _nachname;
 	private String _adresse;
 
+	public Person() {
+	}
+
 	public Person(int pid, String vorname, String nachname, String adresse) {
 		_pid = pid;
 		_vorname = vorname;

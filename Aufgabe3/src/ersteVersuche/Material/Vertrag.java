@@ -11,6 +11,9 @@ public abstract class Vertrag {
 	protected Immobilie _immobilie;
 	private Person _person;
 
+	public Vertrag() {
+	}
+
 	public Vertrag(int vertragsnr, Date datum, String ort, Person person,
 			Immobilie immobilie) {
 		_vertragsnr = vertragsnr;

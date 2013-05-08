@@ -8,6 +8,9 @@ public class Mietvertrag extends Vertrag {
 	private int _dauer;
 	private float _nebenkosten;
 
+	public Mietvertrag() {
+	}
+
 	public Mietvertrag(int vertragsnr, Date datum, String ort, Person person,
 			Wohnung immobilie, Date mietbeginn, int dauer, float nebenkosten) {
 		super(vertragsnr, datum, ort, person, immobilie);

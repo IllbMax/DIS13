@@ -8,6 +8,9 @@ public class Wohnung extends Immobilie {
 	private boolean _balkon;
 	private boolean _ebk;
 
+	public Wohnung() {
+	}
+
 	public Wohnung(int id, String ort, int plz, String strasse, int hausNr,
 			float flaeche, int stockwerk, float mietpreis, int zimmer,
 			boolean balkon, boolean ebk) {

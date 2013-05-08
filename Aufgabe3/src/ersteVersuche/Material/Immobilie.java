@@ -8,6 +8,9 @@ public abstract class Immobilie {
 	private int _hausNr;
 	private float _flaeche;
 
+	public Immobilie() {
+	}
+
 	public Immobilie(int id, String ort, int plz, String strasse, int hausNr,
 			float flaeche) {
 		_id = id;
