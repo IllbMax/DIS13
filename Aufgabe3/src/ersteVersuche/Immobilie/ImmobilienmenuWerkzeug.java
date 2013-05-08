@@ -119,7 +119,7 @@ public class ImmobilienmenuWerkzeug {
 	}
 
 	private boolean UpdImmobilieSQL(Immobilie i) {
-		// TODO: add _service.update(i)
+		_service.AktualisiereImmobilie(i);
 		return false;
 	}
 

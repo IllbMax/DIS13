@@ -97,13 +97,12 @@ public class MaklermenuWerkzeug {
 	private void UpdMakler(Makler m, String login) {
 
 		if (m != null && UpdMaklerSQL(m, login)) {
-			// TODO add in sql (table ist schon fertig :-) )
 		}
 		_GUI.repaint();
 	}
 
 	private boolean UpdMaklerSQL(Makler m, String login) {
-		// TODO: add _service.update(m)
+		_service.AktualisiereMakler(m);
 		return false;
 	}
 
