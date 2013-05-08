@@ -68,4 +68,18 @@ public class Kaufvertrag extends Vertrag {
 		this._immobilie = haus;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (!super.equals(obj))
+			return false;
+		Kaufvertrag k = (Kaufvertrag) obj;
+		if (k == null)
+			return false;
+		if (k == this)
+			return true;
+
+		return _anzahlRaten == k._anzahlRaten && _ratenzins == k._ratenzins;
+
+	}
+
 }

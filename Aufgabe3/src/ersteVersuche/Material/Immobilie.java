@@ -113,4 +113,23 @@ public abstract class Immobilie {
 		return _strasse + " " + _hausNr + ", " + _plz + " " + _ort + " ("
 				+ _flaeche + "m²)";
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Immobilie i = (Immobilie) obj;
+		if (i == null)
+			return false;
+		if (i == this)
+			return true;
+
+		return _id == i._id && _plz == i._plz && _ort.equals(i._ort)
+				&& _strasse.equals(i._strasse) && _hausNr == i._hausNr
+				&& _flaeche == i._flaeche;
+	}
+
+	@Override
+	public int hashCode() {
+		return _id;
+	}
+
 }

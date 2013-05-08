@@ -85,4 +85,19 @@ public class Mietvertrag extends Vertrag {
 		this._nebenkosten = nebenkosten;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (!super.equals(obj))
+			return false;
+		Mietvertrag m = (Mietvertrag) obj;
+		if (m == null)
+			return false;
+		if (m == this)
+			return true;
+
+		return _dauer == m._dauer && _nebenkosten == m._nebenkosten
+				&& _mietbeginn.equals(m._mietbeginn);
+
+	}
+
 }

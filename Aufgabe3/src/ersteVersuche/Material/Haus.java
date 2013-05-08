@@ -3,6 +3,7 @@
  */
 package ersteVersuche.Material;
 
+
 /**
  * @author Max Menzel
  * 
@@ -64,6 +65,21 @@ public class Haus extends Immobilie {
 	 */
 	public void setGarten(boolean garten) {
 		_garten = garten;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!super.equals(obj))
+			return false;
+		Haus h = (Haus) obj;
+		if (h == null)
+			return false;
+		if (h == this)
+			return true;
+
+		return _stockwerke == h._stockwerke && _garten == h._garten
+				&& _kaufpreis == h._kaufpreis;
+
 	}
 
 }

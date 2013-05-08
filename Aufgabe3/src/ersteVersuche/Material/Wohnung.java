@@ -8,9 +8,9 @@ public class Wohnung extends Immobilie {
 	private boolean _balkon;
 	private boolean _ebk;
 
-	public Wohnung(int id, String ort, int plz, String strasse,
-			int hausNr, float flaeche, int stockwerk, float mietpreis,
-			int zimmer, boolean balkon, boolean ebk) {
+	public Wohnung(int id, String ort, int plz, String strasse, int hausNr,
+			float flaeche, int stockwerk, float mietpreis, int zimmer,
+			boolean balkon, boolean ebk) {
 		super(id, ort, plz, strasse, hausNr, flaeche);
 
 		_stockwerk = stockwerk;
@@ -93,6 +93,21 @@ public class Wohnung extends Immobilie {
 	 */
 	public void setEBK(boolean eBK) {
 		_ebk = eBK;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!super.equals(obj))
+			return false;
+		Wohnung w = (Wohnung) obj;
+		if (w == null)
+			return false;
+		if (w == this)
+			return true;
+
+		return _stockwerk == w._stockwerk && _mietpreis == w._mietpreis
+				&& _zimmer == w._zimmer && _balkon == w._balkon
+				&& _ebk == w._ebk;
 	}
 
 }

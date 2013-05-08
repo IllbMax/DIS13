@@ -88,4 +88,21 @@ public abstract class Vertrag {
 		this._person = person;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		Vertrag v = (Vertrag) obj;
+		if (v == null)
+			return false;
+		if (v == this)
+			return true;
+
+		return _vertragsnr == v._vertragsnr && _datum.equals(v._datum)
+				&& _ort.equals(v._ort) && _person.equals(v._person)
+				&& _immobilie.equals(v._immobilie);
+	}
+
+	@Override
+	public int hashCode() {
+		return _vertragsnr;
+	}
 }

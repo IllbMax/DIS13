@@ -61,4 +61,22 @@ public class Makler {
 		_id = iD;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		Makler m = (Makler) obj;
+		if (m == null)
+			return false;
+		if (m == this)
+			return true;
+
+		return _id == m._id && _name.equals(m._name)
+				&& _adresse.equals(m._adresse) && _login.equals(m._login)
+				&& _passwort.equals(m._passwort);
+	}
+
+	@Override
+	public int hashCode() {
+		return _id;
+	}
+
 }

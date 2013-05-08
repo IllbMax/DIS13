@@ -71,4 +71,22 @@ public class Person {
 	public String toString() {
 		return _nachname + ", " + _vorname;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Person p = (Person) obj;
+		if (p == null)
+			return false;
+		if (p == this)
+			return true;
+
+		return _pid == p._pid && _nachname.equals(p._nachname)
+				&& _adresse.equals(p._adresse) && _vorname.equals(p._vorname);
+	}
+
+	@Override
+	public int hashCode() {
+		return _pid;
+	}
+
 }
