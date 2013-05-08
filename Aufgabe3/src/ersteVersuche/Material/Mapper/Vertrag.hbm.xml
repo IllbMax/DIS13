@@ -4,19 +4,19 @@
 <!-- Generated 07.05.2013 22:11:22 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="ersteVersuche.Material.Vertrag" table="VERTRAG" abstract="true">
-        <id name="_vertragsnr" type="int" access="field">
+        <id name="vertragsnr" type="int" access="field">
             <column name="VERTRAGSNR" />
             <generator class="increment" />
         </id>
-        <property name="_datum" type="java.sql.Date" access="field">
+        <property name="datum" type="java.sql.Date" access="field">
             <column name="DATUM" />
         </property>
-        <property name="_ort" type="java.lang.String" access="field">
+        <property name="ort" type="java.lang.String" access="field">
             <column name="ORT" />
         </property>
         
         
-        <many-to-one name="_person" class="ersteVersuche.Material.Person" access="field" fetch="join" not-null="true" column="PERSON" />
+        <many-to-one name="person" class="ersteVersuche.Material.Person" access="field" fetch="join" not-null="true" column="PERSON" />
             
     </class>
 </hibernate-mapping>

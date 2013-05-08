@@ -9,9 +9,9 @@ package ersteVersuche.Material;
  */
 public class Haus extends Immobilie {
 
-	private int _stockwerke;
-	private float _kaufpreis;
-	private boolean _garten;
+	private int stockwerke;
+	private float kaufpreis;
+	private boolean garten;
 
 	public Haus() {
 	}
@@ -19,16 +19,16 @@ public class Haus extends Immobilie {
 	public Haus(int id, String ort, int plz, String strasse, int hausNr,
 			float flaeche, int stockwerke, float kaufpreis, boolean garten) {
 		super(id, ort, plz, strasse, hausNr, flaeche);
-		_stockwerke = stockwerke;
-		_kaufpreis = kaufpreis;
-		_garten = garten;
+		this.stockwerke = stockwerke;
+		this.kaufpreis = kaufpreis;
+		this.garten = garten;
 	}
 
 	/**
 	 * @return the stockwerke
 	 */
 	public int getStockwerke() {
-		return _stockwerke;
+		return stockwerke;
 	}
 
 	/**
@@ -36,14 +36,14 @@ public class Haus extends Immobilie {
 	 *            the stockwerke to set
 	 */
 	public void setStockwerke(int stockwerke) {
-		_stockwerke = stockwerke;
+		this.stockwerke = stockwerke;
 	}
 
 	/**
 	 * @return the kaufpreis
 	 */
 	public float getKaufpreis() {
-		return _kaufpreis;
+		return kaufpreis;
 	}
 
 	/**
@@ -51,14 +51,14 @@ public class Haus extends Immobilie {
 	 *            the kaufpreis to set
 	 */
 	public void setKaufpreis(float kaufpreis) {
-		_kaufpreis = kaufpreis;
+		this.kaufpreis = kaufpreis;
 	}
 
 	/**
 	 * @return the garten
 	 */
 	public boolean isGarten() {
-		return _garten;
+		return garten;
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class Haus extends Immobilie {
 	 *            the garten to set
 	 */
 	public void setGarten(boolean garten) {
-		_garten = garten;
+		this.garten = garten;
 	}
 
 	@Override
@@ -79,8 +79,8 @@ public class Haus extends Immobilie {
 		if (h == this)
 			return true;
 
-		return _stockwerke == h._stockwerke && _garten == h._garten
-				&& _kaufpreis == h._kaufpreis;
+		return stockwerke == h.stockwerke && garten == h.garten
+				&& kaufpreis == h.kaufpreis;
 
 	}
 

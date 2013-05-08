@@ -4,26 +4,26 @@
 <!-- Generated 07.05.2013 22:11:22 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="ersteVersuche.Material.Immobilie" table="IMMOBILIE" abstract="true">
-        <id name="_id" type="int" access="field">
+        <id name="id" type="int" access="field">
             <column name="ID" />
             <generator class="increment" />
         </id>
-        <property name="_ort" type="java.lang.String" access="field">
+        <property name="ort" type="java.lang.String" access="field">
             <column name="ORT" />
         </property>
-        <property name="_plz" type="int" access="field">
+        <property name="plz" type="int" access="field">
             <column name="PLZ" />
         </property>
-        <property name="_strasse" type="java.lang.String" access="field">
+        <property name="strasse" type="java.lang.String" access="field">
             <column name="STRASSE" />
         </property>
-        <property name="_hausNr" type="int" access="field">
+        <property name="hausNr" type="int" access="field">
             <column name="HAUSNR" />
         </property>
-        <property name="_flaeche" type="float" access="field">
+        <property name="flaeche" type="float" access="field">
             <column name="FLAECHE" />
         </property>
         
-        <many-to-one name="_verwalter" class="ersteVersuche.Material.Makler" column="VERWALTER" not-null="true" />
+        <many-to-one name="verwalter" class="ersteVersuche.Material.Makler" column="VERWALTER" not-null="true" />
     </class>
 </hibernate-mapping>

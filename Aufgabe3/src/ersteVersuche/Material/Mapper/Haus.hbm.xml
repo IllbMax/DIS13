@@ -5,13 +5,13 @@
 <hibernate-mapping>
     <joined-subclass name="ersteVersuche.Material.Haus" extends="ersteVersuche.Material.Immobilie" table="HÄUSER" >
     	<key column="ID" />
-        <property name="_stockwerke" type="int" access="field">
+        <property name="stockwerke" type="int" access="field">
             <column name="STOCKWERKE" />
         </property>
-        <property name="_kaufpreis" type="float" access="field">
+        <property name="kaufpreis" type="float" access="field">
             <column name="KAUFPREIS" />
         </property>
-        <property name="_garten" type="boolean" access="field">
+        <property name="garten" type="boolean" access="field">
             <column name="GARTEN" />
         </property>
     </joined-subclass> 

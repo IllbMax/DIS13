@@ -67,7 +67,8 @@ public class HauptmenuWerkzeug {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				ZeigeVertragsVerwaltung();
+				ZeigeVertragsVerwaltung(_hauptmenuGUI.GetLoginText(),
+						_hauptmenuGUI.GetPasswort2Text());
 
 			}
 		});
@@ -138,9 +139,14 @@ public class HauptmenuWerkzeug {
 	/**
 	 * Erzeugt das Fenster zur Verwaltung der Verträge.
 	 */
-	private void ZeigeVertragsVerwaltung() {
-		_VertragsmenuWerkzeug.ZeigeVertragsMenu();
-		_hauptmenuGUI.setVisible(false);
+	private void ZeigeVertragsVerwaltung(String login, String passwort) {
+		if (pruefeLoginDaten(login, passwort)) {
+
+			System.out.println("Zugang genehmigt!");
+			Makler m = _service.getMaklerByLogin(login);
+			_VertragsmenuWerkzeug.ZeigeVertragsMenu(m);
+			_hauptmenuGUI.setVisible(false);
+		}
 	}
 
 	/**

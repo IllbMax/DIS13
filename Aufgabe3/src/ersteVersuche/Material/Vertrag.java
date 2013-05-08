@@ -4,21 +4,21 @@ import java.sql.Date;
 
 public abstract class Vertrag {
 
-	private int _vertragsnr;
-	private Date _datum;
-	private String _ort;
+	private int vertragsnr;
+	private Date datum;
+	private String ort;
 
-	private Person _person;
+	private Person person;
 
 	public Vertrag() {
 	}
 
 	public Vertrag(int vertragsnr, Date datum, String ort, Person person) {
-		_vertragsnr = vertragsnr;
-		_datum = datum;
-		_ort = ort;
+		this.vertragsnr = vertragsnr;
+		this.datum = datum;
+		this.ort = ort;
 
-		_person = person;
+		this.person = person;
 
 	}
 
@@ -26,7 +26,7 @@ public abstract class Vertrag {
 	 * @return the vertragsnr
 	 */
 	public int getVertragsnr() {
-		return _vertragsnr;
+		return vertragsnr;
 	}
 
 	/**
@@ -34,14 +34,14 @@ public abstract class Vertrag {
 	 *            the vertragsnr to set
 	 */
 	public void setVertragsnr(int vertragsnr) {
-		this._vertragsnr = vertragsnr;
+		this.vertragsnr = vertragsnr;
 	}
 
 	/**
 	 * @return the datum
 	 */
 	public Date getDatum() {
-		return _datum;
+		return datum;
 	}
 
 	/**
@@ -49,14 +49,14 @@ public abstract class Vertrag {
 	 *            the datum to set
 	 */
 	public void setDatum(Date datum) {
-		this._datum = datum;
+		this.datum = datum;
 	}
 
 	/**
 	 * @return the ort
 	 */
 	public String getOrt() {
-		return _ort;
+		return ort;
 	}
 
 	/**
@@ -64,14 +64,14 @@ public abstract class Vertrag {
 	 *            the ort to set
 	 */
 	public void setOrt(String ort) {
-		this._ort = ort;
+		this.ort = ort;
 	}
 
 	/**
 	 * @return the person
 	 */
 	public Person getPerson() {
-		return _person;
+		return person;
 	}
 
 	/**
@@ -79,7 +79,7 @@ public abstract class Vertrag {
 	 *            the person to set
 	 */
 	public void setPerson(Person person) {
-		this._person = person;
+		this.person = person;
 	}
 
 	public abstract Immobilie getImmobilie();
@@ -92,12 +92,12 @@ public abstract class Vertrag {
 		if (v == this)
 			return true;
 
-		return _vertragsnr == v._vertragsnr && _datum.equals(v._datum)
-				&& _ort.equals(v._ort) && _person.equals(v._person);
+		return vertragsnr == v.vertragsnr && datum.equals(v.datum)
+				&& ort.equals(v.ort) && person.equals(v.person);
 	}
 
 	@Override
 	public int hashCode() {
-		return _vertragsnr;
+		return vertragsnr;
 	}
 }

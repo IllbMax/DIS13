@@ -25,12 +25,14 @@ public class VertragsmenuWerkzeug {
 
 	private final ImmoService _service;
 
-	private List<Person> _personen = LadePersonen();
-	private List<Immobilie> _immobilien = LadeImmobilien();
+	private List<Person> _personen;
+	private List<Immobilie> _immobilien;
 
 	public VertragsmenuWerkzeug(ImmoService service) {
 
 		_service = service;
+		_personen = LadePersonen();
+		_immobilien = LadeImmobilien();
 
 		_GUI = new VertragsmenuGUI();
 		_vertragNeu = new VertragNeuWerkzeug(_personen, _immobilien);
@@ -52,7 +54,6 @@ public class VertragsmenuWerkzeug {
 			}
 		});
 
-		_GUI.GetTableModel().SetData(LadeVertrag());
 	}
 
 	private void AddVertrag() {
@@ -64,9 +65,10 @@ public class VertragsmenuWerkzeug {
 		_GUI.repaint();
 	}
 
-	public void ZeigeVertragsMenu() {
+	public void ZeigeVertragsMenu(Makler makler) {
 		_GUI.setVisible(true);
-		// _makler = makler;
+		_aktuellerMakler = makler;
+		_GUI.GetTableModel().SetData(LadeVertrag());
 	}
 
 	private boolean AddVertragSQL(Vertrag v) {

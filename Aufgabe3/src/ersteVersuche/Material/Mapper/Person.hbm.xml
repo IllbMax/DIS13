@@ -4,17 +4,17 @@
 <!-- Generated 07.05.2013 22:11:22 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="ersteVersuche.Material.Person" table="PERSON">
-        <id name="_pid" type="int" access="field">
+        <id name="pid" type="int" access="field">
             <column name="PID" />
             <generator class="increment" />
         </id>
-        <property name="_vorname" type="java.lang.String" access="field">
+        <property name="vorname" type="java.lang.String" access="field">
             <column name="VORNAME" />
         </property>
-        <property name="_nachname" type="java.lang.String" access="field">
+        <property name="nachname" type="java.lang.String" access="field">
             <column name="NACHNAME" />
         </property>
-        <property name="_adresse" type="java.lang.String" access="field">
+        <property name="adresse" type="java.lang.String" access="field">
             <column name="ADRESSE" />
         </property>
     </class>

@@ -2,26 +2,26 @@ package ersteVersuche.Material;
 
 public class Person {
 
-	private int _pid;
-	private String _vorname;
-	private String _nachname;
-	private String _adresse;
+	private int pid;
+	private String vorname;
+	private String nachname;
+	private String adresse;
 
 	public Person() {
 	}
 
 	public Person(int pid, String vorname, String nachname, String adresse) {
-		_pid = pid;
-		_vorname = vorname;
-		_nachname = nachname;
-		_adresse = adresse;
+		this.pid = pid;
+		this.vorname = vorname;
+		this.nachname = nachname;
+		this.adresse = adresse;
 	}
 
 	/**
 	 * @return the adresse
 	 */
 	public String getAdresse() {
-		return _adresse;
+		return this.adresse;
 	}
 
 	/**
@@ -29,14 +29,14 @@ public class Person {
 	 *            the adresse to set
 	 */
 	public void setAdresse(String adresse) {
-		this._adresse = adresse;
+		this.adresse = adresse;
 	}
 
 	/**
 	 * @return the nachname
 	 */
 	public String getNachname() {
-		return _nachname;
+		return this.nachname;
 	}
 
 	/**
@@ -44,14 +44,14 @@ public class Person {
 	 *            the nachname to set
 	 */
 	public void setNachname(String nachname) {
-		this._nachname = nachname;
+		this.nachname = nachname;
 	}
 
 	/**
 	 * @return the vorname
 	 */
 	public String getVorname() {
-		return _vorname;
+		return this.vorname;
 	}
 
 	/**
@@ -59,20 +59,20 @@ public class Person {
 	 *            the vorname to set
 	 */
 	public void setVorname(String vorname) {
-		this._vorname = vorname;
+		this.vorname = vorname;
 	}
 
 	public int getPID() {
-		return _pid;
+		return this.pid;
 	}
 
 	public void setPID(int pid) {
-		_pid = pid;
+		this.pid = pid;
 	}
 
 	@Override
 	public String toString() {
-		return _nachname + ", " + _vorname;
+		return this.nachname + ", " + this.vorname;
 	}
 
 	@Override
@@ -83,13 +83,13 @@ public class Person {
 		if (p == this)
 			return true;
 
-		return _pid == p._pid && _nachname.equals(p._nachname)
-				&& _adresse.equals(p._adresse) && _vorname.equals(p._vorname);
+		return pid == p.pid && nachname.equals(p.nachname)
+				&& adresse.equals(p.adresse) && vorname.equals(p.vorname);
 	}
 
 	@Override
 	public int hashCode() {
-		return _pid;
+		return pid;
 	}
 
 }

@@ -4,10 +4,10 @@ import java.sql.Date;
 
 public class Kaufvertrag extends Vertrag {
 
-	private int _anzahlRaten;
-	private float _ratenzins;
+	private int anzahlRaten;
+	private float ratenzins;
 
-	private Haus _haus;
+	private Haus haus;
 
 	public Kaufvertrag() {
 	}
@@ -16,16 +16,16 @@ public class Kaufvertrag extends Vertrag {
 			Haus immobilie, int anzahlRaten, float ratenzins) {
 		super(vertragsnr, datum, ort, person);
 
-		_anzahlRaten = anzahlRaten;
-		_ratenzins = ratenzins;
-		_haus = immobilie;
+		this.anzahlRaten = anzahlRaten;
+		this.ratenzins = ratenzins;
+		this.haus = immobilie;
 	}
 
 	/**
 	 * @return the anzahlRaten
 	 */
 	public int getAnzahlRaten() {
-		return _anzahlRaten;
+		return anzahlRaten;
 	}
 
 	/**
@@ -33,14 +33,14 @@ public class Kaufvertrag extends Vertrag {
 	 *            the anzahlRaten to set
 	 */
 	public void setAnzahlRaten(int anzahlRaten) {
-		this._anzahlRaten = anzahlRaten;
+		this.anzahlRaten = anzahlRaten;
 	}
 
 	/**
 	 * @return the ratentins
 	 */
 	public float getRatenzins() {
-		return _ratenzins;
+		return ratenzins;
 	}
 
 	/**
@@ -48,14 +48,14 @@ public class Kaufvertrag extends Vertrag {
 	 *            the ratentins to set
 	 */
 	public void setRatenzins(float ratenzins) {
-		this._ratenzins = ratenzins;
+		this.ratenzins = ratenzins;
 	}
 
 	/**
 	 * @return the haus
 	 */
 	public Haus getHaus() {
-		return _haus;
+		return haus;
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class Kaufvertrag extends Vertrag {
 	 *            the immobilie to set
 	 */
 	public void setHaus(Haus haus) {
-		this._haus = haus;
+		this.haus = haus;
 	}
 
 	@Override
@@ -76,13 +76,13 @@ public class Kaufvertrag extends Vertrag {
 		if (k == this)
 			return true;
 
-		return _anzahlRaten == k._anzahlRaten && _ratenzins == k._ratenzins;
+		return anzahlRaten == k.anzahlRaten && ratenzins == k.ratenzins;
 
 	}
 
 	@Override
 	public Immobilie getImmobilie() {
-		return _haus;
+		return haus;
 	}
 
 }

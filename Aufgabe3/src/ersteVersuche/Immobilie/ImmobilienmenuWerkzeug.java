@@ -64,8 +64,6 @@ public class ImmobilienmenuWerkzeug {
 
 		});
 
-		_GUI.GetTableModel().SetData(LadeImmobilien());
-
 	}
 
 	private void AddImmobilie() {
@@ -94,6 +92,7 @@ public class ImmobilienmenuWerkzeug {
 
 	public void ZeigeImmobilienMenu(Makler m) {
 		_aktuellerMakler = m;
+		_GUI.GetTableModel().SetData(LadeImmobilien());
 		_GUI.setVisible(true);
 
 	}

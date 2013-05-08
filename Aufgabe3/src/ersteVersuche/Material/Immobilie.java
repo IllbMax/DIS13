@@ -1,33 +1,33 @@
 package ersteVersuche.Material;
 
 public abstract class Immobilie {
-	private int _id;
-	private String _ort;
-	private int _plz;
-	private String _strasse;
-	private int _hausNr;
-	private float _flaeche;
+	private int id;
+	private String ort;
+	private int plz;
+	private String strasse;
+	private int hausNr;
+	private float flaeche;
 
-	private Makler _verwalter;
+	private Makler verwalter;
 
 	public Immobilie() {
 	}
 
 	public Immobilie(int id, String ort, int plz, String strasse, int hausNr,
 			float flaeche) {
-		_id = id;
-		_ort = ort;
-		_plz = plz;
-		_strasse = strasse;
-		_hausNr = hausNr;
-		_flaeche = flaeche;
+		this.id = id;
+		this.ort = ort;
+		this.plz = plz;
+		this.strasse = strasse;
+		this.hausNr = hausNr;
+		this.flaeche = flaeche;
 	}
 
 	/**
 	 * @return the iD
 	 */
 	public int getID() {
-		return _id;
+		return this.id;
 	}
 
 	/**
@@ -35,14 +35,14 @@ public abstract class Immobilie {
 	 *            the iD to set
 	 */
 	public void setID(int iD) {
-		_id = iD;
+		this.id = iD;
 	}
 
 	/**
 	 * @return the ort
 	 */
 	public String getOrt() {
-		return _ort;
+		return this.ort;
 	}
 
 	/**
@@ -50,14 +50,14 @@ public abstract class Immobilie {
 	 *            the ort to set
 	 */
 	public void setOrt(String ort) {
-		_ort = ort;
+		this.ort = ort;
 	}
 
 	/**
 	 * @return the pLZ
 	 */
 	public int getPLZ() {
-		return _plz;
+		return this.plz;
 	}
 
 	/**
@@ -65,14 +65,14 @@ public abstract class Immobilie {
 	 *            the pLZ to set
 	 */
 	public void setPLZ(int pLZ) {
-		_plz = pLZ;
+		this.plz = pLZ;
 	}
 
 	/**
 	 * @return the strasse
 	 */
 	public String getStrasse() {
-		return _strasse;
+		return this.strasse;
 	}
 
 	/**
@@ -80,14 +80,14 @@ public abstract class Immobilie {
 	 *            the strasse to set
 	 */
 	public void setStrasse(String strasse) {
-		_strasse = strasse;
+		this.strasse = strasse;
 	}
 
 	/**
 	 * @return the hausNr
 	 */
 	public int getHausNr() {
-		return _hausNr;
+		return this.hausNr;
 	}
 
 	/**
@@ -95,14 +95,14 @@ public abstract class Immobilie {
 	 *            the hausNr to set
 	 */
 	public void setHausNr(int hausNr) {
-		_hausNr = hausNr;
+		this.hausNr = hausNr;
 	}
 
 	/**
 	 * @return the flaeche
 	 */
 	public float getFlaeche() {
-		return _flaeche;
+		return this.flaeche;
 	}
 
 	/**
@@ -110,13 +110,13 @@ public abstract class Immobilie {
 	 *            the flaeche to set
 	 */
 	public void setFlaeche(float flaeche) {
-		_flaeche = flaeche;
+		this.flaeche = flaeche;
 	}
 
 	@Override
 	public String toString() {
-		return _strasse + " " + _hausNr + ", " + _plz + " " + _ort + " ("
-				+ _flaeche + "m²)";
+		return this.strasse + " " + this.hausNr + ", " + this.plz + " "
+				+ this.ort + " (" + this.flaeche + "m²)";
 	}
 
 	@Override
@@ -127,21 +127,21 @@ public abstract class Immobilie {
 		if (i == this)
 			return true;
 
-		return _id == i._id && _plz == i._plz && _ort.equals(i._ort)
-				&& _strasse.equals(i._strasse) && _hausNr == i._hausNr
-				&& _flaeche == i._flaeche;
+		return id == i.id && plz == i.plz && ort.equals(i.ort)
+				&& strasse.equals(i.strasse) && hausNr == i.hausNr
+				&& flaeche == i.flaeche;
 	}
 
 	@Override
 	public int hashCode() {
-		return _id;
+		return id;
 	}
 
 	/**
 	 * @return the verwalter
 	 */
 	public Makler getVerwalter() {
-		return _verwalter;
+		return verwalter;
 	}
 
 	/**
@@ -149,7 +149,7 @@ public abstract class Immobilie {
 	 *            the verwalter to set
 	 */
 	public void setVerwalter(Makler verwalter) {
-		this._verwalter = verwalter;
+		this.verwalter = verwalter;
 	}
 
 }

@@ -5,19 +5,19 @@
 <hibernate-mapping>
     <joined-subclass name="ersteVersuche.Material.Wohnung" extends="ersteVersuche.Material.Immobilie" table="WOHNUNGEN">
         <key column="ID" />
-        <property name="_stockwerk" type="int" access="field">
+        <property name="stockwerk" type="int" access="field">
             <column name="STOCKWERK" />
         </property>
-        <property name="_mietpreis" type="float" access="field">
+        <property name="mietpreis" type="float" access="field">
             <column name="MIETPREIS" />
         </property>
-        <property name="_zimmer" type="int" access="field">
+        <property name="zimmer" type="int" access="field">
             <column name="ZIMMER" />
         </property>
-        <property name="_balkon" type="boolean" access="field">
+        <property name="balkon" type="boolean" access="field">
             <column name="BALKON" />
         </property>
-        <property name="_ebk" type="boolean" access="field">
+        <property name="ebk" type="boolean" access="field">
             <column name="EBK" />
         </property>
     </joined-subclass>

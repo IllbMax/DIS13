@@ -1,67 +1,67 @@
 package ersteVersuche.Material;
 
 public class Makler {
-	private int _id;
-	private String _name;
-	private String _adresse;
-	private String _login;
-	private String _passwort;
+	private int id;
+	private String name;
+	private String adresse;
+	private String login;
+	private String passwort;
 
 	public Makler() {
 	}
 
 	public Makler(String name, String adresse, String login, String passwort) {
-		_name = name;
-		_adresse = adresse;
-		_login = login;
-		_passwort = passwort;
+		this.name = name;
+		this.adresse = adresse;
+		this.login = login;
+		this.passwort = passwort;
 	}
 
 	public String getPasswort() {
-		return _passwort;
+		return this.passwort;
 	}
 
 	public void setPasswort(String passwort) {
-		this._passwort = passwort;
+		this.passwort = passwort;
 	}
 
 	public String getLogin() {
-		return _login;
+		return this.login;
 	}
 
 	public void setLogin(String login) {
-		this._login = login;
+		this.login = login;
 	}
 
 	public String getAdresse() {
-		return _adresse;
+		return this.adresse;
 	}
 
 	public void setAdresse(String adresse) {
-		this._adresse = adresse;
+		this.adresse = adresse;
 	}
 
 	public String getName() {
-		return _name;
+		return this.name;
 	}
 
-	public void setName(String _name) {
-		this._name = _name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
 	 * @return the iD
 	 */
-	public int getID() {
-		return _id;
+	public int getId() {
+		return this.id;
 	}
 
 	/**
 	 * @param iD
 	 *            the iD to set
 	 */
-	public void setID(int iD) {
-		_id = iD;
+	public void setId(int iD) {
+		this.id = iD;
 	}
 
 	@Override
@@ -72,14 +72,14 @@ public class Makler {
 		if (m == this)
 			return true;
 
-		return _id == m._id && _name.equals(m._name)
-				&& _adresse.equals(m._adresse) && _login.equals(m._login)
-				&& _passwort.equals(m._passwort);
+		return id == m.id && name.equals(m.name)
+				&& adresse.equals(m.adresse) && login.equals(m.login)
+				&& passwort.equals(m.passwort);
 	}
 
 	@Override
 	public int hashCode() {
-		return _id;
+		return id;
 	}
 
 }

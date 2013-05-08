@@ -5,17 +5,17 @@
 <hibernate-mapping>
     <joined-subclass name="ersteVersuche.Material.Mietvertrag" extends="ersteVersuche.Material.Vertrag" table="MIETVERTRÄGE">
         <key column="VERTRAGSNR" />
-        <property name="_mietbeginn" type="java.sql.Date" access="field">
+        <property name="mietbeginn" type="java.sql.Date" access="field">
             <column name="MIETBEGINN" />
         </property>
-        <property name="_dauer" type="int" access="field">
+        <property name="dauer" type="int" access="field">
             <column name="DAUER" />
         </property>
-        <property name="_nebenkosten" type="float" access="field">
+        <property name="nebenkosten" type="float" access="field">
             <column name="NEBENKOSTEN" />
         </property>
         
-        <many-to-one name="_wohnung" class="ersteVersuche.Material.Wohnung" column="WOHNUNG" access="field" fetch="join" not-null="true" />
+        <many-to-one name="wohnung" class="ersteVersuche.Material.Wohnung" column="WOHNUNG" access="field" fetch="join" not-null="true" />
         
         
     </joined-subclass>

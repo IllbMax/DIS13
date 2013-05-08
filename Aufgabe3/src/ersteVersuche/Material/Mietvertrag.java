@@ -4,11 +4,11 @@ import java.sql.Date;
 
 public class Mietvertrag extends Vertrag {
 
-	private Date _mietbeginn;
-	private int _dauer;
-	private float _nebenkosten;
+	private Date mietbeginn;
+	private int dauer;
+	private float nebenkosten;
 
-	private Wohnung _wohnung;
+	private Wohnung wohnung;
 
 	public Mietvertrag() {
 	}
@@ -17,17 +17,17 @@ public class Mietvertrag extends Vertrag {
 			Wohnung immobilie, Date mietbeginn, int dauer, float nebenkosten) {
 		super(vertragsnr, datum, ort, person);
 
-		_mietbeginn = mietbeginn;
-		_dauer = dauer;
-		_nebenkosten = nebenkosten;
-		_wohnung = immobilie;
+		this.mietbeginn = mietbeginn;
+		this.dauer = dauer;
+		this.nebenkosten = nebenkosten;
+		this.wohnung = immobilie;
 	}
 
 	/**
 	 * @return the haus
 	 */
 	public Wohnung getWohnung() {
-		return _wohnung;
+		return wohnung;
 	}
 
 	/**
@@ -35,14 +35,14 @@ public class Mietvertrag extends Vertrag {
 	 *            the immobilie to set
 	 */
 	public void setWohnung(Wohnung wohnung) {
-		this._wohnung = wohnung;
+		this.wohnung = wohnung;
 	}
 
 	/**
 	 * @return the mietbeginn
 	 */
 	public Date getMietbeginn() {
-		return _mietbeginn;
+		return mietbeginn;
 	}
 
 	/**
@@ -50,14 +50,14 @@ public class Mietvertrag extends Vertrag {
 	 *            the mietbeginn to set
 	 */
 	public void setMietbeginn(Date mietbeginn) {
-		this._mietbeginn = mietbeginn;
+		this.mietbeginn = mietbeginn;
 	}
 
 	/**
 	 * @return the dauer
 	 */
 	public int getDauer() {
-		return _dauer;
+		return dauer;
 	}
 
 	/**
@@ -65,14 +65,14 @@ public class Mietvertrag extends Vertrag {
 	 *            the dauer to set
 	 */
 	public void setDauer(int dauer) {
-		this._dauer = dauer;
+		this.dauer = dauer;
 	}
 
 	/**
 	 * @return the nebenkosten
 	 */
 	public float getNebenkosten() {
-		return _nebenkosten;
+		return nebenkosten;
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class Mietvertrag extends Vertrag {
 	 *            the nebenkosten to set
 	 */
 	public void setNebenkosten(float nebenkosten) {
-		this._nebenkosten = nebenkosten;
+		this.nebenkosten = nebenkosten;
 	}
 
 	@Override
@@ -93,15 +93,14 @@ public class Mietvertrag extends Vertrag {
 		if (m == this)
 			return true;
 
-		return _dauer == m._dauer && _nebenkosten == m._nebenkosten
-				&& _mietbeginn.equals(m._mietbeginn)
-				&& _wohnung.equals(m._wohnung);
+		return dauer == m.dauer && nebenkosten == m.nebenkosten
+				&& mietbeginn.equals(m.mietbeginn) && wohnung.equals(m.wohnung);
 
 	}
 
 	@Override
 	public Immobilie getImmobilie() {
-		return _wohnung;
+		return wohnung;
 	}
 
 }

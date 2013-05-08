@@ -2,11 +2,11 @@ package ersteVersuche.Material;
 
 public class Wohnung extends Immobilie {
 
-	private int _stockwerk;
-	private float _mietpreis;
-	private int _zimmer;
-	private boolean _balkon;
-	private boolean _ebk;
+	private int stockwerk;
+	private float mietpreis;
+	private int zimmer;
+	private boolean balkon;
+	private boolean ebk;
 
 	public Wohnung() {
 	}
@@ -16,18 +16,18 @@ public class Wohnung extends Immobilie {
 			boolean balkon, boolean ebk) {
 		super(id, ort, plz, strasse, hausNr, flaeche);
 
-		_stockwerk = stockwerk;
-		_mietpreis = mietpreis;
-		_zimmer = zimmer;
-		_balkon = balkon;
-		_ebk = ebk;
+		this.stockwerk = stockwerk;
+		this.mietpreis = mietpreis;
+		this.zimmer = zimmer;
+		this.balkon = balkon;
+		this.ebk = ebk;
 	}
 
 	/**
 	 * @return the stockwerk
 	 */
 	public int getStockwerk() {
-		return _stockwerk;
+		return this.stockwerk;
 	}
 
 	/**
@@ -35,14 +35,14 @@ public class Wohnung extends Immobilie {
 	 *            the stockwerk to set
 	 */
 	public void setStockwerk(int stockwerk) {
-		_stockwerk = stockwerk;
+		this.stockwerk = stockwerk;
 	}
 
 	/**
 	 * @return the mietpreis
 	 */
 	public float getMietpreis() {
-		return _mietpreis;
+		return this.mietpreis;
 	}
 
 	/**
@@ -50,14 +50,14 @@ public class Wohnung extends Immobilie {
 	 *            the mietpreis to set
 	 */
 	public void setMietpreis(float mietpreis) {
-		_mietpreis = mietpreis;
+		this.mietpreis = mietpreis;
 	}
 
 	/**
 	 * @return the zimmer
 	 */
 	public int getZimmer() {
-		return _zimmer;
+		return this.zimmer;
 	}
 
 	/**
@@ -65,14 +65,14 @@ public class Wohnung extends Immobilie {
 	 *            the zimmer to set
 	 */
 	public void setZimmer(int zimmer) {
-		_zimmer = zimmer;
+		this.zimmer = zimmer;
 	}
 
 	/**
 	 * @return the balkon
 	 */
 	public boolean isBalkon() {
-		return _balkon;
+		return this.balkon;
 	}
 
 	/**
@@ -80,14 +80,14 @@ public class Wohnung extends Immobilie {
 	 *            the balkon to set
 	 */
 	public void setBalkon(boolean balkon) {
-		_balkon = balkon;
+		this.balkon = balkon;
 	}
 
 	/**
 	 * @return the eBK
 	 */
 	public boolean isEBK() {
-		return _ebk;
+		return this.ebk;
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class Wohnung extends Immobilie {
 	 *            the eBK to set
 	 */
 	public void setEBK(boolean eBK) {
-		_ebk = eBK;
+		this.ebk = eBK;
 	}
 
 	@Override
@@ -108,9 +108,8 @@ public class Wohnung extends Immobilie {
 		if (w == this)
 			return true;
 
-		return _stockwerk == w._stockwerk && _mietpreis == w._mietpreis
-				&& _zimmer == w._zimmer && _balkon == w._balkon
-				&& _ebk == w._ebk;
+		return stockwerk == w.stockwerk && mietpreis == w.mietpreis
+				&& zimmer == w.zimmer && balkon == w.balkon && ebk == w.ebk;
 	}
 
 }
