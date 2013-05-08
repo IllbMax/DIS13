@@ -265,10 +265,9 @@ public class ImmobilieNeuGUI extends JDialog {
 																		// _haus_stockwerke.getValue();
 			float preis = getFloatFromFormatTextbox(_haus_kaufpreis);
 
-			return new Haus(-1, _ort.getText(),
-					Integer.parseInt(_plz.getText()), _strasse.getText(),
-					Integer.parseInt(_hausNr.getText()), flaeche, stockwerke,
-					preis, _haus_garten.isSelected());
+			return new Haus(-1, _ort.getText(), getIntFromFormatTextbox(_plz),
+					_strasse.getText(), getIntFromFormatTextbox(_hausNr),
+					flaeche, stockwerke, preis, _haus_garten.isSelected());
 		} else if (_classWohnung.isSelected()) {
 			int stockwerk = getIntFromFormatTextbox(_wohnung_stockwerk); // (Integer)
 																			// _wohnung_stockwerk.getValue();
@@ -276,10 +275,11 @@ public class ImmobilieNeuGUI extends JDialog {
 			int zimmer = getIntFromFormatTextbox(_wohnung_zimmer); // (Integer)
 																	// _wohnung_zimmer.getValue();
 
-			return new Wohnung(-1, _ort.getText(), Integer.parseInt(_plz
-					.getText()), _strasse.getText(), Integer.parseInt(_hausNr
-					.getText()), flaeche, stockwerk, preis, zimmer,
-					_wohnung_balkon.isSelected(), _wohnung_ebk.isSelected());
+			return new Wohnung(-1, _ort.getText(),
+					getIntFromFormatTextbox(_plz), _strasse.getText(),
+					getIntFromFormatTextbox(_hausNr), flaeche, stockwerk,
+					preis, zimmer, _wohnung_balkon.isSelected(),
+					_wohnung_ebk.isSelected());
 
 		}
 

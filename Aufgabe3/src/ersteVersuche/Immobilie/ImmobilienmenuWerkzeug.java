@@ -60,6 +60,7 @@ public class ImmobilienmenuWerkzeug {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				_GUI.GetTableModel().SetData(LadeImmobilien());
+				_GUI.repaint();
 			}
 
 		});
