@@ -45,7 +45,6 @@ public class ImmoService {
 
 	@Override
 	protected void finalize() throws Throwable {
-		// TODO Auto-generated method stub
 		super.finalize();
 		_session.close();
 	}
@@ -132,7 +131,9 @@ public class ImmoService {
 	 *            Der Makler
 	 */
 	public void deleteMakler(Makler m) {
+		_session.beginTransaction();
 		_session.delete(m);
+		_session.getTransaction().commit();
 	}
 
 	/**
@@ -174,7 +175,9 @@ public class ImmoService {
 	 *            Die Person
 	 */
 	public void deletePerson(Person p) {
+		_session.beginTransaction();
 		_session.delete(p);
+		_session.getTransaction().commit();
 	}
 
 	/**
@@ -242,7 +245,9 @@ public class ImmoService {
 	 *            Das Haus
 	 */
 	public void deleteHaus(Haus h) {
+		_session.beginTransaction();
 		_session.delete(h);
+		_session.getTransaction().commit();
 	}
 
 	/**
@@ -312,7 +317,9 @@ public class ImmoService {
 	 *            Die Wohnung
 	 */
 	public void deleteWohnung(Wohnung w) {
+		_session.beginTransaction();
 		_session.delete(w);
+		_session.getTransaction().commit();
 	}
 
 	/**
@@ -467,7 +474,9 @@ public class ImmoService {
 	 *            Der Mietvertrag
 	 */
 	public void deleteMietvertrag(Mietvertrag m) {
+		_session.beginTransaction();
 		_session.delete(m);
+		_session.getTransaction().commit();
 	}
 
 	/**
@@ -595,18 +604,22 @@ public class ImmoService {
 	 * aktualisiert Objekt Person
 	 */
 	public void AktualisierePerson(Person p) {
+		_session.beginTransaction();
 		_session.save(p);
 		_session.flush();
 		_session.refresh(p);
+		_session.getTransaction().commit();
 	}
 
 	/**
 	 * aktualisiert Objekt Makler
 	 */
 	public void AktualisiereMakler(Makler m) {
+		_session.beginTransaction();
 		_session.save(m);
 		_session.flush();
 		_session.refresh(m);
+		_session.getTransaction().commit();
 	}
 
 	/**
@@ -614,17 +627,21 @@ public class ImmoService {
 	 */
 
 	public void AktualisiereVertrag(Vertrag v) {
+		_session.beginTransaction();
 		_session.save(v);
 		_session.flush();
 		_session.refresh(v);
+		_session.getTransaction().commit();
 	}
 
 	/**
 	 * aktualisiert Objekt Immobilie
 	 */
 	public void AktualisiereImmobilie(Immobilie i) {
+		_session.beginTransaction();
 		_session.save(i);
 		_session.flush();
 		_session.refresh(i);
+		_session.getTransaction().commit();
 	}
 }
