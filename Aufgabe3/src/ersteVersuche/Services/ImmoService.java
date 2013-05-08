@@ -485,9 +485,9 @@ public class ImmoService {
 		session.beginTransaction();
 		Haus h = new Haus();
 		h.setOrt("Hamburg");
-		h.setPlz(22527);
+		h.setPLZ(22527);
 		h.setStrasse("Vogt-Kölln-Straße");
-		h.setHausnummer("2a");
+		h.setHausNr(2);
 		h.setFlaeche(384);
 		h.setStockwerke(5);
 		h.setKaufpreis(10000000);
@@ -503,47 +503,47 @@ public class ImmoService {
 		// Hibernate Session erzeugen
 		session = sessionFactory.openSession();
 		session.beginTransaction();
-		Makler m2 = (Makler) session.get(Makler.class, m.getId());
-		Set<Immobilie> immos = m2.getImmobilien();
-		Iterator<Immobilie> it = immos.iterator();
+		Makler m2 = (Makler) session.get(Makler.class, m.getID());
+		//Set<Immobilie> immos = m2.;
+		//Iterator<Immobilie> it = immos.iterator();
 
-		while (it.hasNext()) {
-			Immobilie i = it.next();
-			System.out.println("Immo: " + i.getOrt());
-		}
+		//while (it.hasNext()) {
+		//	Immobilie i = it.next();
+		//	System.out.println("Immo: " + i.getOrt());
+		//}
 		session.close();
 
 		Wohnung w = new Wohnung();
 		w.setOrt("Hamburg");
-		w.setPlz(22527);
+		w.setPLZ(22527);
 		w.setStrasse("Vogt-Kölln-Straße");
-		w.setHausnummer("3");
+		w.setHausNr(3);
 		w.setFlaeche(120);
 		w.setStockwerk(4);
 		w.setMietpreis(790);
-		w.setEbk(true);
+		w.setEBK(true);
 		w.setBalkon(false);
 		w.setVerwalter(m);
 		this.addWohnung(w);
 
 		w = new Wohnung();
 		w.setOrt("Berlin");
-		w.setPlz(22527);
+		w.setPLZ(22527);
 		w.setStrasse("Vogt-Kölln-Straße");
-		w.setHausnummer("3");
+		w.setHausNr(3);
 		w.setFlaeche(120);
 		w.setStockwerk(4);
 		w.setMietpreis(790);
-		w.setEbk(true);
+		w.setEBK(true);
 		w.setBalkon(false);
 		w.setVerwalter(m);
 		this.addWohnung(w);
 
 		Kaufvertrag kv = new Kaufvertrag();
 		kv.setHaus(h);
-		kv.setVertragspartner(p1);
-		kv.setVertragsnummer(9234);
-		kv.setDatum(new Date(System.currentTimeMillis()));
+		kv.setPerson(p1);
+		kv.setVertragsnr(9234);
+		kv.setDatum(new java.sql.Date(System.currentTimeMillis()));
 		kv.setOrt("Hamburg");
 		kv.setAnzahlRaten(5);
 		kv.setRatenzins(4);
@@ -551,11 +551,11 @@ public class ImmoService {
 
 		Mietvertrag mv = new Mietvertrag();
 		mv.setWohnung(w);
-		mv.setVertragspartner(p2);
-		mv.setVertragsnummer(23112);
-		mv.setDatum(new Date(System.currentTimeMillis() - 1000000000));
+		mv.setPerson(p2);
+		mv.setVertragsnr(23112);
+		mv.setDatum(new java.sql.Date(System.currentTimeMillis() - 1000000000));
 		mv.setOrt("Berlin");
-		mv.setMietbeginn(new Date(System.currentTimeMillis()));
+		mv.setMietbeginn(new java.sql.Date(System.currentTimeMillis()));
 		mv.setNebenkosten(65);
 		mv.setDauer(36);
 		this.addMietvertrag(mv);
