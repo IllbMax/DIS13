@@ -3,6 +3,7 @@ package ersteVersuche.Services;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Session;
@@ -36,9 +37,19 @@ public class ImmoService {
 
 	// Hibernate Session
 	private final SessionFactory sessionFactory;
+	private final Session _session;
 
 	public ImmoService() {
 		sessionFactory = new Configuration().configure().buildSessionFactory();
+
+		_session = sessionFactory.openSession();
+	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		// TODO Auto-generated method stub
+		super.finalize();
+		_session.close();
 	}
 
 	// /**
@@ -69,29 +80,29 @@ public class ImmoService {
 	 * @return Makler mit der ID oder null
 	 */
 	public Makler getMaklerByLogin(String login) {
-		Iterator<Makler> it = makler.iterator();
-
-		while (it.hasNext()) {
-			Makler m = it.next();
-
-			if (m.getLogin().equals(login))
-				return m;
-		}
-
-		return null;
+		return (Makler) _session.get(Makler.class, login);
 	}
 
 	public Makler getMaklerByLoginPasswort(String login, String passwort) {
 
-		// TODO: HAuptmenuWerkzeugtpruefeLoginDaten
-		return null;
+		Makler m = getMaklerByLogin(login);
+
+		if (m != null && m.getPasswort().equals(passwort))
+			return m;
+		else
+			return null;
 	}
 
 	/**
 	 * Gibt alle Makler zurück
 	 */
 	public Set<Makler> getAllMakler() {
-		return makler;
+
+		List makler = _session.createQuery("SELECT * FORM makler").list();
+
+		Set<Makler> m = new HashSet<Makler>(makler);
+
+		return m;
 	}
 
 	/**
@@ -101,17 +112,9 @@ public class ImmoService {
 	 *            Die ID der Person
 	 * @return Person mit der ID oder null
 	 */
-	public Person getPersonById(int id) {
-		Iterator<Person> it = personen.iterator();
+	public Person getPersonById(int pid) {
+		return (Person) _session.get(Person.class, pid);
 
-		while (it.hasNext()) {
-			Person p = it.next();
-
-			if (p.getPID() == id)
-				return p;
-		}
-
-		return null;
 	}
 
 	/**
@@ -120,8 +123,15 @@ public class ImmoService {
 	 * @param m
 	 *            Der Makler
 	 */
-	public void addMakler(Makler m) {
-		makler.add(m);
+	public boolean addMakler(Makler m) {
+
+		Integer id = (Integer) _session.save(m);
+		if (id != null) {
+			m.setID(id);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -131,7 +141,7 @@ public class ImmoService {
 	 *            Der Makler
 	 */
 	public void deleteMakler(Makler m) {
-		makler.remove(m);
+		_session.delete(m);
 	}
 
 	/**

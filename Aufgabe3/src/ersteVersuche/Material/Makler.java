@@ -1,6 +1,7 @@
 package ersteVersuche.Material;
 
 public class Makler {
+	private int _id;
 	private String _name;
 	private String _adresse;
 	private String _login;
@@ -43,6 +44,21 @@ public class Makler {
 
 	public void setName(String _name) {
 		this._name = _name;
+	}
+
+	/**
+	 * @return the iD
+	 */
+	public int getID() {
+		return _id;
+	}
+
+	/**
+	 * @param iD
+	 *            the iD to set
+	 */
+	public void setID(int iD) {
+		_id = iD;
 	}
 
 }
