@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 07.05.2013 22:11:22 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <joined-subclass name="ersteVersuche.Material.Haus" extends="ersteVersuche.Material.Immobilie" table="HÄUSER" >
+    	<key column="ID" />
+        <property name="_stockwerke" type="int" access="field">
+            <column name="STOCKWERKE" />
+        </property>
+        <property name="_kaufpreis" type="float" access="field">
+            <column name="KAUFPREIS" />
+        </property>
+        <property name="_garten" type="boolean" access="field">
+            <column name="GARTEN" />
+        </property>
+    </joined-subclass> 
+</hibernate-mapping>
