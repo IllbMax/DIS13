@@ -71,7 +71,7 @@ public class ImmoService {
 	public Makler getMaklerByLogin(String login) {
 		return (Makler) _session
 				.createQuery("FROM Makler as makler where makler.login = ?")
-				.setEntity(0, login).uniqueResult();
+				.setString(0, login).uniqueResult();
 	}
 
 	public Makler getMaklerByLoginPasswort(String login, String passwort) {
@@ -79,7 +79,7 @@ public class ImmoService {
 		return (Makler) _session
 				.createQuery(
 						"FROM Makler as makler where makler.login = ? AND makler.passwort = ?")
-				.setEntity(0, login).setEntity(1, passwort).uniqueResult();
+				.setString(0, login).setString(1, passwort).uniqueResult();
 	}
 
 	/**
@@ -114,8 +114,9 @@ public class ImmoService {
 	 */
 	public boolean addMakler(Makler m) {
 
+		_session.beginTransaction();
 		Integer id = (Integer) _session.save(m);
-		_session.flush();
+		_session.getTransaction().commit();
 		if (id != null) {
 			m.setId(id);
 			return true;
@@ -142,7 +143,10 @@ public class ImmoService {
 	 */
 	public boolean addPerson(Person p) {
 
+		_session.beginTransaction();
 		Integer id = (Integer) _session.save(p);
+		_session.getTransaction().commit();
+
 		if (id != null) {
 			p.setPID(id);
 			return true;
@@ -180,7 +184,10 @@ public class ImmoService {
 	 *            Das Haus
 	 */
 	public boolean addHaus(Haus h) {
+		_session.beginTransaction();
 		Integer id = (Integer) _session.save(h);
+		_session.getTransaction().commit();
+
 		if (id != null) {
 			h.setID(id);
 			return true;
@@ -245,7 +252,10 @@ public class ImmoService {
 	 *            die Wohnung
 	 */
 	public boolean addWohnung(Wohnung w) {
+		_session.beginTransaction();
 		Integer id = (Integer) _session.save(w);
+		_session.getTransaction().commit();
+
 		if (id != null) {
 			w.setID(id);
 			return true;
@@ -312,7 +322,10 @@ public class ImmoService {
 	 *            Der Mietvertrag
 	 */
 	public boolean addMietvertrag(Mietvertrag m) {
+		_session.beginTransaction();
 		Integer id = (Integer) _session.save(m);
+		_session.getTransaction().commit();
+
 		if (id != null) {
 			m.setVertragsnr(id);
 			return true;
@@ -328,7 +341,10 @@ public class ImmoService {
 	 *            Der Kaufvertrag
 	 */
 	public boolean addKaufvertrag(Kaufvertrag k) {
+		_session.beginTransaction();
 		Integer id = (Integer) _session.save(k);
+		_session.getTransaction().commit();
+
 		if (id != null) {
 			k.setVertragsnr(id);
 			return true;

@@ -8,17 +8,17 @@
    <column name="ID"/>
    <generator class="increment"/>
   </id>
-  <property access="field" generated="never" lazy="false" name="login" type="java.lang.String">
+  <property access="field" generated="never" lazy="false" name="login" type="string">
    <column name="LOGIN" not-null="true" unique="true"/>
   </property>
-  <property access="field" generated="never" lazy="false" name="adresse" type="java.lang.String">
+  <property access="field" generated="never" lazy="false" name="adresse" type="string">
    <column name="ADRESSE"/>
   </property>
-  <property access="field" generated="never" lazy="false" name="name" type="java.lang.String">
+  <property access="field" generated="never" lazy="false" name="name" type="string">
    <column name="NAME"/>
   </property>
   <property access="field" generated="never" lazy="false"
-   name="passwort" type="java.lang.String">
+   name="passwort" type="string">
    <column name="PASSWORT"/>
   </property>
  </class>

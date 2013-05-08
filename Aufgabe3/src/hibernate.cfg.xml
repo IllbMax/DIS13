@@ -12,8 +12,8 @@
   <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
   <property name="show_sql">true</property>
   <!-- Drop and re-create the database schema on startup -->
-  <property name="hbm2ddl.auto">create</property>
-
+  <property name="hbm2ddl.auto">update</property>
+  <property name="hibernate.connection.autocommit">true</property>
 
   <mapping resource="ersteVersuche/Material/Mapper/Immobilie.hbm.xml" />
   <mapping resource="ersteVersuche/Material/Mapper/Haus.hbm.xml" />

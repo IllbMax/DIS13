@@ -68,7 +68,7 @@ public class ImmobilienmenuWerkzeug {
 
 	private void AddImmobilie() {
 		Immobilie i = _immobilieNeu.ErstelleImmobilie();
-
+		i.setVerwalter(_aktuellerMakler);
 		if (i != null && AddImmobilieSQL(i)) {
 			_GUI.GetTableModel().AddImmobilie(i);
 		}

@@ -237,6 +237,18 @@ public class ImmobilieNeuGUI extends JDialog {
 		return f;
 	}
 
+	private int getIntFromFormatTextbox(JFormattedTextField text) {
+		int i;
+		Object o = text.getValue();
+		if (o instanceof Long)
+			i = ((Long) o).intValue();
+		else
+			// if( o instanceof Integer)
+			i = ((Integer) o).intValue();
+
+		return i;
+	}
+
 	public Immobilie getImmobilie() {
 
 		NumberFormat formatter = NumberFormat.getNumberInstance(Locale.GERMANY);
@@ -249,7 +261,8 @@ public class ImmobilieNeuGUI extends JDialog {
 		flaeche = getFloatFromFormatTextbox(_flaeche);
 
 		if (_classHaus.isSelected()) {
-			int stockwerke = (Integer) _haus_stockwerke.getValue();
+			int stockwerke = getIntFromFormatTextbox(_haus_stockwerke); // (Integer)
+																		// _haus_stockwerke.getValue();
 			float preis = getFloatFromFormatTextbox(_haus_kaufpreis);
 
 			return new Haus(-1, _ort.getText(),
@@ -257,9 +270,11 @@ public class ImmobilieNeuGUI extends JDialog {
 					Integer.parseInt(_hausNr.getText()), flaeche, stockwerke,
 					preis, _haus_garten.isSelected());
 		} else if (_classWohnung.isSelected()) {
-			int stockwerk = (Integer) _wohnung_stockwerk.getValue();
+			int stockwerk = getIntFromFormatTextbox(_wohnung_stockwerk); // (Integer)
+																			// _wohnung_stockwerk.getValue();
 			float preis = getFloatFromFormatTextbox(_wohnung_mietpreis);
-			int zimmer = (Integer) _wohnung_zimmer.getValue();
+			int zimmer = getIntFromFormatTextbox(_wohnung_zimmer); // (Integer)
+																	// _wohnung_zimmer.getValue();
 
 			return new Wohnung(-1, _ort.getText(), Integer.parseInt(_plz
 					.getText()), _strasse.getText(), Integer.parseInt(_hausNr
