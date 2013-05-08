@@ -83,7 +83,9 @@ public class HauptmenuGUI extends JFrame {
 
 		Panel panel3 = new Panel();
 		panel3.add(vertragsButton);
+		panel3.add(personButton);
 		panel.add(panel3);
+		
 		return panel;
 	}
 

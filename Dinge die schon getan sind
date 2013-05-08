@@ -17,7 +17,9 @@ Hier sind die Befehle der ausgeführten Version:
 	constraint fk_wohnung
 	foreign key (ID) references Immobilie(ID));
 
-	create table Person (PID decimal(16) not null,Vorname varchar(42), Nachname varchar(42), Ort varchar(42), PLZ decimal(5), Straße varchar(42), Hausnummer decimal(4),
+	create table Person (PID decimal(16) not null GENERATED ALWAYS AS IDENTITY
+   (START WITH 1
+   INCREMENT BY 1),Vorname varchar(42), Nachname varchar(42), Adresse varchar(42),
 	constraint pk_Person
 	primary key (PID));
 

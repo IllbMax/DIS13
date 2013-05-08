@@ -262,7 +262,7 @@ private float getFloatFromFormatTextbox(JFormattedTextField text)
 					_strasse.getText(), Integer.parseInt(_hausNr.getText()), flaeche, stockwerke,
 					preis, _haus_garten.isSelected());
 		} else if (_classWohnung.isSelected()) {
-			int stockwerk = (Integer) _wohnung_stockwerk.getValue();
+			int stockwerk = Integer.parseInt(_wohnung_stockwerk.getText());
 			float preis = getFloatFromFormatTextbox(_wohnung_mietpreis);
 			int zimmer = (Integer) _wohnung_zimmer.getValue();
 

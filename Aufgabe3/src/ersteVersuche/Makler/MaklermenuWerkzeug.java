@@ -1,11 +1,14 @@
 package ersteVersuche.Makler;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
@@ -90,8 +93,22 @@ public class MaklermenuWerkzeug {
 	}
 
 	private boolean DelMaklerSQL(Makler m) {
+		try
+		{
 		_service.deleteMakler(m);
 		return true;
+		}
+		catch(org.hibernate.exception.ConstraintViolationException e)
+		{
+			JDialog fehler = new JDialog(this._GUI, "Lösch mich nicht! Ich hab'n kunterbuntes Haus!",true);
+			fehler.setLayout(new GridLayout(0, 1));
+			fehler.add(new JLabel("Dieser Makler verwaltet noch Immobilien und kann daher nicht gelöscht werden."));
+			fehler.add(new JLabel(e.getMessage()));
+			fehler.pack();
+			fehler.setVisible(true);
+			_service.getSession().getTransaction().rollback();
+			return false;
+		}
 	}
 
 	private void UpdMakler(Makler m, String login) {
