@@ -122,9 +122,9 @@ public class ImmobilienmenuWerkzeug {
 		}
 		catch(org.hibernate.exception.ConstraintViolationException e)
 		{
-			JDialog fehler = new JDialog(this._GUI, "Lösch mich nicht! Ich hab'n kunterbuntes Haus!",true);
+			JDialog fehler = new JDialog(this._GUI, "Lösch mich nicht! Ich bin'n kunterbuntes Haus!",true);
 			fehler.setLayout(new GridLayout(0, 1));
-			fehler.add(new JLabel("Dieser Makler verwaltet noch Immobilien und kann daher nicht gelöscht werden."));
+			fehler.add(new JLabel("Zu dieser Immobilie existiert ein Vertrag und daher kann er nicht gelöscht werden."));
 			fehler.add(new JLabel(e.getMessage()));
 			fehler.pack();
 			fehler.setVisible(true);
