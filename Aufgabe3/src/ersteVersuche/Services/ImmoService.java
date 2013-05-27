@@ -46,7 +46,7 @@ public class ImmoService {
 	@Override
 	protected void finalize() throws Throwable {
 		super.finalize();
-		getSession().close();
+		_session.close();
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class ImmoService {
 	 * @return Makler mit der ID oder null
 	 */
 	public Makler getMaklerById(int id) {
-		return (Makler) getSession().get(Makler.class, id);
+		return (Makler) _session.get(Makler.class, id);
 	}
 
 	/**
@@ -68,14 +68,14 @@ public class ImmoService {
 	 * @return Makler mit der ID oder null
 	 */
 	public Makler getMaklerByLogin(String login) {
-		return (Makler) getSession()
+		return (Makler) _session
 				.createQuery("FROM Makler as makler where makler.login = ?")
 				.setString(0, login).uniqueResult();
 	}
 
 	public Makler getMaklerByLoginPasswort(String login, String passwort) {
 
-		return (Makler) getSession()
+		return (Makler) _session
 				.createQuery(
 						"FROM Makler as makler where makler.login = ? AND makler.passwort = ?")
 				.setString(0, login).setString(1, passwort).uniqueResult();
@@ -86,7 +86,7 @@ public class ImmoService {
 	 */
 	public Set<Makler> getAllMakler() {
 
-		List makler = getSession().createQuery("FROM Makler as makler").list();
+		List makler = _session.createQuery("FROM Makler as makler").list();
 
 		Set<Makler> m = new HashSet<Makler>(makler);
 
@@ -101,7 +101,7 @@ public class ImmoService {
 	 * @return Person mit der ID oder null
 	 */
 	public Person getPersonById(int pid) {
-		return (Person) getSession().get(Person.class, pid);
+		return (Person) _session.get(Person.class, pid);
 
 	}
 
@@ -113,9 +113,9 @@ public class ImmoService {
 	 */
 	public boolean addMakler(Makler m) {
 
-		getSession().beginTransaction();
-		Integer id = (Integer) getSession().save(m);
-		getSession().getTransaction().commit();
+		_session.beginTransaction();
+		Integer id = (Integer) _session.save(m);
+		_session.getTransaction().commit();
 		if (id != null) {
 			m.setId(id);
 			return true;
@@ -131,9 +131,9 @@ public class ImmoService {
 	 *            Der Makler
 	 */
 	public void deleteMakler(Makler m) {
-		getSession().beginTransaction();
-		getSession().delete(m);
-		getSession().getTransaction().commit();
+		_session.beginTransaction();
+		_session.delete(m);
+		_session.getTransaction().commit();
 	}
 
 	/**
@@ -144,9 +144,9 @@ public class ImmoService {
 	 */
 	public boolean addPerson(Person p) {
 
-		getSession().beginTransaction();
-		Integer id = (Integer) getSession().save(p);
-		getSession().getTransaction().commit();
+		_session.beginTransaction();
+		Integer id = (Integer) _session.save(p);
+		_session.getTransaction().commit();
 
 		if (id != null) {
 			p.setPID(id);
@@ -161,7 +161,7 @@ public class ImmoService {
 	 */
 	public Set<Person> getAllPersons() {
 
-		List person = getSession().createQuery("FROM Person as person").list();
+		List person = _session.createQuery("FROM Person as person").list();
 
 		Set<Person> m = new HashSet<Person>(person);
 
@@ -175,9 +175,9 @@ public class ImmoService {
 	 *            Die Person
 	 */
 	public void deletePerson(Person p) {
-		getSession().beginTransaction();
-		getSession().delete(p);
-		getSession().getTransaction().commit();
+		_session.beginTransaction();
+		_session.delete(p);
+		_session.getTransaction().commit();
 	}
 
 	/**
@@ -187,9 +187,9 @@ public class ImmoService {
 	 *            Das Haus
 	 */
 	public boolean addHaus(Haus h) {
-		getSession().beginTransaction();
-		Integer id = (Integer) getSession().save(h);
-		getSession().getTransaction().commit();
+		_session.beginTransaction();
+		Integer id = (Integer) _session.save(h);
+		_session.getTransaction().commit();
 
 		if (id != null) {
 			h.setID(id);
@@ -217,7 +217,7 @@ public class ImmoService {
 	public Set<Haus> getAllHaeuserForMakler(Makler m) {
 		if (m == null)
 			return new HashSet<Haus>();
-		List haus = getSession()
+		List haus = _session
 				.createQuery("FROM Haus as haus WHERE haus.verwalter= ?")
 				.setEntity(0, m).list();
 
@@ -234,7 +234,7 @@ public class ImmoService {
 	 * @return Das Haus oder null, falls nicht gefunden
 	 */
 	public Haus getHausById(int id) {
-		return (Haus) getSession().get(Haus.class, id);
+		return (Haus) _session.get(Haus.class, id);
 
 	}
 
@@ -245,9 +245,9 @@ public class ImmoService {
 	 *            Das Haus
 	 */
 	public void deleteHaus(Haus h) {
-		getSession().beginTransaction();
-		getSession().delete(h);
-		getSession().getTransaction().commit();
+		_session.beginTransaction();
+		_session.delete(h);
+		_session.getTransaction().commit();
 	}
 
 	/**
@@ -257,9 +257,9 @@ public class ImmoService {
 	 *            die Wohnung
 	 */
 	public boolean addWohnung(Wohnung w) {
-		getSession().beginTransaction();
-		Integer id = (Integer) getSession().save(w);
-		getSession().getTransaction().commit();
+		_session.beginTransaction();
+		Integer id = (Integer) _session.save(w);
+		_session.getTransaction().commit();
 
 		if (id != null) {
 			w.setID(id);
@@ -287,7 +287,7 @@ public class ImmoService {
 		if (m == null)
 			return new HashSet<Wohnung>();
 
-		List wohnung = getSession()
+		List wohnung = _session
 				.createQuery(
 						"FROM Wohnung as wohnung WHERE wohnung.verwalter = ?")
 				.setEntity(0, m).list();
@@ -306,7 +306,7 @@ public class ImmoService {
 	 */
 	public Wohnung getWohnungById(int id) {
 
-		return (Wohnung) getSession().get(Wohnung.class, id);
+		return (Wohnung) _session.get(Wohnung.class, id);
 
 	}
 
@@ -317,9 +317,9 @@ public class ImmoService {
 	 *            Die Wohnung
 	 */
 	public void deleteWohnung(Wohnung w) {
-		getSession().beginTransaction();
-		getSession().delete(w);
-		getSession().getTransaction().commit();
+		_session.beginTransaction();
+		_session.delete(w);
+		_session.getTransaction().commit();
 	}
 
 	/**
@@ -329,9 +329,9 @@ public class ImmoService {
 	 *            Der Mietvertrag
 	 */
 	public boolean addMietvertrag(Mietvertrag m) {
-		getSession().beginTransaction();
-		Integer id = (Integer) getSession().save(m);
-		getSession().getTransaction().commit();
+		_session.beginTransaction();
+		Integer id = (Integer) _session.save(m);
+		_session.getTransaction().commit();
 
 		if (id != null) {
 			m.setVertragsnr(id);
@@ -348,9 +348,9 @@ public class ImmoService {
 	 *            Der Kaufvertrag
 	 */
 	public boolean addKaufvertrag(Kaufvertrag k) {
-		getSession().beginTransaction();
-		Integer id = (Integer) getSession().save(k);
-		getSession().getTransaction().commit();
+		_session.beginTransaction();
+		Integer id = (Integer) _session.save(k);
+		_session.getTransaction().commit();
 
 		if (id != null) {
 			k.setVertragsnr(id);
@@ -377,7 +377,7 @@ public class ImmoService {
 	 *         verwaltet werden
 	 */
 	public Set<Mietvertrag> getAllMietvertraegeForMakler(Makler m) {
-		List mietvertrag = getSession()
+		List mietvertrag = _session
 				.createQuery(
 						"FROM Mietvertrag as mietvertrag WHERE mietvertrag.wohnung.verwalter= ?")
 				.setEntity(0, m).list();
@@ -398,7 +398,7 @@ public class ImmoService {
 	public Set<Kaufvertrag> getAllKaufvertraegeForMakler(Makler m) {
 		if (m == null)
 			return new HashSet<Kaufvertrag>();
-		List kaufvertrag = getSession()
+		List kaufvertrag = _session
 				.createQuery(
 						"FROM Kaufvertrag as kaufvertrag WHERE kaufvertrag.haus.verwalter= ?")
 				.setEntity(0, m).list();
@@ -416,7 +416,7 @@ public class ImmoService {
 	 * @return Der Mietvertrag oder null, falls nicht gefunden
 	 */
 	public Mietvertrag getMietvertragByVNR(int vnr) {
-		return (Mietvertrag) getSession().get(Mietvertrag.class, vnr);
+		return (Mietvertrag) _session.get(Mietvertrag.class, vnr);
 	}
 
 	/**
@@ -428,7 +428,7 @@ public class ImmoService {
 	 * @return Set aus Mietverträgen
 	 */
 	public Set<Mietvertrag> getMietvertragByVerwalter(Makler m) {
-		List mietvertrag = getSession()
+		List mietvertrag = _session
 				.createQuery(
 						"FROM Mietvertrag as mietvertrag WHERE mietvertrag.wohnung.verwalter= ?")
 				.setEntity(0, m).list();
@@ -446,7 +446,7 @@ public class ImmoService {
 	 * @return Set aus Kaufverträgen
 	 */
 	public Set<Kaufvertrag> getKaufvertragByVerwalter(Makler m) {
-		List kaufvertrag = getSession()
+		List kaufvertrag = _session
 				.createQuery(
 						"FROM Kaufvertrag as kaufvertrag WHERE kaufvertrag.haus.verwalter= ?")
 				.setEntity(0, m).list();
@@ -464,7 +464,7 @@ public class ImmoService {
 	 * @return Der Kaufvertrag oder null, falls nicht gefunden
 	 */
 	public Kaufvertrag getKaufvertragByVNR(int vnr) {
-		return (Kaufvertrag) getSession().get(Kaufvertrag.class, vnr);
+		return (Kaufvertrag) _session.get(Kaufvertrag.class, vnr);
 	}
 
 	/**
@@ -474,9 +474,9 @@ public class ImmoService {
 	 *            Der Mietvertrag
 	 */
 	public void deleteMietvertrag(Mietvertrag m) {
-		getSession().beginTransaction();
-		getSession().delete(m);
-		getSession().getTransaction().commit();
+		_session.beginTransaction();
+		_session.delete(m);
+		_session.getTransaction().commit();
 	}
 
 	/**
@@ -493,7 +493,7 @@ public class ImmoService {
 		m.setAdresse("Am Informatikum 9");
 		m.setLogin("max");
 		m.setPasswort("max");
-		getSession().save(m);
+		_session.save(m);
 
 		// TODO: Dieser Makler wird im Speicher und der DB gehalten
 		this.addMakler(m);
@@ -604,22 +604,22 @@ public class ImmoService {
 	 * aktualisiert Objekt Person
 	 */
 	public void AktualisierePerson(Person p) {
-		getSession().beginTransaction();
-		getSession().save(p);
-		getSession().flush();
-		getSession().refresh(p);
-		getSession().getTransaction().commit();
+		_session.beginTransaction();
+		_session.save(p);
+		_session.flush();
+		_session.refresh(p);
+		_session.getTransaction().commit();
 	}
 
 	/**
 	 * aktualisiert Objekt Makler
 	 */
 	public void AktualisiereMakler(Makler m) {
-		getSession().beginTransaction();
-		getSession().save(m);
-		getSession().flush();
-		getSession().refresh(m);
-		getSession().getTransaction().commit();
+		_session.beginTransaction();
+		_session.save(m);
+		_session.flush();
+		_session.refresh(m);
+		_session.getTransaction().commit();
 	}
 
 	/**
@@ -627,25 +627,21 @@ public class ImmoService {
 	 */
 
 	public void AktualisiereVertrag(Vertrag v) {
-		getSession().beginTransaction();
-		getSession().save(v);
-		getSession().flush();
-		getSession().refresh(v);
-		getSession().getTransaction().commit();
+		_session.beginTransaction();
+		_session.save(v);
+		_session.flush();
+		_session.refresh(v);
+		_session.getTransaction().commit();
 	}
 
 	/**
 	 * aktualisiert Objekt Immobilie
 	 */
 	public void AktualisiereImmobilie(Immobilie i) {
-		getSession().beginTransaction();
-		getSession().save(i);
-		getSession().flush();
-		getSession().refresh(i);
-		getSession().getTransaction().commit();
-	}
-
-	public Session getSession() {
-		return _session;
+		_session.beginTransaction();
+		_session.save(i);
+		_session.flush();
+		_session.refresh(i);
+		_session.getTransaction().commit();
 	}
 }

@@ -1,14 +1,11 @@
 package ersteVersuche.Immobilie;
 
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
@@ -63,7 +60,6 @@ public class ImmobilienmenuWerkzeug {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				_GUI.GetTableModel().SetData(LadeImmobilien());
-				_GUI.repaint();
 			}
 
 		});
@@ -72,7 +68,8 @@ public class ImmobilienmenuWerkzeug {
 
 	private void AddImmobilie() {
 		Immobilie i = _immobilieNeu.ErstelleImmobilie();
-		i.setVerwalter(_aktuellerMakler);
+		if(i != null)
+			i.setVerwalter(_aktuellerMakler);
 		if (i != null && AddImmobilieSQL(i)) {
 			_GUI.GetTableModel().AddImmobilie(i);
 		}
@@ -117,21 +114,8 @@ public class ImmobilienmenuWerkzeug {
 	}
 
 	private boolean DelImmobilieSQL(Immobilie i) {
-		try{
 		_service.deleteImmobilie(i);
 		return true;
-		}
-		catch(org.hibernate.exception.ConstraintViolationException e)
-		{
-			JDialog fehler = new JDialog(this._GUI, "Lösch mich nicht! Ich bin'n kunterbuntes Haus!",true);
-			fehler.setLayout(new GridLayout(0, 1));
-			fehler.add(new JLabel("Zu dieser Immobilie existiert ein Vertrag und daher kann er nicht gelöscht werden."));
-			fehler.add(new JLabel(e.getMessage()));
-			fehler.pack();
-			fehler.setVisible(true);
-			_service.getSession().getTransaction().rollback();
-			return false;
-		}
 	}
 
 	private boolean UpdImmobilieSQL(Immobilie i) {
