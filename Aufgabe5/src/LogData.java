@@ -5,9 +5,9 @@ public class LogData {
 	private int _taid;
 	private int _pageid;
 	private String _data;
-	public LogData(int _logid, int _taid, int _pageid, String _data) {
+	public LogData( int _taid, int _pageid, String _data) {
 		super();
-		this._logid = _logid;
+		
 		this._taid = _taid;
 		this._pageid = _pageid;
 		this._data = _data;
@@ -35,6 +35,10 @@ public class LogData {
 	public int GetLOGID()
 	{
 		return _logid;
+	}
+	public void SetLOGID( int logid)
+	{
+		_logid=logid;
 	}
 	
 	
