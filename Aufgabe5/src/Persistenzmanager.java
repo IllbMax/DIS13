@@ -41,7 +41,12 @@ public class Persistenzmanager {
 		return true;
 	}
 	
-	
+	/**
+	 * Methode, die die Daten im Puffer verändert, oder erstellt. Das Übernehmen in die Nutz-Daten ist ausgelagert
+	 * @param taid
+	 * @param pageid
+	 * @param data
+	 */
 	public synchronized void write(int taid, int pageid, String data)
 	{
 		boolean bufferd = false;
@@ -54,7 +59,7 @@ public class Persistenzmanager {
 					usedData = BD;
 				}
 		}
-		if(bufferd)
+		if(bufferd)//Fall, dass die Daten schon im Puffer sind
 		{
 			//P(pageid); laut Aufgabenstellung nicht notwendig
 			int logid = saveLog(new LogData( taid, pageid, data));
@@ -71,7 +76,9 @@ public class Persistenzmanager {
 		saveNutz();
 	}
 		
-	
+	/**
+	 * Für den Fall, dass der Puffer voll ist, werden alle committeten Daten gespeichert und aus dem Puffer entfernt.
+	 */
 	private void saveNutz()
 	{
 		if(_puffer.size()>5)
