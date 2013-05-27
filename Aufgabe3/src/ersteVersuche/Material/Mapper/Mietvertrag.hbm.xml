@@ -1,0 +1,22 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 07.05.2013 22:11:22 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <joined-subclass name="ersteVersuche.Material.Mietvertrag" extends="ersteVersuche.Material.Vertrag" table="MIETVERTRÄGE">
+        <key column="VERTRAGSNR" />
+        <property name="mietbeginn" type="java.sql.Date" access="field">
+            <column name="MIETBEGINN" />
+        </property>
+        <property name="dauer" type="int" access="field">
+            <column name="DAUER" />
+        </property>
+        <property name="nebenkosten" type="float" access="field">
+            <column name="NEBENKOSTEN" />
+        </property>
+        
+        <many-to-one name="wohnung" class="ersteVersuche.Material.Wohnung" column="WOHNUNG" access="field" fetch="join" not-null="true" />
+        
+        
+    </joined-subclass>
+</hibernate-mapping>
