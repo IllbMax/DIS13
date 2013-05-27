@@ -20,7 +20,11 @@ public class NutzDaten {
 	{
 		return _logid;
 	}
-	
+	public String toString()
+	{
+		return _pageid+"|"+_logid+"|"+_data;
+		
+	}
 	
 
 }
