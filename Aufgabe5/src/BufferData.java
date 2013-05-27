@@ -69,4 +69,9 @@ public class BufferData {
 		_data= data;
 	}
 
+	public void SetLOGID(int logid) {
+		_logid = logid;
+		
+	}
+
 }
