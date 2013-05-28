@@ -42,7 +42,7 @@ public class LogData {
 	}
 	public String toString()
 	{
-		return _taid+"|"+_pageid+"|"+_logid+"|"+_data;
+		return "ta"+_taid+"|page"+_pageid+"|log"+_logid+"|"+_data;
 		
 	}
 	

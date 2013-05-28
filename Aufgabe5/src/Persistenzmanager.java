@@ -1,4 +1,9 @@
-import java.io.Serializable;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 
@@ -7,6 +12,7 @@ public class Persistenzmanager {
 	
 	private ArrayList<BufferData> _puffer;
 	private int transaktioncount;
+	private static Persistenzmanager _instance=null;
 
 	/**
 	 * voll so krass nen Konstruktor^^
@@ -15,6 +21,19 @@ public class Persistenzmanager {
 		super();
 		_puffer = new ArrayList<BufferData>();
 		transaktioncount = 0;
+	}
+	
+	/**
+	 * Mehtode um das Sigelton-Patter einzuhalten
+	 * @return die einzige Instanz des Persistenzmanagers 
+	 */
+	public static Persistenzmanager getInstance()
+	{
+		if(_instance== null)
+		{
+			_instance = new Persistenzmanager();
+		}
+		return _instance;
 	}
 	
 	/**
@@ -96,12 +115,54 @@ public class Persistenzmanager {
 	
 	private int saveLog(LogData logdata)
 	{
-		return 42;
+		FileReader fr;
+		String helpstring;
+		int result=0;
+		int helpint =0;
+		try {
+			fr = new FileReader("LogDatei.txt");
+			BufferedReader br = new BufferedReader(fr);
+			helpstring = br.readLine();
+			/*
+			 * Ermittlung der höchsten LogID
+			 */
+			if(helpstring != null&& result < (helpint = Integer.parseInt(helpstring.split("|")[2].substring(3))))
+			{
+				result = helpint;
+			}
+
+			//TODO blub
+			
+			 PrintWriter pWriter = new PrintWriter(new FileWriter("LogDatei.txt", true));
+	            pWriter.println(logdata.toString());
+	            pWriter.flush(); 
+		
 		//TODO Hier müssen die LogDaten persistent gespeichert werden.
+		/*
+		 * Aus der LogDatei muss die letzte Log-ID ermittelt werden, 
+		 * die LogData.setLOGID(letzte Log-ID+1) gesetzt werden und 
+		 * logdata.toString+"\n" in die Datei geschrieben werden. 
+		 */
+		return result;
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 1;
+		}
+		return 0;
 	}
 	
 	private void saveNutz(NutzDaten ND)
 	{
-		//TODO Hier müssen die Daten persistent gespeichert werden. 
+		//TODO Hier müssen die Daten persistent gespeichert werden.
+		/*
+		 * es muss geprüft werden, ob es die PageID bereits gibt. 
+		 * Wenn ja, muss diese ersetzt werden, 
+		 * wenn nein, muss nur ND.toString+"\n" an die Datei angehängt werden.
+		 */
 	}	
 }
