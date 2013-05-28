@@ -20,9 +20,16 @@ public class NutzDaten {
 	{
 		return _logid;
 	}
+	
+	/**
+	 * Die LogID ist als letztes gewählt, damit bei einem Crash beim Schreiben die LogID,
+	 * wenn überhaupt vorhanden, kleiner ist, als die eigentliche LogID, sodass beim Recovery
+	 * diese aus den Logdaten wiederhergestellt wird.
+	 * Die PageID ist im Dateinamen festgehalten.
+	 */
 	public String toString()
 	{
-		return _pageid+"|"+_logid+"|"+_data;
+		return _data+"|"+_logid;
 		
 	}
 	

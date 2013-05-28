@@ -40,9 +40,13 @@ public class LogData {
 	{
 		_logid=logid;
 	}
+	
+	/**
+	 * Da die LogID im Dateinamen steht, wird diese nicht im toString erwähnt.
+	 */
 	public String toString()
 	{
-		return "ta"+_taid+"|page"+_pageid+"|log"+_logid+"|"+_data;
+		return "ta"+_taid+"|page"+_pageid+"|"+_data;
 		
 	}
 	
