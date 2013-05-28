@@ -131,27 +131,19 @@ public class Persistenzmanager {
 				result = helpint;
 			}
 
-			//TODO blub
+			logdata.SetLOGID(result+1);
 			
 			 PrintWriter pWriter = new PrintWriter(new FileWriter("LogDatei.txt", true));
 	            pWriter.println(logdata.toString());
 	            pWriter.flush(); 
 		
-		//TODO Hier müssen die LogDaten persistent gespeichert werden.
-		/*
-		 * Aus der LogDatei muss die letzte Log-ID ermittelt werden, 
-		 * die LogData.setLOGID(letzte Log-ID+1) gesetzt werden und 
-		 * logdata.toString+"\n" in die Datei geschrieben werden. 
-		 */
-		return result;
+		return result+1;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return 0;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return 1;
 		}
 		return 0;
 	}
