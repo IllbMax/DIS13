@@ -1,5 +1,8 @@
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -115,31 +118,16 @@ public class Persistenzmanager {
 	
 	private int saveLog(LogData logdata)
 	{
-		FileReader fr;
-		String helpstring="";
-		int result=0;
-		int helpint =0;
+		File directory = new File("LogDaten");
+		int anzahlLogdaten = directory.list().length;
 		try {
-			fr = new FileReader("LogDatei.txt");
-			BufferedReader br = new BufferedReader(fr);
-			while(helpstring!=null)
-			{
-				helpstring = br.readLine();
-				/*
-				 * Ermittlung der höchsten LogID
-				 */
-				if(helpstring != null&& result < (helpint = Integer.parseInt(helpstring.split("|")[2].substring(3))))
-				{
-					result = helpint;
-				}
-			}
-			logdata.SetLOGID(result+1);
+			logdata.SetLOGID(anzahlLogdaten+1);
 			
-			PrintWriter pWriter = new PrintWriter(new FileWriter("LogDatei.txt", true));
-	        pWriter.println(logdata.toString());
+			PrintWriter pWriter = new PrintWriter(new FileWriter("LogDaten/"+anzahlLogdaten+1));
+	        pWriter.print(logdata.toString());
 	        pWriter.flush(); 
 		
-	        return result+1;
+	        return anzahlLogdaten+1;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -147,18 +135,28 @@ public class Persistenzmanager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 0;
+		return anzahlLogdaten+1;
 	}
 	
 	private void saveNutz(NutzDaten ND)
 	{
-		//TODO Hier müssen die Daten persistent gespeichert werden.
-		/*
-		 * es muss geprüft werden, ob es die PageID bereits gibt. 
-		 * Wenn ja, muss diese ersetzt werden, 
-		 * wenn nein, muss nur ND.toString+"\n" an die Datei angehängt werden.
-		 * 
-		 * Ich hab kein Bock auf diese Methode...
-		 */
+		try {
+			FileOutputStream fis = new FileOutputStream("NutzDaten/"+ND);
+			for(char c : ND.toString().toCharArray())
+			{
+				fis.write((byte)c);
+			}
+		} catch (FileNotFoundException e) {
+			 try{
+		            PrintWriter pWriter = new PrintWriter(new FileWriter("NutzDaten/"+ND));
+		            pWriter.print(ND);
+		            pWriter.flush();
+		        }catch(IOException ioe){
+		            ioe.printStackTrace();
+		        } 
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}	
 }
