@@ -116,28 +116,30 @@ public class Persistenzmanager {
 	private int saveLog(LogData logdata)
 	{
 		FileReader fr;
-		String helpstring;
+		String helpstring="";
 		int result=0;
 		int helpint =0;
 		try {
 			fr = new FileReader("LogDatei.txt");
 			BufferedReader br = new BufferedReader(fr);
-			helpstring = br.readLine();
-			/*
-			 * Ermittlung der höchsten LogID
-			 */
-			if(helpstring != null&& result < (helpint = Integer.parseInt(helpstring.split("|")[2].substring(3))))
+			while(helpstring!=null)
 			{
-				result = helpint;
+				helpstring = br.readLine();
+				/*
+				 * Ermittlung der höchsten LogID
+				 */
+				if(helpstring != null&& result < (helpint = Integer.parseInt(helpstring.split("|")[2].substring(3))))
+				{
+					result = helpint;
+				}
 			}
-
 			logdata.SetLOGID(result+1);
 			
-			 PrintWriter pWriter = new PrintWriter(new FileWriter("LogDatei.txt", true));
-	            pWriter.println(logdata.toString());
-	            pWriter.flush(); 
+			PrintWriter pWriter = new PrintWriter(new FileWriter("LogDatei.txt", true));
+	        pWriter.println(logdata.toString());
+	        pWriter.flush(); 
 		
-		return result+1;
+	        return result+1;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -155,6 +157,8 @@ public class Persistenzmanager {
 		 * es muss geprüft werden, ob es die PageID bereits gibt. 
 		 * Wenn ja, muss diese ersetzt werden, 
 		 * wenn nein, muss nur ND.toString+"\n" an die Datei angehängt werden.
+		 * 
+		 * Ich hab kein Bock auf diese Methode...
 		 */
 	}	
 }
