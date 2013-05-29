@@ -4,7 +4,7 @@ public class BufferData {
 	private boolean _commited;
 	private int _taid;
 	private int _pageid;
-	private int _logid;
+	private LogData _logData;
 	private String _data;
 /**
  * 	
@@ -13,13 +13,13 @@ public class BufferData {
  * @param _logid
  * @param _data
  */
-	public BufferData( int _taid, int _pageid, int _logid,
+	public BufferData( int _taid, int _pageid, LogData logData,
 			String _data) {
 		super();
 		this._commited = false;
 		this._taid = _taid;
 		this._pageid = _pageid;
-		this._logid = _logid;
+		this._logData = logData;
 		this._data = _data;
 	}
 	
@@ -42,9 +42,9 @@ public class BufferData {
 	 * 
 	 * @return _logid
 	 */
-	public int GetLOGID()
+	public LogData GetLOGDATA()
 	{
-		return _logid;
+		return _logData;
 	}
 	
 	public boolean  GetCommited()
@@ -60,7 +60,7 @@ public class BufferData {
 	public NutzDaten MakeUseData()
 	{ 
 		
-	return new NutzDaten(_pageid,_logid,_data);
+	return new NutzDaten(_pageid,_logData.GetLOGID(),_data);
 		
 	}
 	
@@ -73,8 +73,8 @@ public class BufferData {
 		 return _data;
 	 }
 
-	public void SetLOGID(int logid) {
-		_logid = logid;
+	public void SetLOGDATA(LogData logData) {
+		_logData = logData;
 		
 	}
 
