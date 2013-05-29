@@ -68,6 +68,10 @@ public class BufferData {
 	{
 		_data= data;
 	}
+	 public String GetData()
+	 {
+		 return _data;
+	 }
 
 	public void SetLOGDATA(LogData logData) {
 		_logData = logData;
