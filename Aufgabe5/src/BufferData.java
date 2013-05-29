@@ -68,6 +68,10 @@ public class BufferData {
 	{
 		_data= data;
 	}
+	 public String GetData()
+	 {
+		 return _data;
+	 }
 
 	public void SetLOGID(int logid) {
 		_logid = logid;
