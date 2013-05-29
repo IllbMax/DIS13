@@ -11,6 +11,17 @@ public class RecovreyWerkzeug {
 			Thread t = new Thread(c);
 			t.start();
 		}
-	}	
+	}
+	
+	private void analyse()
+	{
+		
+	}
+	
+	
+	private void redo()
+	{
+		
+	}
 
 }
