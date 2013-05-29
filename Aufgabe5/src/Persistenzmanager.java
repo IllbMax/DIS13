@@ -64,6 +64,10 @@ public class Persistenzmanager {
 		List<LogData> blub = _TransactionLogBuffer.get(taid);
 		for(LogData LD :blub)
 		{
+			if(LD.is_failed())return false;
+		}
+		for(LogData LD :blub)
+		{
 			LD.SetLOGID(getLogCount()+1);
 			saveLog(LD);
 		}
@@ -105,9 +109,14 @@ public class Persistenzmanager {
 		if(bufferd)//Fall, dass die Daten schon im Puffer sind
 		{
 			//P(pageid); laut Aufgabenstellung nicht notwendig
-			
+			if(usedData.GetCommited())
+			{
 			usedData.SetData(data);
 			usedData.SetLOGDATA(boing);
+			}else
+			{
+				boing.SetFAILED(true);
+			}
 		}
 		else
 		{
@@ -125,7 +134,7 @@ public class Persistenzmanager {
 	{
 		if(_puffer.size()>5)
 		{
-			for(BufferData BD : _puffer)
+			for(BufferData BD : (ArrayList<BufferData>)_puffer.clone())
 			{
 				if(BD.GetCommited())
 				{

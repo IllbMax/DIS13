@@ -5,6 +5,7 @@ public class LogData {
 	private int _taid;
 	private int _pageid;
 	private String _data;
+	private boolean _failed;
 	public LogData( int _taid, int _pageid, String _data) {
 		super();
 		
@@ -46,8 +47,17 @@ public class LogData {
 	 */
 	public String toString()
 	{
-		return "ta"+_taid+"|page"+_pageid+"|"+_data;
+		return _taid+"|"+_pageid+"|"+_data;
 		
+	}
+
+	public void SetFAILED(boolean b) {
+		_failed = b;
+		
+	}
+
+	public boolean is_failed() {
+		return _failed;
 	}
 	
 	
