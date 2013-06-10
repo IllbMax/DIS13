@@ -42,15 +42,17 @@ public class MovieService extends MovieServiceBase {
 	public MovieService() {
 		// Connect to local machine
 		try {
+
 			mongo = new MongoClient("localhost",5900);
 			db = mongo.getDB("imdb");
-			
 			
 		} catch (Exception e) {
 			System.out.println("No MongoDB server running on localhost");
 		}
 		// TODO: Select database "imdb"
+
 		db = mongo.getDB("imdb");
+
 		// Create a GriFS FileSystem Object using the db
 		fs = new GridFS(db);
 		// See this method on how to use GridFS
@@ -61,6 +63,7 @@ public class MovieService extends MovieServiceBase {
 		enableTextSearch();
 
 		// TODO: Take "movies" and "tweets" collection
+
 		movies = db.getCollection("movies");
 		tweets = db.getCollection("tweets");
 
@@ -75,8 +78,8 @@ public class MovieService extends MovieServiceBase {
         movies.ensureIndex(new BasicDBObject("rating", "float"));
         movies.ensureIndex(new BasicDBObject("votes", "Integer"));
         movies.ensureIndex(new BasicDBObject("tweets.coordinates", "2dsphere"));
-        
-		tweets.ensureIndex(new BasicDBObject("coordinates", "2dsphere"));
+
+        tweets.ensureIndex(new BasicDBObject("coordinates", "2dsphere"));
 	}
 
 	/**
@@ -101,7 +104,8 @@ public class MovieService extends MovieServiceBase {
 		// TODO: implement
 		DBObject result = null;
 		for ()
-		return result;
+
+			return result;
 	}
 
 	/**
