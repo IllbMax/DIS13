@@ -44,7 +44,7 @@ public class MovieService extends MovieServiceBase {
 		try {
 
 			mongo = new MongoClient("localhost",5900);
-			db = mongo.getDB("imdb");
+			//db = mongo.getDB("imdb");
 			
 		} catch (Exception e) {
 			System.out.println("No MongoDB server running on localhost");
@@ -62,7 +62,7 @@ public class MovieService extends MovieServiceBase {
 		// Enable Full Text Search
 		enableTextSearch();
 
-		// TODO: Take "movies" and "tweets" collection
+		// TODO: Take "movies" and "tweets" collectioned
 
 		movies = db.getCollection("movies");
 		tweets = db.getCollection("tweets");
@@ -73,7 +73,7 @@ public class MovieService extends MovieServiceBase {
 			createMovieData();
 		}
 
-		// TODO: Index Movie attributes "title", "rating", "votes", "tweets.coordinates"
+		// TODO: richtig so? Index Movie attributes "title", "rating", "votes", "tweets.coordinates"
         movies.ensureIndex(new BasicDBObject("title", "String"));
         movies.ensureIndex(new BasicDBObject("rating", "float"));
         movies.ensureIndex(new BasicDBObject("votes", "Integer"));
@@ -101,11 +101,11 @@ public class MovieService extends MovieServiceBase {
 	 * @return the matching DBObject
 	 */
 	public DBObject findMovieByTitle(String title) {
-		// TODO: implement
-		DBObject result = null;
-		for ()
+		// TODO: implemented
+		
+	return movies.findOne(new BasicDBObject("Title",title));
 
-			return result;
+			
 	}
 
 	/**
@@ -149,9 +149,14 @@ public class MovieService extends MovieServiceBase {
 	 * @return the DBCursor for the query
 	 */
 	public DBCursor getByGenre(String genreList, int limit) {
+		DBObject object = new BasicDBObject();
 		String[] genres = genreList.split(",");
-		//TODO: implement
-		DBCursor result = null;
+		for (String s : genres)
+		{ object.put("genre",s);}
+			
+		
+		
+		  DBCursor result = movies.find(object).limit(limit);
 		return result;
 	}
 
@@ -168,8 +173,10 @@ public class MovieService extends MovieServiceBase {
 	 * @return the DBCursor for the query
 	 */
 	public DBCursor searchByPrefix(String titlePrefix, int limit) {
-		//TODO: implement
-		DBObject prefixQuery = null;
+		//TODO: implemented
+		Pattern pattern = Pattern.compile("^"+titlePrefix+".*");
+		DBObject prefixQuery = new BasicDBObject("title",pattern);
+		 
 		return movies.find(prefixQuery).limit(limit);
 	}
 
@@ -220,7 +227,8 @@ public class MovieService extends MovieServiceBase {
 	 *            the comment to save
 	 */
 	public void saveMovieComment(String id, String comment) {
-		//TODO: implement
+		//TODO: implemented
+		movies.findAndModify(new BasicDBObject("_id",id), new BasicDBObject("comment",comment));
 
 	}
 
