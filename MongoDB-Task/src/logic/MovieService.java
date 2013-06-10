@@ -4,8 +4,11 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
+
+import org.bson.BSONObject;
 
 import twitter4j.GeoLocation;
 import twitter4j.Status;
@@ -133,8 +136,12 @@ public class MovieService extends MovieServiceBase {
 	 * @return the DBCursor for the query
 	 */
 	public DBCursor getBestMovies(int minVotes, double minRating, int limit) {
-		// TODO: implement
-		DBCursor best = null;
+		// TODO: implemented
+		DBObject reference = new BasicDBObject();
+		reference.put("votes", new BasicDBObject("$gte",minVotes));
+		reference.put("rating", new BasicDBObject("$gt",minRating));
+		
+		DBCursor best = movies.find(reference).limit(limit);
 		return best;
 	}
 
@@ -212,8 +219,9 @@ public class MovieService extends MovieServiceBase {
 	 * @return the DBCursor for the query
 	 */
 	public DBCursor getTweetedMovies() {
-		//TODO: implement
-		DBCursor results = null;
+		//TODO: implemented für doofe
+		DBCursor results = movies.find(new BasicDBObject("tweets", Pattern.compile(".*")));
+		
 		return results;
 	}
 
@@ -227,8 +235,11 @@ public class MovieService extends MovieServiceBase {
 	 *            the comment to save
 	 */
 	public void saveMovieComment(String id, String comment) {
+
 		//TODO: implemented
 		movies.findAndModify(new BasicDBObject("_id",id), new BasicDBObject("comment",comment));
+
+
 
 	}
 
