@@ -25,3 +25,22 @@ local.properties
 
 # PDT-specific
 .buildpath
+
+# MongoDB-Task ignore:
+MongoDB-Task/doc/**
+MongoDB-Task/doc/**/*
+MongoDB-Task/lib/**
+MongoDB-Task/.settings
+MongoDB-Task/.classpath
+MongoDB-Task/.gitignore
+MongoDB-Task/.project
+MongoDB-Task/data/**
+MongoDB-Task/data/*
+MongoDB-Task/data/**/*
+MongoDB-Task/twitter/**
+MongoDB-Task/twitter/*
+MongoDB-Task/twitter/**/*
+MongoDB-Task/web/**
+MongoDB-Task/web/*
+MongoDB-Task/web/**/*
+MongoDB-Task/logic/MovieServiceBase.java
