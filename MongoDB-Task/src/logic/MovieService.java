@@ -80,7 +80,7 @@ public class MovieService extends MovieServiceBase {
         movies.ensureIndex(new BasicDBObject("title", "String"));
         movies.ensureIndex(new BasicDBObject("rating", "float"));
         movies.ensureIndex(new BasicDBObject("votes", "Integer"));
-        movies.ensureIndex(new BasicDBObject("tweets.coordinates", "2dsphere"));
+        //movies.ensureIndex(new BasicDBObject("tweets.coordinates", "2dsphere"));
 
         tweets.ensureIndex(new BasicDBObject("coordinates", "2dsphere"));
 	}
@@ -142,6 +142,7 @@ public class MovieService extends MovieServiceBase {
 		reference.put("rating", new BasicDBObject("$gt",minRating));
 		
 		DBCursor best = movies.find(reference).limit(limit);
+		best.sort(new BasicDBObject("rating",-1));
 		return best;
 	}
 
