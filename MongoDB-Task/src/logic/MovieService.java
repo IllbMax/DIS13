@@ -270,7 +270,7 @@ public class MovieService extends MovieServiceBase {
 	 * @return the DBCursor for the query
 	 */
 	public DBCursor getTaggedTweets() {
-		//TODO : implemented ohne Sortierung
+		//TODO : implemented 
 		DBObject fields = new BasicDBObject("text", 1);
 		fields.put("movie", 1);
 		fields.put("user.name", 1);
@@ -416,7 +416,8 @@ public class MovieService extends MovieServiceBase {
 	 */
 	public DBCursor getNewestTweets(int limit) {
 		//TODO : implement
-		DBCursor result = null;
+		BasicDBObject project = new BasicDBObject();
+		DBCursor result = tweets.find(project).sort(new BasicDBObject("_id",-1)).limit(limit);
 		return result;
 	}
 
