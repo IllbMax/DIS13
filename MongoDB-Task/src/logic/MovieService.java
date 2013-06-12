@@ -1,5 +1,6 @@
 package logic;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.LinkedList;
@@ -253,8 +254,8 @@ public class MovieService extends MovieServiceBase {
 	 * @return the DBCursor for the query
 	 */
 	public DBCursor getGeotaggedTweets(int limit) {
-		//TODO : implement
-		DBCursor result = null;
+		//TODO : implementeeed
+		DBCursor result = tweets.find(new BasicDBObject("coordinates", new BasicDBObject("$exists", true).append("$gt",0).append("$st",0))).limit(limit);
 		return result;
 	}
 
@@ -270,11 +271,15 @@ public class MovieService extends MovieServiceBase {
 	 * @return the DBCursor for the query
 	 */
 	public DBCursor getTaggedTweets() {
-		//TODO : implement
-		DBObject projection = null;
-		DBObject query = null;
-		DBObject sort = null;
-		DBCursor results = tweets.find(query, projection).sort(sort);
+		//TODO : implemented ohne Sortierung
+		DBObject fields = new BasicDBObject("text", 1);
+		fields.put("movie", 1);
+		fields.put("user.name", 1);
+		fields.put("coordinates", 1);
+		fields.put("_id",0);
+		DBObject projection = new BasicDBObject("$project", fields );
+		DBObject query = new BasicDBObject("coordinates",new BasicDBObject("$exists", true));
+			DBCursor results = tweets.find(query, projection).sort(new BasicDBObject("_id",-1));
 		return results;
 	}
 
@@ -360,8 +365,8 @@ public class MovieService extends MovieServiceBase {
 	 * @return the DBCursor for the query
 	 */
 	public DBCursor getByTweetsKeywordRegex(String keyword, int limit) {
-		//TODO : implement
-		DBCursor result = null;
+		//TODO : implemented , keine Ahnung, ob richtig ist
+		DBCursor result = tweets.find(new BasicDBObject("tweets", Pattern.compile(".*"+keyword+".*"))).limit(limit);
 		return result;
 	}
 
@@ -474,8 +479,13 @@ public class MovieService extends MovieServiceBase {
 	 * @return The retrieved GridFS File
 	 */
 	public GridFSDBFile getFile(String name) {
-		//TODO: implement
-		GridFSDBFile file = null;
+		//TODO: implemented
+		GridFS myContracts = new GridFS(db, "fs");
+		
+		GridFSDBFile file = myContracts.findOne(name);
+		if (file== null)
+			file= myContracts.findOne("sample.org");
+
 		return file;
 	}
 
@@ -489,10 +499,15 @@ public class MovieService extends MovieServiceBase {
 	 * @param contentType
 	 */
 	public void saveFile(String name, InputStream inputStream, String contentType) {
-		GridFSInputFile gFile = null;
-		//Remove old versions
+		
 		fs.remove(name);
 		//TODO: implement
+		
+	  GridFSInputFile gFile= fs.createFile(inputStream,name);
+	  
+		 gFile.setContentType(contentType);
+		 gFile.save();
+		 
 	}
 
 	// Given Helper Functions:
