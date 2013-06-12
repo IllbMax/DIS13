@@ -47,7 +47,7 @@ public class MovieService extends MovieServiceBase {
 		// Connect to local machine
 		try {
 
-			mongo = new MongoClient("localhost",5900);
+			mongo = new MongoClient();
 			//db = mongo.getDB("imdb");
 			
 		} catch (Exception e) {
