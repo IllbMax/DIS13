@@ -107,7 +107,7 @@ public class MovieService extends MovieServiceBase {
 	public DBObject findMovieByTitle(String title) {
 		// TODO: implemented
 		
-	return movies.findOne(new BasicDBObject("Title",title));
+	return movies.findOne(new BasicDBObject("title",title));
 
 			
 	}
@@ -221,8 +221,8 @@ public class MovieService extends MovieServiceBase {
 	 * @return the DBCursor for the query
 	 */
 	public DBCursor getTweetedMovies() {
-		//TODO: implemented für doofe
-		DBCursor results = movies.find(new BasicDBObject("tweets", Pattern.compile(".*")));
+		//TODO: implemented
+		DBCursor results = movies.find(new BasicDBObject("tweets", new BasicDBObject("$exists", true)));
 		
 		return results;
 	}
@@ -254,8 +254,8 @@ public class MovieService extends MovieServiceBase {
 	 * @return the DBCursor for the query
 	 */
 	public DBCursor getGeotaggedTweets(int limit) {
-		//TODO : implementeeed
-		DBCursor result = tweets.find(new BasicDBObject("coordinates", new BasicDBObject("$exists", true).append("$gt",0).append("$st",0))).limit(limit);
+		//TODO : implementeeeeeed
+		DBCursor result = tweets.find(new BasicDBObject("coordinates", new BasicDBObject("$exists", true).append("$ne",0))).limit(limit);
 		return result;
 	}
 
@@ -365,7 +365,7 @@ public class MovieService extends MovieServiceBase {
 	 * @return the DBCursor for the query
 	 */
 	public DBCursor getByTweetsKeywordRegex(String keyword, int limit) {
-		//TODO : implemented , keine Ahnung, ob richtig ist
+		//TODO : implemented
 		DBCursor result = tweets.find(new BasicDBObject("tweets", Pattern.compile(".*"+keyword+".*"))).limit(limit);
 		return result;
 	}
@@ -416,7 +416,7 @@ public class MovieService extends MovieServiceBase {
 	 * @return the DBCursor for the query
 	 */
 	public DBCursor getNewestTweets(int limit) {
-		//TODO : implement
+		//TODO : implemented
 		BasicDBObject project = new BasicDBObject();
 		DBCursor result = tweets.find(project).sort(new BasicDBObject("_id",-1)).limit(limit);
 		return result;
@@ -502,7 +502,7 @@ public class MovieService extends MovieServiceBase {
 	public void saveFile(String name, InputStream inputStream, String contentType) {
 		
 		fs.remove(name);
-		//TODO: implement
+		//TODO: implemented
 		
 	  GridFSInputFile gFile= fs.createFile(inputStream,name);
 	  
