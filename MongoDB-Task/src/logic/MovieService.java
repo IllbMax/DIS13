@@ -47,7 +47,7 @@ public class MovieService extends MovieServiceBase {
 		// Connect to local machine
 		try {
 
-			mongo = new MongoClient("localhost",5900);
+			mongo = new MongoClient();
 			//db = mongo.getDB("imdb");
 			
 		} catch (Exception e) {
@@ -81,7 +81,7 @@ public class MovieService extends MovieServiceBase {
         movies.ensureIndex(new BasicDBObject("title", "String"));
         movies.ensureIndex(new BasicDBObject("rating", "float"));
         movies.ensureIndex(new BasicDBObject("votes", "Integer"));
-        //movies.ensureIndex(new BasicDBObject("tweets.coordinates", "2dsphere"));
+        movies.ensureIndex(new BasicDBObject("tweets.coordinates", "2dsphere"));
 
         tweets.ensureIndex(new BasicDBObject("coordinates", "2dsphere"));
 	}
@@ -163,7 +163,7 @@ public class MovieService extends MovieServiceBase {
 		for (String s : genres)
 		{ object.put("genre",s);}
 			
-		
+		//TODO !funktioniert. Gibt nur resultate, wenn man ein Genre angiebt
 		
 		  DBCursor result = movies.find(object).limit(limit);
 		return result;
@@ -279,7 +279,8 @@ public class MovieService extends MovieServiceBase {
 		fields.put("_id",0);
 		DBObject projection = new BasicDBObject("$project", fields );
 		DBObject query = new BasicDBObject("coordinates",new BasicDBObject("$exists", true));
-			DBCursor results = tweets.find(query, projection).sort(new BasicDBObject("_id",-1));
+		DBCursor results = tweets.find(query, projection).sort(new BasicDBObject("_id",-1));
+		//TODO das hier läuft zwar alles durch, zieht aber einen Fehler nach sich, wenn man "Update Data from MongoDB" auswählt. 
 		return results;
 	}
 
@@ -366,6 +367,7 @@ public class MovieService extends MovieServiceBase {
 	 */
 	public DBCursor getByTweetsKeywordRegex(String keyword, int limit) {
 		//TODO : implemented
+		//TODO !funktioniert. gibt keine Ergebnisse
 		DBCursor result = tweets.find(new BasicDBObject("tweets", Pattern.compile(".*"+keyword+".*"))).limit(limit);
 		return result;
 	}
