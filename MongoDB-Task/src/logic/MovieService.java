@@ -158,15 +158,10 @@ public class MovieService extends MovieServiceBase {
 	 * @return the DBCursor for the query
 	 */
 	public DBCursor getByGenre(String genreList, int limit) {
-		DBObject object = new BasicDBObject();
-		String[] genres = genreList.split(",");
-		for (String s : genres)
-		{ object.put("genre",s);}
-			
-		//TODO !funktioniert. Gibt nur resultate, wenn man ein Genre angiebt
-		
-		  DBCursor result = movies.find(object).limit(limit);
-		  System.out.println(result);
+		String[] genres = genreList.split(", ");
+		//TODO funktioniert jetzt!
+		 DBCursor result = movies.find(new BasicDBObject("genre", new BasicDBObject("$all",genres))).limit(limit);
+		 System.out.println(result);
 		return result;
 	}
 
@@ -370,8 +365,9 @@ public class MovieService extends MovieServiceBase {
 	 */
 	public DBCursor getByTweetsKeywordRegex(String keyword, int limit) {
 		//TODO : implemented
-		//TODO !funktioniert. gibt keine Ergebnisse
-		DBCursor result = tweets.find(new BasicDBObject("tweets", Pattern.compile(".*"+keyword+".*"))).limit(limit);
+		//TODO funktioniert jetzt auch
+		Pattern regex = Pattern.compile(".*"+keyword+".*", Pattern.CASE_INSENSITIVE);
+		DBCursor result = tweets.find(new BasicDBObject("tweets", regex)).limit(limit);
 		return result;
 	}
 
