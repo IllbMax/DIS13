@@ -166,6 +166,7 @@ public class MovieService extends MovieServiceBase {
 		//TODO !funktioniert. Gibt nur resultate, wenn man ein Genre angiebt
 		
 		  DBCursor result = movies.find(object).limit(limit);
+		  System.out.println(result);
 		return result;
 	}
 
@@ -271,16 +272,18 @@ public class MovieService extends MovieServiceBase {
 	 * @return the DBCursor for the query
 	 */
 	public DBCursor getTaggedTweets() {
-		//TODO : implemented 
+		//TODO : implemented funktioniert!
+		tweets.ensureIndex( new BasicDBObject("coordinates", 1) );
+		DBObject query = new BasicDBObject("coordinates",new BasicDBObject("$exists", true));
 		DBObject fields = new BasicDBObject("text", 1);
 		fields.put("movie", 1);
 		fields.put("user.name", 1);
 		fields.put("coordinates", 1);
 		fields.put("_id",0);
-		DBObject projection = new BasicDBObject("$project", fields );
-		DBObject query = new BasicDBObject("coordinates",new BasicDBObject("$exists", true));
-		DBCursor results = tweets.find(query, projection).sort(new BasicDBObject("_id",-1));
-		//TODO das hier läuft zwar alles durch, zieht aber einen Fehler nach sich, wenn man "Update Data from MongoDB" auswählt. 
+		// hier war der Fehler! DBObject projection = new BasicDBObject("$project", fields );
+		DBCursor results = tweets.find(query,fields);
+		results.sort(new BasicDBObject("_id",-1));
+		System.out.println(results.toString());
 		return results;
 	}
 
