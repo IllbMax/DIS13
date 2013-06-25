@@ -81,7 +81,7 @@ public class MovieService extends MovieServiceBase {
         movies.ensureIndex(new BasicDBObject("title", "String"));
         movies.ensureIndex(new BasicDBObject("rating", "float"));
         movies.ensureIndex(new BasicDBObject("votes", "Integer"));
-        //movies.ensureIndex(new BasicDBObject("tweets.coordinates", "2dsphere"));
+        movies.ensureIndex(new BasicDBObject("tweets.coordinates", "2dsphere"));
 
         tweets.ensureIndex(new BasicDBObject("coordinates", "2dsphere"));
 	}
@@ -163,9 +163,10 @@ public class MovieService extends MovieServiceBase {
 		for (String s : genres)
 		{ object.put("genre",s);}
 			
-		
+		//TODO !funktioniert. Gibt nur resultate, wenn man ein Genre angiebt
 		
 		  DBCursor result = movies.find(object).limit(limit);
+		  System.out.println(result);
 		return result;
 	}
 
@@ -271,15 +272,18 @@ public class MovieService extends MovieServiceBase {
 	 * @return the DBCursor for the query
 	 */
 	public DBCursor getTaggedTweets() {
-		//TODO : implemented 
+		//TODO : implemented funktioniert!
+		tweets.ensureIndex( new BasicDBObject("coordinates", 1) );
+		DBObject query = new BasicDBObject("coordinates",new BasicDBObject("$exists", true));
 		DBObject fields = new BasicDBObject("text", 1);
 		fields.put("movie", 1);
 		fields.put("user.name", 1);
 		fields.put("coordinates", 1);
 		fields.put("_id",0);
-		DBObject projection = new BasicDBObject("$project", fields );
-		DBObject query = new BasicDBObject("coordinates",new BasicDBObject("$exists", true));
-			DBCursor results = tweets.find(query, projection).sort(new BasicDBObject("_id",-1));
+		// hier war der Fehler! DBObject projection = new BasicDBObject("$project", fields );
+		DBCursor results = tweets.find(query,fields);
+		results.sort(new BasicDBObject("_id",-1));
+		System.out.println(results.toString());
 		return results;
 	}
 
@@ -366,6 +370,10 @@ public class MovieService extends MovieServiceBase {
 	 */
 	public DBCursor getByTweetsKeywordRegex(String keyword, int limit) {
 		//TODO : implemented
+<<<<<<< HEAD
+=======
+		//TODO !funktioniert. gibt keine Ergebnisse
+>>>>>>> 27ddff49dc3b5aa8f272f25e556e4c5092f827ff
 		DBCursor result = tweets.find(new BasicDBObject("tweets", Pattern.compile(".*"+keyword+".*"))).limit(limit);
 		return result;
 	}
