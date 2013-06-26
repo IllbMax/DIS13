@@ -6,5 +6,10 @@ public class StadtID {
 	private String stadt;
 	private String land;
 	
+	public static StadtID getInstanze(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 
 }

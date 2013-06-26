@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 
-import de.dis2011.data.DB2ConnectionManager;
-import de.dis2011.data.Makler;
+import dis2011_kopie.DB2ConnectionManager;
+
+
+
 
 import Datum.dayID;
 import Datum.monthID;
@@ -48,7 +50,7 @@ public class ShopID {
 		return stadt;
 	}
 
-	private int getShopID()
+	public int getShopID()
 	{
 		
 			try {
@@ -58,26 +60,22 @@ public class ShopID {
 				// Erzeuge Anfrage
 				String selectSQL = "SELECT id FROM Makler WHERE name = ?";
 				PreparedStatement pstmt = con.prepareStatement(selectSQL);
-				pstmt.setInt(1, shop);
+				pstmt.setString(1, shop);
 
 				// FŸhre Anfrage aus
 				ResultSet rs = pstmt.executeQuery();
 				if (rs.next()) {
 					
-					ts.setId(id);
-					ts.setName(rs.getString("name"));
-					ts.setAddress(rs.getString("address"));
-					ts.setLogin(rs.getString("login"));
-					ts.setPassword(rs.getString("password"));
+					
 
 					rs.close();
 					pstmt.close();
-					return ts;
+					return rs.getInt("id");
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			return null;
+			return 0;
 		}
 	}
-}
+
