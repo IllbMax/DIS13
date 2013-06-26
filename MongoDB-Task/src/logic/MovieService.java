@@ -161,7 +161,6 @@ public class MovieService extends MovieServiceBase {
 		String[] genres = genreList.split(", ");
 		//TODO funktioniert jetzt!
 		 DBCursor result = movies.find(new BasicDBObject("genre", new BasicDBObject("$all",genres))).limit(limit);
-		 System.out.println(result);
 		return result;
 	}
 
@@ -278,7 +277,6 @@ public class MovieService extends MovieServiceBase {
 		// hier war der Fehler! DBObject projection = new BasicDBObject("$project", fields );
 		DBCursor results = tweets.find(query,fields);
 		results.sort(new BasicDBObject("_id",-1));
-		System.out.println(results.toString());
 		return results;
 	}
 
@@ -366,10 +364,10 @@ public class MovieService extends MovieServiceBase {
 	public DBCursor getByTweetsKeywordRegex(String keyword, int limit) {
 		//TODO : implemented
 
-		//TODO funktioniert jetzt auch
+		//TODO funktioniert jetzt auch nicht :(
 		Pattern regex = Pattern.compile(".*"+keyword+".*", Pattern.CASE_INSENSITIVE);
-		DBCursor result = tweets.find(new BasicDBObject("tweets", regex)).limit(limit);
-
+		DBCursor result = tweets.find(new BasicDBObject("tweets.text", regex)).limit(limit);
+		System.out.println(result);
 		return result;
 	}
 
