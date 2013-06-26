@@ -366,7 +366,7 @@ public class MovieService extends MovieServiceBase {
 
 		//TODO funktioniert jetzt auch nicht :(
 		Pattern regex = Pattern.compile(".*"+keyword+".*", Pattern.CASE_INSENSITIVE);
-		DBCursor result = tweets.find(new BasicDBObject("tweets.text", regex)).limit(limit);
+		DBCursor result = movies.find(new BasicDBObject("tweets.text", regex)).limit(limit);
 		System.out.println(result);
 		return result;
 	}
