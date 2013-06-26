@@ -58,7 +58,7 @@ public class ShopID {
 				Connection con = DB2ConnectionManager.getInstance().getConnection();
 
 				// Erzeuge Anfrage
-				String selectSQL = "SELECT id FROM Makler WHERE name = ?";
+				String selectSQL = "SELECT id FROM ShopID WHERE name = ?";
 				PreparedStatement pstmt = con.prepareStatement(selectSQL);
 				pstmt.setString(1, shop);
 
