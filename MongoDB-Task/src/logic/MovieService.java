@@ -364,7 +364,7 @@ public class MovieService extends MovieServiceBase {
 	public DBCursor getByTweetsKeywordRegex(String keyword, int limit) {
 		//TODO : implemented
 
-		//TODO funktioniert jetzt auch nicht :(
+		//TODO funktioniert jetzt auch 
 		Pattern regex = Pattern.compile(".*"+keyword+".*", Pattern.CASE_INSENSITIVE);
 		DBCursor result = movies.find(new BasicDBObject("tweets.text", regex)).limit(limit);
 		System.out.println(result);
