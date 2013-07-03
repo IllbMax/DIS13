@@ -78,6 +78,18 @@ public class DataMining {
 		return result;
 	}
 
+	public boolean listVergleich(List<Integer> l1, List<Integer> l2, int size) {
+		if (l1.size() != l2.size())
+			return false;
+		if (l1.size() < size)
+			return false;
+
+		for (int i = 0; i < size; i++)
+			if (!l1.get(i).equals(l2.get(i)))
+				return false;
+		return true;
+	}
+
 	public boolean listVergleich(List<Integer> l1, List<Integer> l2) {
 		if (l1.size() != l2.size())
 			return false;
