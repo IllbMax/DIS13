@@ -77,19 +77,48 @@ public class DataMining {
 		}
 		return result;
 	}
-	public void GenerateCandidates(Set<ArrayList<Integer>> L)
-	{
+	public Set<ArrayList<Integer>>  GenerateCandidates(Set<ArrayList<Integer>> L)
+	{  Set<ArrayList<Integer>> C= new HashSet<ArrayList<Integer>>();
 		for (ArrayList<Integer> ali : L  )
 			{ 
 			for (ArrayList<Integer> ali2 : L  )
 			{ 
-			if( ali[ali.size()-1])
+		if( listVergleich(ali,ali2,ali.size()-1) && ali.get(ali.size()-1)<ali2.get(ali2.size()-1))
+					{ ArrayList<Integer> c = (ArrayList<Integer>) ali.clone();
+					c.add(ali2.get(ali2.size()-1));
+					if (!prune(c,L))
+						
+					 C.add(c);
+					}
 				
 		
 				
 
 			}
 			}
+		return C;
+	}
+
+	public boolean listVergleich(List<Integer> l1, List<Integer> l2, int size) {
+		if (l1.size() != l2.size())
+			return false;
+		if (l1.size() < size)
+			return false;
+
+		for (int i = 0; i < size; i++)
+			if (!l1.get(i).equals(l2.get(i)))
+				return false;
+		return true;
+	}
+
+	public boolean listVergleich(List<Integer> l1, List<Integer> l2) {
+		if (l1.size() != l2.size())
+			return false;
+
+		for (int i = 0; i < l1.size(); i++)
+			if (!l1.get(i).equals(l2.get(i)))
+				return false;
+		return true;
 	}
 
 	public boolean prune(List<Integer> c, Set<ArrayList<Integer>> L) {
