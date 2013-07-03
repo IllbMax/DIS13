@@ -2,8 +2,19 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+
+import javax.swing.JDialog;
+import javax.swing.JTextField;
+
+import dis2011_kopie.DB2ConnectionManager;
 
 import Datum.dayID;
 import main.*;
@@ -12,6 +23,7 @@ import main.*;
 public class ExtremTraurigeLangeweile {
 
 	ArrayList<Fakten> faktentabelle = new ArrayList<Fakten>();
+	HashMap<String, Integer> bekannteDati = new HashMap<String, Integer>();
 	File csv = new File("../sales.csv");
 	public static void main(String[] args) {
 	
@@ -29,7 +41,11 @@ public class ExtremTraurigeLangeweile {
 	      while( stringRead != null )
 	      {
 	    	  input = stringRead.split(";");
-	    	  faktentabelle.add(new Fakten(behandleArtikel(input[2]), behandleShop(input[1]), behandleDatum(input[0]), behandleVerkauft(input[3]), behandleUmsatz(input[4])));
+	    	  behandleDatum(input[0]);
+	    	  behandleShop(input[1]);
+	    	  behandleArtikel(input[2]);
+	    	  behandleVerkauft(input[3]);
+	    	  behandleUmsatz(input[4]);
 	    	  
 	    	  
 	    	  stringRead = br.readLine();
@@ -41,18 +57,94 @@ public class ExtremTraurigeLangeweile {
 	    }
 	}
 	
-	private dayID behandleDatum(String datum)
+	@SuppressWarnings("deprecation")
+	private int behandleDatum(String datum)
 	{
-		return dayID.getInstanze(new Date(datum));
+		if(!bekannteDati.containsKey(datum))
+		{
+			Date d = new Date(datum);
+			Connection con = DB2ConnectionManager.getInstance().getConnection();
+			try {
+				// Erzeuge Anfrage
+				String selectSQL = "select id from blub...???";
+				PreparedStatement pstmt = con.prepareStatement(selectSQL);
+				pstmt.setInt(1, d.getDate());
+				pstmt.setInt(2, d.getMonth()+1);
+				pstmt.setInt(3, d.getYear()+1900);
+
+				// Führe Anfrage aus
+				ResultSet rs = pstmt.executeQuery();
+				bekannteDati.put(datum, rs.getInt(1));
+				
+			} catch (SQLException e) {
+				
+				// TODO ordentliches Exeption Handling
+				
+			} finally {
+				// try { con.close();} catch (SQLException e) {e.printStackTrace();}
+
+			}
+		}
+		return bekannteDati.get(datum);
 	}
 	
-	private ArtikelID behandleArtikel(String artikel)
+	private int behandleArtikel(String artikel)
 	{
-		return ArtikelID.getInstanze(artikel);
+		if(!bekannteDati.containsKey(artikel))
+		{
+			Date d = new Date(artikel);
+			Connection con = DB2ConnectionManager.getInstance().getConnection();
+			try {
+				// Erzeuge Anfrage
+				String selectSQL = "select id from blub...???";
+				PreparedStatement pstmt = con.prepareStatement(selectSQL);
+				pstmt.setInt(1, d.getDate());
+				pstmt.setInt(2, d.getMonth()+1);
+				pstmt.setInt(3, d.getYear()+1900);
+
+				// Führe Anfrage aus
+				ResultSet rs = pstmt.executeQuery();
+				bekannteDati.put(artikel, rs.getInt(1));
+				
+			} catch (SQLException e) {
+				
+				// TODO ordentliches Exeption Handling
+				
+			} finally {
+				// try { con.close();} catch (SQLException e) {e.printStackTrace();}
+
+			}
+		}
+		return bekannteDati.get(artikel);
 	}
 	
-	private ShopID behandleShop(String shop) {
-		return ShopID.getInstanze(shop);
+	private int behandleShop(String shop) {
+		if(!bekannteDati.containsKey(shop))
+		{
+			Date d = new Date(shop);
+			Connection con = DB2ConnectionManager.getInstance().getConnection();
+			try {
+				// Erzeuge Anfrage
+				String selectSQL = "select id from blub...???";
+				PreparedStatement pstmt = con.prepareStatement(selectSQL);
+				pstmt.setInt(1, d.getDate());
+				pstmt.setInt(2, d.getMonth()+1);
+				pstmt.setInt(3, d.getYear()+1900);
+
+				// Führe Anfrage aus
+				ResultSet rs = pstmt.executeQuery();
+				bekannteDati.put(shop, rs.getInt(1));
+				
+			} catch (SQLException e) {
+				
+				// TODO ordentliches Exeption Handling
+				
+			} finally {
+				// try { con.close();} catch (SQLException e) {e.printStackTrace();}
+
+			}
+		}
+		return bekannteDati.get(shop);
 	}
 	
 	private int behandleVerkauft(String verkauft) {
@@ -61,5 +153,32 @@ public class ExtremTraurigeLangeweile {
 	
 	private double behandleUmsatz(String umsatz) {
 		return Double.parseDouble(umsatz);
+	}
+	
+	private void upload(int dayID, int shopID, int artikelID, int verkauf, int umsatz)
+	{
+		Connection con = DB2ConnectionManager.getInstance().getConnection();
+		try {
+			// Erzeuge Anfrage
+			String selectSQL = "insert int fakten values (?,?,?,?,?);";
+			PreparedStatement pstmt = con.prepareStatement(selectSQL);
+			pstmt.setInt(1, dayID);
+			pstmt.setInt(2, shopID);
+			pstmt.setInt(3, artikelID);
+			pstmt.setInt(4, verkauf);
+			pstmt.setInt(5, umsatz);
+
+			// Führe Anfrage aus
+			ResultSet rs = pstmt.executeQuery();
+			
+			
+		} catch (SQLException e) {
+			
+			// TODO ordentliches Exeption Handling
+			
+		} finally {
+			
+
+		}
 	}
 }
