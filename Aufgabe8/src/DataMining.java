@@ -77,6 +77,10 @@ public class DataMining {
 		}
 		return result;
 	}
+	public void GenerateCandidates()
+	{
+		for (ArrayList<Integer> ali : )
+	}
 
 	public boolean listVergleich(List<Integer> l1, List<Integer> l2, int size) {
 		if (l1.size() != l2.size())
