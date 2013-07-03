@@ -4,6 +4,9 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class DataMining {
 
@@ -42,7 +45,7 @@ public class DataMining {
 		}
 	}
 
-	public ArrayList<Integer> findFrequent1Itemsets() {
+	public Set<ArrayList<Integer>> findFrequent1Itemsets() {
 		int grossT = zeilen.size();
 
 		for (String[] sarray : zeilen) {
@@ -61,14 +64,21 @@ public class DataMining {
 
 			}
 		}
-		ArrayList<Integer> result = new ArrayList<Integer>();
+		Set<ArrayList<Integer>> result = new HashSet<ArrayList<Integer>>();
+
 		for (int dingens : itemList.keySet()) {
+
 			System.out.println((double) (itemList.get(dingens) / grossT));
 			if (((double) itemList.get(dingens)) / grossT >= 0.01) {
-				result.add(dingens);
+				ArrayList<Integer> l = new ArrayList<Integer>();
+				l.add(dingens);
+				result.add(l);
 			}
 		}
 		return result;
 	}
 
+	public boolean prune(List<Integer> c, Set<ArrayList<Integer>> L) {
+		return false;
+	}
 }
