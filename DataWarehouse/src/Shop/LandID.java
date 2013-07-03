@@ -6,7 +6,7 @@ public class LandID {
 			 
      public int getLandID()
      {
-    	 return 1;
+    	 return landID;
      }
 	 
 	 

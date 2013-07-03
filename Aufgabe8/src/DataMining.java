@@ -70,5 +70,9 @@ public class DataMining {
 		}
 		return result;
 	}
+	public void GenerateCandidates()
+	{
+		for (ArrayList<Integer> ali : )
+	}
 
 }
