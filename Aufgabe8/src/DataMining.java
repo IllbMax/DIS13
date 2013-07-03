@@ -77,6 +77,7 @@ public class DataMining {
 		}
 		return result;
 	}
+
 	public void GenerateCandidates()
 	{
 		for (ArrayList<Integer> ali : )
@@ -105,6 +106,22 @@ public class DataMining {
 	}
 
 	public boolean prune(List<Integer> c, Set<ArrayList<Integer>> L) {
+
+		for (int i = 0; i < c.size(); i++) {
+			List<Integer> s = new ArrayList<Integer>(c);
+			s.remove(i);
+			if (!listInSet(s, L))
+				return true;
+		}
+
+		return false;
+
+	}
+
+	public boolean listInSet(List<Integer> s, Set<ArrayList<Integer>> L) {
+		for (List<Integer> l : L)
+			if (listVergleich(s, l))
+				return true;
 		return false;
 	}
 }
