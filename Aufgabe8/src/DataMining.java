@@ -77,9 +77,19 @@ public class DataMining {
 		}
 		return result;
 	}
-	public void GenerateCandidates()
+	public void GenerateCandidates(Set<ArrayList<Integer>> L)
 	{
-		for (ArrayList<Integer> ali : )
+		for (ArrayList<Integer> ali : L  )
+			{ 
+			for (ArrayList<Integer> ali2 : L  )
+			{ 
+			if( ali[ali.size()-1])
+				
+		
+				
+
+			}
+			}
 	}
 
 	public boolean prune(List<Integer> c, Set<ArrayList<Integer>> L) {
