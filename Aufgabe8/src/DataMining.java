@@ -17,7 +17,7 @@ public class DataMining {
 
 	public static void main(String[] args) {
 		DataMining dm = new DataMining();
-		System.out.println(dm.findFrequent1Itemsets());
+		System.out.println(dm.findFrequent1Itemsets().size());
 
 	}
 
@@ -68,7 +68,6 @@ public class DataMining {
 
 		for (int dingens : itemList.keySet()) {
 
-			System.out.println((double) (itemList.get(dingens) / grossT));
 			if (((double) itemList.get(dingens)) / grossT >= 0.01) {
 				ArrayList<Integer> l = new ArrayList<Integer>();
 				l.add(dingens);
@@ -142,5 +141,56 @@ public class DataMining {
 			if (listVergleich(s, l))
 				return true;
 		return false;
+	}
+	
+	private boolean listInArray(List<Integer> l,String[] a)
+	{
+		for(int item : l)
+		{
+			boolean b=false;
+			for(int i = 0; i<a.length&&!b;i++)
+			{
+				int temp = Integer.parseInt(a[i]);
+				b = item == temp;
+			}
+			if(!b) return false;
+		}
+		return true;
+	}
+	
+	public void aprioriAlgorithm(){
+		ArrayList<Set<ArrayList<Integer>>> Lx = new ArrayList<Set<ArrayList<Integer>>>();
+		Lx.add(findFrequent1Itemsets());
+		
+		for(int k=2;Lx.size()<=k-1;k++)
+		{
+			Set<ArrayList<Integer>> canditaten = GenerateCandidates(Lx.get(k-1));
+			for(String[] transaction : zeilen)
+			{
+				for(ArrayList<Integer> candidat : canditaten)
+				{
+					if(listInArray(candidat, transaction))
+					{
+						//TODO Unser Kanditatenset abändern, sodass man hier weiter arbeiten kann.
+						/*irgendwie müssten wir hier jetzt pro Kandidat einen Zähler hochzählen.
+						* wir könnten das Canditatenset zu einem Set<HashMap<Integer,Integer>> machen zu die Canditaten als Schlüssel, 
+						* ihre Häufigkeit als ihren Wert speichern
+						*/ 
+					}
+				}
+			}
+			Set<ArrayList<Integer>> antwortmenge = new HashSet<ArrayList<Integer>>();
+			int grossT = zeilen.size();
+			for(ArrayList<Integer> candidat : canditaten)
+			{
+				//TODO hier dann die Zählung anwenden
+				if(/*((double)candidat.count)/grossT >= 0.01 */false)
+				{
+					antwortmenge.add(candidat);
+				}
+			}
+			if(antwortmenge.size() > 0)
+				Lx.add(antwortmenge);
+		}
 	}
 }
