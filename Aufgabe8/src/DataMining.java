@@ -10,14 +10,14 @@ import java.util.Set;
 
 public class DataMining {
 
-	File daten = new File("./transactions.txt");
+	File daten = new File("/home/thorsten/Dokumente/SE2/DIS13/Aufgabe8/src/transactions.txt");
 	Reader is;
 	ArrayList<String[]> zeilen;
 	HashMap<Integer, Integer> itemList;
 
 	public static void main(String[] args) {
 		DataMining dm = new DataMining();
-		System.out.println(dm.findFrequent1Itemsets().size());
+		dm.aprioriAlgorithm();
 
 	}
 
@@ -160,22 +160,33 @@ public class DataMining {
 	
 	public void aprioriAlgorithm(){
 		ArrayList<Set<ArrayList<Integer>>> Lx = new ArrayList<Set<ArrayList<Integer>>>();
-		Lx.add(findFrequent1Itemsets());
-		
-		for(int k=2;Lx.size()<=k-1;k++)
+		Set<ArrayList<Integer>> einitemsets = findFrequent1Itemsets();
+		Lx.add(einitemsets);
+		for(ArrayList<Integer> einset : einitemsets)
 		{
+			System.out.println("Frequent Item Set mit einem Item: "+einset);
+		}
+		System.out.println("Anzahl FIS mit einem Item: "+einitemsets.size());
+		for(int k=1;Lx.size()==k;k++)
+		{
+			
 			Set<ArrayList<Integer>> canditaten = GenerateCandidates(Lx.get(k-1));
+			HashMap<ArrayList<Integer>,Integer> canditatenmap = new HashMap<ArrayList<Integer>,Integer>();
+			for(ArrayList<Integer> can :canditaten)
+			{
+				canditatenmap.put(can, 0);
+				
+			}
+			
 			for(String[] transaction : zeilen)
 			{
 				for(ArrayList<Integer> candidat : canditaten)
 				{
 					if(listInArray(candidat, transaction))
 					{
-						//TODO Unser Kanditatenset abändern, sodass man hier weiter arbeiten kann.
-						/*irgendwie müssten wir hier jetzt pro Kandidat einen Zähler hochzählen.
-						* wir könnten das Canditatenset zu einem Set<HashMap<Integer,Integer>> machen zu die Canditaten als Schlüssel, 
-						* ihre Häufigkeit als ihren Wert speichern
-						*/ 
+						int count = canditatenmap.get(candidat);
+						count++;
+						canditatenmap.put(candidat, count); 
 					}
 				}
 			}
@@ -183,14 +194,17 @@ public class DataMining {
 			int grossT = zeilen.size();
 			for(ArrayList<Integer> candidat : canditaten)
 			{
-				//TODO hier dann die Zählung anwenden
-				if(/*((double)candidat.count)/grossT >= 0.01 */false)
+				if(((double)canditatenmap.get(candidat))/grossT >= 0.01)
 				{
 					antwortmenge.add(candidat);
+					System.out.println("Frequent Item Set mit "+(k+1)+" Items: "+candidat);
 				}
 			}
+			System.out.println("Anzahl FIS mit "+(k+1)+" Items: "+antwortmenge.size());
+			
 			if(antwortmenge.size() > 0)
 				Lx.add(antwortmenge);
+			System.out.println(Lx.size());
 		}
 	}
 }
