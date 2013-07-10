@@ -204,7 +204,6 @@ public class DataMining {
 			
 			if(antwortmenge.size() > 0)
 				Lx.add(antwortmenge);
-			System.out.println(Lx.size());
 		}
 	}
 }
